@@ -1,0 +1,9 @@
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/bin/Debug/netstandard2.0/TransformationComponent.deps.json
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/bin/Debug/netstandard2.0/TransformationComponent.dll
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/bin/Debug/netstandard2.0/TransformationComponent.pdb
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.csprojAssemblyReference.cache
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.csproj.CoreCompileInputs.cache
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.AssemblyInfoInputs.cache
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.AssemblyInfo.cs
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.dll
+/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/Debug/netstandard2.0/TransformationComponent.pdb

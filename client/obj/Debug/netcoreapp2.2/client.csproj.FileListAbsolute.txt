@@ -1,0 +1,14 @@
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/client.deps.json
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/client.runtimeconfig.json
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/client.runtimeconfig.dev.json
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/client.dll
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/client.pdb
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.csprojAssemblyReference.cache
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.csproj.CoreCompileInputs.cache
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.AssemblyInfoInputs.cache
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.AssemblyInfo.cs
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.dll
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.pdb
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/TransformationComponent.dll
+/home/xxxcul/Documents/core/courseWork/client/bin/Debug/netcoreapp2.2/TransformationComponent.pdb
+/home/xxxcul/Documents/core/courseWork/client/obj/Debug/netcoreapp2.2/client.csproj.CopyComplete
