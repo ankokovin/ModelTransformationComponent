@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
-    /// Системная конструкция потомка
+    /// Системная конструкция потомка. Используется в <see cref="Type"/>
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Child : SystemRule{
         

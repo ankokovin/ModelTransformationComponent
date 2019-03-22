@@ -9,6 +9,42 @@ namespace ModelTransformationComponent
     /// </summary>
     public class TransformationComponent : ITransformationComponent
     {
+        private readonly Dictionary<System.Type, Func<string, Rule, bool>> RuleTypePredicateList;
+
+        /// <summary>
+        /// Конструктор <see cref="TransformationComponent"/>
+        /// </summary>
+        public TransformationComponent()
+        {
+            RuleTypePredicateList = new Dictionary<System.Type, Func<string, Rule, bool>>
+            {
+                [typeof(RegRuleFactory)] =
+                delegate (string s, Rule rule)
+                {
+                    return rule is Reg;
+                },
+                [typeof(SystemRuleFactory)] = 
+                delegate (string s, Rule rule)
+                {
+                    return s.Length>0 && s[0] == '/' && !(rule is Reg) &&/*(!rule is BNF or rule is ended or system is fine)*/ true;
+                },
+                [typeof(BNFRuleFactory)] =
+                delegate (string s, Rule rule)
+                {
+                    return s.Length > 0 && s[0] != '/' && !(rule is Reg) && !(rule is Type);
+                },
+                [typeof(TypeRuleFactory)] =
+                delegate (string s, Rule rule)
+                {
+                    return rule is Type;
+                }
+            };
+
+        }
+        
+
+
+
         /// <summary>
         /// Функция трансформации моделей
         /// </summary>
@@ -108,11 +144,70 @@ namespace ModelTransformationComponent
             Debug.WriteLine("getting base description");
             Debug.WriteLine("text:");
             Debug.WriteLine(text);
+            Rule prevRule = null;
+            Dictionary<string, Rule> result = new Dictionary<string, Rule>();
+            int idx = 0;
+            int skipChars = 0;
+            var lines = text.Split('\n');
             try {
-                throw new NotImplementedException();
-            }catch(Exception e)
+                while (idx < lines.Length)
+                {
+                    if (string.IsNullOrWhiteSpace(lines[idx]))
+                    {
+                        ++idx;
+                        break;
+                    }
+                    bool ok = false;
+                    foreach(var pred in RuleTypePredicateList)
+                    {
+                        if (pred.Value(lines[idx], prevRule))
+                        {
+                            var factory = (AbstractRuleFactory)Activator.CreateInstance(pred.Key);
+                            var res = factory.CreateRule(lines[idx], out int charcnt);
+                            if (charcnt != lines[idx].Length)
+                            {
+                                lines[idx] = lines[idx].Substring(charcnt);
+                                skipChars += charcnt;
+                            }
+                            else
+                            {
+                                ++idx;
+                                skipChars = 0;
+                            }
+
+                            if (/*???prevRule needs this res*/false)
+                            {
+
+                            }
+                            else
+                            {
+                                prevRule = res;
+                                if (prevRule is NamedRule rule)
+                                {
+                                    result[rule.GetName] = rule;
+                                }                                
+                            }
+                            ok = true;
+                            break;
+                        }
+                    }
+                    if (!ok) throw new SyntaxError();
+                }
+
+
+
+                //throw new NotImplementedException();
+                return result;
+            }
+            catch(SyntaxErrorPlaced e)
             {
                 throw new BaseRuleParseException(e);
+            }
+            catch (Exception e)
+            {
+                throw new BaseRuleParseException(
+                    new SyntaxErrorPlaced(idx+1, skipChars+1,e)
+                    );
             }
 
         }

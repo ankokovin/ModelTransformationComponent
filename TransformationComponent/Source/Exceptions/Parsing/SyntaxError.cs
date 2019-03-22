@@ -34,7 +34,7 @@ namespace ModelTransformationComponent
         /// <summary>
         /// Конструктор <see cref="SyntaxError"/>
         /// </summary>
-        public SyntaxError()
+        public SyntaxError() : base("Синтаксическая ошибка: Неожиданный символ.")
         {
         }
 

@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция окончания описания языка
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Language_end : SystemRule
     {

@@ -1,7 +1,7 @@
 namespace ModelTransformationComponent
 {
     /// <summary>
-    /// Класс структуры
+    /// Класс конструкции
     /// </summary>
     public abstract class Rule{
         

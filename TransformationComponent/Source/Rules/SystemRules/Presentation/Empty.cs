@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция пустой символ
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Empty : SystemRule{
 

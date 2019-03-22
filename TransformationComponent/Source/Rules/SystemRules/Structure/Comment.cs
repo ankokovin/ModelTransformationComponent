@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция однострочного комментария
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Comment : SystemRule
     {

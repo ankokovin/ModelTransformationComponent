@@ -146,14 +146,21 @@ namespace ModelTranformerExample
                     Debug.WriteLine("new hash:" + hash);
                     allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text);
                     Debug.WriteLine("rules parsed succesful");
+
                     AutoCompleteStringCollection names = new AutoCompleteStringCollection();
                     names.AddRange(allRules.GetLanguages.ToArray());
+
                     SourceLangTextBox.AutoCompleteCustomSource = names;
                     SourceLangTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                     SourceLangTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
                     TargetLangTextBox.AutoCompleteCustomSource = names;
                     TargetLangTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                     TargetLangTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+                    OutputRichTextBox.StartTimestamp();
+                    OutputRichTextBox.AppendText(DateTime.Now.ToString()+": Правила запарсены успешно\n", System.Drawing.Color.Black);
+                    OutputRichTextBox.EndTimestamp();
                 }
                 else
                 {
@@ -181,6 +188,7 @@ namespace ModelTranformerExample
                 OutputRichTextBox.AppendException(ex);
             }
         }
+        
 
         private void InputTestRichTextBox_TextChanged(object sender, EventArgs e)
         {

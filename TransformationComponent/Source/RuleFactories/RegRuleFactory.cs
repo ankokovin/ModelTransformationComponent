@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace ModelTransformationComponent{
     /// <summary>
     /// Конкретная фабрика структур с представлением в виде регулярных выражений
@@ -9,13 +11,15 @@ namespace ModelTransformationComponent{
         /// <summary>
         /// Метод создания структуры с регулярным выражением
         /// </summary>
-        /// <param name="text">Текстовое представление структуры</param>
-        /// <returns>Структура с представлением в виде регулярного выражения</returns>
+        /// <param name="text">Текстовое представление структуры</param>      
+        /// <param name="charcnt">Количество символов, использованных для создания</param>  
         /// <exception cref="System.ArgumentException">Неожиданная строка</exception>
-        /// <exception cref="SyntaxError">Синтаксическая ошибка<exception>
-        public override Rule CreateRule(string text)
+        /// <exception cref="SyntaxError">Синтаксическая ошибка</exception>
+        /// <returns>Структура с представлением в виде регулярного выражения</returns>
+        public override Rule CreateRule(string text, out int charcnt)
         {
-            var sp = text.Split();
+            var sp = text.Split().Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            
             if (sp.Length<3)
                 throw new System.ArgumentException("Unexpected string input");
             string pattern = sp[2];
@@ -24,6 +28,7 @@ namespace ModelTransformationComponent{
             for(int i=3;i<sp.Length; ++i){
                 pattern += " " + sp[i];
             }
+            charcnt = text.Length;
             return new RegexRule(pattern, sp[0]);
         }
     }

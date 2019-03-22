@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция увеличения счётчика табов
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Add_tab : SystemRule
     {

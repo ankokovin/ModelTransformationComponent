@@ -2,6 +2,8 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Конструкция с представлением в виде регулярного выражения
+    /// <para/>
+    /// Наследует <see cref="NamedRule"/>
     /// </summary>
     class RegexRule : NamedRule{
         /// <summary>

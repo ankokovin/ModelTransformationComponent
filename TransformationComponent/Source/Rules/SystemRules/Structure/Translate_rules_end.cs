@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция окончания описания дополнительных правил трансформации
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Translate_rules_end : SystemRule{
         /// <summary>

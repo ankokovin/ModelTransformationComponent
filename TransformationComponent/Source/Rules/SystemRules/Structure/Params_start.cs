@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция начала описания параметров
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Params_start : SystemRule{
         /// <summary>

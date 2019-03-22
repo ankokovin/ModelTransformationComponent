@@ -19,18 +19,11 @@ namespace ModelTranformerExample
         private static int SepLen = 50;
         public static void AppendException(this RichTextBox box, Exception ex, int depth=0)
         {
+            if (depth == 0) box.StartTimestamp();
             if (ex != null)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message + " " + ex.GetType());
                 System.Diagnostics.Debug.WriteLine("depth = " + depth);
-                if (depth == 0)
-                {
-                    var datestr = DateTime.Now.ToString();
-                    box.AppendText(new string('-', (SepLen - datestr.Length - 2) / 2) 
-                        + "[" + datestr + "]"
-                        + new string('-', (SepLen - datestr.Length - 2) / 2) + 
-                        "\n");
-                }
                 box.AppendText(new string(' ', depth));
                 if (ex is ModelTransformationComponent.TransformComponentException)
                 {
@@ -50,17 +43,30 @@ namespace ModelTranformerExample
                 }
                 else
                 {
-                    box.AppendText("Unexpected exception\n",Color.Red);
+                    box.AppendText("Unexpected exception\n", Color.Red);
                     box.AppendText(new string(' ', depth));
                     box.AppendText(ex.Message, Color.Red);
                 }
                 box.AppendText("\n");
-                box.AppendException(ex.InnerException, depth+4);
+                box.AppendException(ex.InnerException, depth + 4);
             }
-            else
-            {
-                box.AppendText(new string('-', SepLen ) + "\n");
-            }
+            else box.EndTimestamp();
+        }
+
+        public static void StartTimestamp(this RichTextBox box)
+        {
+            var datestr = DateTime.Now.ToString();
+            box.AppendText(new string('-', (SepLen - datestr.Length - 2) / 2)
+                + "[" + datestr + "]"
+                + new string('-', (SepLen - datestr.Length - 2) / 2) +
+                "\n", System.Drawing.Color.Black);
+
+        }
+
+
+        public static void EndTimestamp(this RichTextBox box)
+        {
+            box.AppendText(new string('-', SepLen) + '\n');
         }
     }
 }

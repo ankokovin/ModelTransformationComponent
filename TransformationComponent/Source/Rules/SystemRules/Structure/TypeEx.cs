@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция создания конструкции, реализующий тип
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class TypeEx : SystemRule{
         /// <summary>

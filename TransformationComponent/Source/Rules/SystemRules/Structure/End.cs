@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная консрукция окончания описания трансляции
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class End : SystemRule
     {

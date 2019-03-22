@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Системная конструкция начала описания трансформаций
+    /// <para/>
+    /// Наследует <see cref="SystemRule"/>
     /// </summary>
     class Start : SystemRule
     {

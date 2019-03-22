@@ -2,24 +2,21 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Конструкция с названием
+    /// <para/>
+    /// Наследует <see cref="Rule"/>
     /// </summary>
-    class NamedRule : Rule{
+    abstract class NamedRule : Rule{
         /// <summary>
         /// Название конструкции
         /// </summary>
-        private string Name;
-
-        /// <summary>
-        /// Название конструкции
-        /// </summary>
-        public string GetName {get=>Name;}
+        public string GetName { get; }
 
         /// <summary>
         /// Конструкция с названием
         /// </summary>
         /// <param name="name">Название конструкции</param>
         public NamedRule(string name) : base(){
-            Name = name;
+            GetName = name;
         }
     }
 }

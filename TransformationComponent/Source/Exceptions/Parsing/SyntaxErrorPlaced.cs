@@ -11,7 +11,13 @@ namespace ModelTransformationComponent
     [Serializable]
     public class SyntaxErrorPlaced : SyntaxError
     {
-
+        /// <summary>
+        /// Строка формата расположения ошибки
+        /// </summary>
+        /// <value>
+        /// "[{0},{1}]"
+        /// </value>
+        static protected string PlaceFormatString = "[{0},{1}]"; 
 
         /// <summary>
         /// Строка формата сообщения ошибки по-умолчанию
@@ -19,8 +25,7 @@ namespace ModelTransformationComponent
         /// <value>
         /// [{0},{1}] Синтаксическая ошибка: ожидалось \"{2}\", а получили \"{3}\"
         /// </value>
-        static protected string FormatString = "[{0},{1}] Синтаксическая ошибка: ожидалось \"{2}\", а получили \"{3}\"";
-
+        static protected string FormatString = PlaceFormatString + " Синтаксическая ошибка: ожидалось \"{2}\", а получили \"{3}\"";
         /// <summary>
         /// Сообщение об ошибке без указания номера строки с символа
         /// </summary>
@@ -90,6 +95,35 @@ namespace ModelTransformationComponent
         /// <param name="message">Сообщение</param>
         /// <param name="inner">Внутренняя ошибка</param>
         public SyntaxErrorPlaced(string message, Exception inner) : base(message, inner) { }
+
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="inner">Внутренняя ошибка</param>
+        /// <param name="line"></param>
+        /// <param name="symbol"></param>
+        public SyntaxErrorPlaced(string message, Exception inner, int line, int symbol) 
+            : this(message, inner)
+        {
+            Line = line;
+            Symbol = symbol;
+            TrimedMsg = message;
+        }
+
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
+        /// <param name="inner">Внутренняя ошибка</param>
+        /// <param name="line"></param>
+        /// <param name="symbol"></param>
+        public SyntaxErrorPlaced(int line, int symbol, Exception inner) : this(
+            string.Format(PlaceFormatString + "Синтаксическая ошибка.", line, symbol), inner, line, symbol)
+        {
+            TrimedMsg = Message.Substring(Message.IndexOf(']') + 1);
+        }
 
         /// <summary>
         /// Конструктор <see cref="SyntaxErrorPlaced"/>
