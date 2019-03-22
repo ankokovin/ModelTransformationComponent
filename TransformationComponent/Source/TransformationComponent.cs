@@ -21,7 +21,7 @@ namespace ModelTransformationComponent
         /// Вызывается при отсутствии определения языка
         /// </exception>
         public string Transform(string text, string rules, string sourceLang, string targetLang){
-            return GetTranformed(text,GetAllRules(rules),sourceLang, targetLang);
+            return Transform(text,TransformToRules(rules),sourceLang, targetLang);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace ModelTransformationComponent
         /// </summary>
         /// <param name="rules">Текстовое представление структур</param>
         /// <returns>Все структуры языков</returns>
-        private AllRules GetAllRules(string rules){
+        public AllRules TransformToRules(string rules){
             Debug.WriteLine("Inside GetAllRules");
             Debug.WriteLine("---------Rules--------");
             Debug.WriteLine(rules);
@@ -91,7 +91,7 @@ namespace ModelTransformationComponent
         /// <exception cref="TransformationComponent.NoLanguageRulesFound">
         /// Вызывается при отсутствии определения языка
         /// </exception>
-        private string GetTranformed(string text, AllRules rules, string sourceLang, string targetLang){
+        public string Transform(string text, AllRules rules, string sourceLang, string targetLang){
             if(!rules.HasLanguage(sourceLang)) throw new NoLanguageRulesFound(sourceLang);
             if(!rules.HasLanguage(targetLang)) throw new NoLanguageRulesFound(targetLang);
             throw new NotImplementedException();

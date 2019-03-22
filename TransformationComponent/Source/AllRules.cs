@@ -4,7 +4,7 @@ namespace ModelTransformationComponent
     /// <summary>
     /// Все структуры
     /// </summary>
-    class AllRules{
+    public class AllRules{
         /// <summary>
         /// Структуры хранятся следующим образом:
         /// Имя языка : Словарь структур данного языка

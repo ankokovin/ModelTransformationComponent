@@ -14,5 +14,22 @@ namespace ModelTransformationComponent
         /// <param name="targetLang">Название целевого языка</param>
         /// <returns>Результат трансформации - новое текстовое представление</returns>
         string Transform(string text, string rules, string sourceLang, string targetLang);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <returns></returns>
+        AllRules TransformToRules(string rules);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="rules"></param>
+        /// <param name="sourceLang"></param>
+        /// <param name="targetLang"></param>
+        /// <returns></returns>
+        string Transform(string text, AllRules rules, string sourceLang, string targetLang);
     }
 }
