@@ -16,3 +16,4 @@ C:\Users\user\Documents\ModelTrasformationComponent\TransformationComponent\obj\
 C:\Users\user\Documents\ModelTrasformationComponent\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.AssemblyInfo.cs
 C:\Users\user\Documents\ModelTrasformationComponent\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.dll
 C:\Users\user\Documents\ModelTrasformationComponent\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.pdb
+C:\Users\user\Documents\ModelTrasformationComponent\TransformationComponent\bin\Debug\netstandard2.0\TransformationComponent.xml

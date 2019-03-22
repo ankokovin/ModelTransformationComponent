@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>client</name>
+    </assembly>
+    <members>
+        <member name="M:client.Program.Main(System.String[])">
+            <summary>
+            Входная точка программы
+            </summary>
+            <param name="args">
+            Ожидается 4 аргумента
+            <list type="number">
+                <listheader>
+                    <description>Список аргументов</description>
+                </listheader>
+                <item>
+                    <description>Расположение файла с моделью</description>
+                </item>
+                <item>
+                    <description>Расположение файла с описанием трансформаций</description>
+                </item>
+                <item>
+                    <description>Название исходного языка</description>
+                </item>
+                <item>
+                    <description>Название целевого языка</description>
+                </item>
+            </list>
+            </param>
+        </member>
+    </members>
+</doc>

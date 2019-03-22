@@ -5,6 +5,8 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Синтаксическая ошибка с указанием номера строки и номера символа
+    /// <para/>
+    /// Наследует <see cref="SyntaxError"/>
     /// </summary>
     [Serializable]
     public class SyntaxErrorPlaced : SyntaxError
@@ -25,7 +27,7 @@ namespace ModelTransformationComponent
         public string TrimedMsg;
 
         /// <summary>
-        /// Синтаксическая ошибка
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
         /// </summary>
         /// <param name="line">Номер строки</param>
         /// <param name="symbol">Номер символа</param>
@@ -43,7 +45,7 @@ namespace ModelTransformationComponent
         }
 
         /// <summary>
-        /// Синтаксическая ошибка
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
         /// </summary>
         /// <param name="line">Номер строки</param>
         /// <param name="symbol">Номер символа</param>
@@ -65,14 +67,35 @@ namespace ModelTransformationComponent
 
 
         /// <summary>
-        /// Синтаксическая ошибка
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
         /// </summary>
         /// <param name="got">Полученная строка</param>
         /// <param name="expected">Ожидаемая строка</param>
         public SyntaxErrorPlaced(string got, string expected) : this(0, 0, got, expected) { }
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
         public SyntaxErrorPlaced() { }
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
+        /// <param name="message">Сообщение</param>
         public SyntaxErrorPlaced(string message) : base(message) { }
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="inner">Внутренняя ошибка</param>
         public SyntaxErrorPlaced(string message, Exception inner) : base(message, inner) { }
+
+        /// <summary>
+        /// Конструктор <see cref="SyntaxErrorPlaced"/>
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         protected SyntaxErrorPlaced(
           SerializationInfo info,
           StreamingContext context) : base(info, context) { }

@@ -5,9 +5,8 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Ошибка в названии структуры
-    /// <para>
-    /// Подвид синтаксической ошибки <see cref="ModelTransformationComponent.SyntaxError">
-    /// </para>
+    /// <para/>
+    /// Подвид синтаксической ошибки <see cref="SyntaxErrorPlaced"/>
     /// </summary>
     [Serializable]
     public class NameSyntaxError : SyntaxErrorPlaced

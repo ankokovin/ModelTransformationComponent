@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Конкретная фабрика структур с представлением в виде регулярных выражений
+    /// <para/>
+    /// Наследует <see cref="AbstractRuleFactory"/>
     /// </summary>
     class RegRuleFactory : AbstractRuleFactory
     {
@@ -10,7 +12,7 @@ namespace ModelTransformationComponent{
         /// <param name="text">Текстовое представление структуры</param>
         /// <returns>Структура с представлением в виде регулярного выражения</returns>
         /// <exception cref="System.ArgumentException">Неожиданная строка</exception>
-        /// <exception cref="ModelTransformationComponent.SyntaxError">Синтаксическая ошибка<exception>
+        /// <exception cref="SyntaxError">Синтаксическая ошибка<exception>
         public override Rule CreateRule(string text)
         {
             var sp = text.Split();

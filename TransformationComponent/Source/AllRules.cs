@@ -12,12 +12,18 @@ namespace ModelTransformationComponent
         /// </summary>
         private Dictionary<string, Dictionary<string, Rule>> rulesPerLanguage;
 
+        /// <summary>
+        /// Конструктор <see cref="AllRules"/>
+        /// </summary>
         public AllRules()
         {
             rulesPerLanguage = new Dictionary<string, Dictionary<string, Rule>>();
         }
 
-        public static string BaseName = "Base";
+        /// <summary>
+        /// Название под базовые правила
+        /// </summary>
+        public const string BaseName = "Base";
 
         /// <summary>
         /// Добавление структур нового языка
@@ -59,7 +65,9 @@ namespace ModelTransformationComponent
         /// <returns>Словарь базовых структур</returns>
         public Dictionary<string, Rule> GetBaseRules => GetRulesForLanguage(BaseName);
 
-
+        /// <summary>
+        /// Получение списка введённых языков
+        /// </summary>
         public List<string> GetLanguages
         {
             get

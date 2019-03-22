@@ -2,12 +2,14 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Исключение: не был найден символ /start
+    /// <para/>
+    /// Наследует <see cref="SyntaxError"/>
     /// </summary>
     public class NoStartDetected : SyntaxError
     {
 
         /// <summary>
-        /// Исключение: не было найдено описание трансформаций для языка
+        /// Конструктор <see cref="NoStartDetected"/>
         /// </summary>
         public NoStartDetected() 
         : base(@"Не был найден символ /start") {}

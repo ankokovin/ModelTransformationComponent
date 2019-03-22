@@ -1,6 +1,8 @@
 namespace ModelTransformationComponent{
     /// <summary>
     /// Конкретная фабрика системных конструкций
+    /// <para/>
+    /// Наследует <see cref="AbstractRuleFactory"/>
     /// </summary>
     class SystemRuleFactory : AbstractRuleFactory
     {

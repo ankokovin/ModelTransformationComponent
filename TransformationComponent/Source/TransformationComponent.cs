@@ -17,7 +17,7 @@ namespace ModelTransformationComponent
         /// <param name="sourceLang">Название исходного языка</param>
         /// <param name="targetLang">Название целевого языка</param>
         /// <returns>Результат трансформации - новое текстовое представление</returns>
-        /// <exception cref="TransformationComponent.NoLanguageRulesFound">
+        /// <exception cref="NoLanguageRulesFound">
         /// Вызывается при отсутствии определения языка
         /// </exception>
         public string Transform(string text, string rules, string sourceLang, string targetLang){
