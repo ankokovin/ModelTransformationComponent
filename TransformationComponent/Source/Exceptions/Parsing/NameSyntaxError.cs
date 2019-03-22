@@ -48,14 +48,30 @@ namespace ModelTransformationComponent
         : this(0,0,got)
         {}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         protected NameSyntaxError(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        /// <returns></returns>
         public NameSyntaxError(string message, Exception innerException) : base(message, innerException)
         {
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public NameSyntaxError()
         {
         }

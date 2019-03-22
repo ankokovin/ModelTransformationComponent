@@ -4,7 +4,9 @@ namespace ModelTransformationComponent{
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Translate_rules_start : SystemRule{
+    
+    [System.Serializable]
+    public class Translate_rules_start : SystemRule{
         /// <summary>
         /// Литерал конструкции начала описания дополнительных правил трансформации
         /// </summary>

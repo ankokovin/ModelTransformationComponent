@@ -7,7 +7,7 @@
         <member name="T:ModelTransformationComponent.AllRules">
             <summary>
             Все структуры
-            </summary>
+            </summary> 
         </member>
         <member name="F:ModelTransformationComponent.AllRules.rulesPerLanguage">
             <summary>
@@ -77,6 +77,97 @@
             </summary>
             <param name="LanguageName">Название языка</param>
         </member>
+        <member name="T:ModelTransformationComponent.ConstructAlreadyDefined">
+            <summary>
+            Конструкция с данным именем уже существует
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.SyntaxError"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.ConstructAlreadyDefined.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ModelTransformationComponent.DelTabOverFlow">
+            <summary>
+            Количество табов стало отрицательным
+            <para/>
+            Наслежует <see cref="T:ModelTransformationComponent.SyntaxErrorPlaced"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DelTabOverFlow.FormatString">
+            <summary>
+            Строка формата сообщения ошибки по-умолчанию
+            </summary>
+            <value>
+            "[{0},{1}] Синтаксическая ошибка: количество табов стало отрицательным"
+            </value>
+        </member>
+        <member name="M:ModelTransformationComponent.DelTabOverFlow.#ctor">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.DelTabOverFlow"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.DelTabOverFlow.#ctor(System.String)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.DelTabOverFlow"/>
+            </summary>
+            <param name="message">Сообщение</param>
+        </member>
+        <member name="M:ModelTransformationComponent.DelTabOverFlow.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.DelTabOverFlow"/>
+            </summary>
+            <param name="message">Сообщение</param>
+            <param name="inner">Внутренняя ошибка</param>
+        </member>
+        <member name="M:ModelTransformationComponent.DelTabOverFlow.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.DelTabOverFlow"/>
+            </summary>
+            <param name="line"></param>
+            <param name="symbol"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.DelTabOverFlow.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.DelTabOverFlow"/>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.EndTabGreaterThanZero">
+            <summary>
+            Количество табов по окончании выше нуля
+            <para/>
+            Наслежует <see cref="T:ModelTransformationComponent.EOSException"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.EndTabGreaterThanZero.#ctor">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.EndTabGreaterThanZero"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.EndTabGreaterThanZero.#ctor(System.String)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.EndTabGreaterThanZero"/>
+            </summary>
+            <param name="message">Сообщение</param>
+        </member>
+        <member name="M:ModelTransformationComponent.EndTabGreaterThanZero.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.EndTabGreaterThanZero"/>
+            </summary>
+            <param name="message">Сообщение</param>
+            <param name="inner">Внутренняя ошибка</param>
+        </member>
+        <member name="M:ModelTransformationComponent.EndTabGreaterThanZero.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.EndTabGreaterThanZero"/>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
         <member name="T:ModelTransformationComponent.EOSException">
             <summary>
             Ошибка: неожиданный конец входной строки <para/>
@@ -133,6 +224,14 @@
             <param name="message">Сообщение</param>
             <param name="inner">Внутренняя ошибка</param>
         </member>
+        <member name="M:ModelTransformationComponent.InputIsEmpty.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="T:ModelTransformationComponent.NameSyntaxError">
             <summary>
             Ошибка в названии структуры
@@ -170,6 +269,27 @@
             Ошибка в названии структуры
             </summary>
             <param name="got">Полученная строка</param>
+        </member>
+        <member name="M:ModelTransformationComponent.NameSyntaxError.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.NameSyntaxError.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.NameSyntaxError.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:ModelTransformationComponent.NoEndDetected">
             <summary>
@@ -271,6 +391,14 @@
             Наследует <see cref="T:ModelTransformationComponent.SyntaxError"/>
             </summary>
         </member>
+        <member name="F:ModelTransformationComponent.SyntaxErrorPlaced.PlaceFormatString">
+            <summary>
+            Строка формата расположения ошибки
+            </summary>
+            <value>
+            "[{0},{1}]"
+            </value>
+        </member>
         <member name="F:ModelTransformationComponent.SyntaxErrorPlaced.FormatString">
             <summary>
             Строка формата сообщения ошибки по-умолчанию
@@ -337,6 +465,23 @@
             </summary>
             <param name="message">Сообщение</param>
             <param name="inner">Внутренняя ошибка</param>
+        </member>
+        <member name="M:ModelTransformationComponent.SyntaxErrorPlaced.#ctor(System.String,System.Exception,System.Int32,System.Int32)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.SyntaxErrorPlaced"/>
+            </summary>
+            <param name="message">Сообщение</param>
+            <param name="inner">Внутренняя ошибка</param>
+            <param name="line"></param>
+            <param name="symbol"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SyntaxErrorPlaced.#ctor(System.Int32,System.Int32,System.Exception)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.SyntaxErrorPlaced"/>
+            </summary>
+            <param name="inner">Внутренняя ошибка</param>
+            <param name="line"></param>
+            <param name="symbol"></param>
         </member>
         <member name="M:ModelTransformationComponent.SyntaxErrorPlaced.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
@@ -517,6 +662,21 @@
             <param name="info"></param>
             <param name="context"></param>
         </member>
+        <member name="T:ModelTransformationComponent.GeneratorState">
+            <summary>
+            Текущее положение генерации текстового представления модели
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.GeneratorState.TabCount">
+            <summary>
+            Счётчик табов
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.GeneratorState.Text">
+            <summary>
+            Текущий текст
+            </summary>
+        </member>
         <member name="T:ModelTransformationComponent.ITransformationComponent">
             <summary>
             Интрефейс компонента трансформации моделей
@@ -549,17 +709,38 @@
             <param name="targetLang"></param>
             <returns></returns>
         </member>
+        <member name="T:ModelTransformationComponent.ParserState">
+            <summary>
+            Текущее положение парсера
+            </summary>
+        </member>
         <member name="T:ModelTransformationComponent.AbstractRuleFactory">
             <summary>
             Абстрактная фабрика конструкций
             </summary>
         </member>
-        <member name="M:ModelTransformationComponent.AbstractRuleFactory.CreateRule(System.String)">
+        <member name="M:ModelTransformationComponent.AbstractRuleFactory.CreateRule(System.String,System.Int32@)">
             <summary>
             Создание конструкции
             </summary>
             <param name="text">Текстовое описание конструкции</param>
+            <param name="charcnt">Количество символов, использованных для создания</param>
             <returns>Конструкция</returns>
+        </member>
+        <member name="T:ModelTransformationComponent.BNFRuleFactory">
+            <summary>
+            Конкретная фабрика BNF конструкций
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.AbstractRuleFactory"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRuleFactory.CreateRule(System.String,System.Int32@)">
+            <summary>
+            Создание BNF конструкции
+            </summary>
+            <param name="text">Текстовое описание конструкции</param>
+            <param name="charcnt">Количество символов, использованных для создания</param>
+            <returns>BNF конструкция</returns>
         </member>
         <member name="T:ModelTransformationComponent.RegRuleFactory">
             <summary>
@@ -568,11 +749,12 @@
             Наследует <see cref="T:ModelTransformationComponent.AbstractRuleFactory"/>
             </summary>
         </member>
-        <member name="M:ModelTransformationComponent.RegRuleFactory.CreateRule(System.String)">
+        <member name="M:ModelTransformationComponent.RegRuleFactory.CreateRule(System.String,System.Int32@)">
             <summary>
             Метод создания структуры с регулярным выражением
             </summary>
-            <param name="text">Текстовое представление структуры</param>        
+            <param name="text">Текстовое представление структуры</param>      
+            <param name="charcnt">Количество символов, использованных для создания</param>  
             <exception cref="T:System.ArgumentException">Неожиданная строка</exception>
             <exception cref="T:ModelTransformationComponent.SyntaxError">Синтаксическая ошибка</exception>
             <returns>Структура с представлением в виде регулярного выражения</returns>
@@ -584,12 +766,28 @@
             Наследует <see cref="T:ModelTransformationComponent.AbstractRuleFactory"/>
             </summary>
         </member>
-        <member name="M:ModelTransformationComponent.SystemRuleFactory.CreateRule(System.String)">
+        <member name="M:ModelTransformationComponent.SystemRuleFactory.CreateRule(System.String,System.Int32@)">
             <summary>
             Создание системной конструкции
             </summary>
             <param name="text">Текстовое описание конструкции</param>
+            <param name="charcnt">Количество символов, использованных для создания</param>
             <returns>Системная конструкция</returns>
+        </member>
+        <member name="T:ModelTransformationComponent.TypeRuleFactory">
+            <summary>
+            Конкретная фабрика type конструкций
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.AbstractRuleFactory"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.TypeRuleFactory.CreateRule(System.String,System.Int32@)">
+            <summary>
+            Создание type конструкции
+            </summary>
+            <param name="text">Текстовое описание конструкции</param>
+            <param name="charcnt">Количество символов, использованных для создания</param>
+            <returns>type конструкция</returns>
         </member>
         <member name="T:ModelTransformationComponent.NamedRule">
             <summary>
@@ -621,7 +819,7 @@
             Объект регулярного выражения
             </summary>
         </member>
-        <member name="F:ModelTransformationComponent.RegexRule.pattern">
+        <member name="F:ModelTransformationComponent.RegexRule.Pattern">
             <summary>
             Регулярное выражение
             </summary>
@@ -640,9 +838,9 @@
         </member>
         <member name="T:ModelTransformationComponent.SystemRule">
             <summary>
-            Системная конструкция
+            ��������� �����������
             <para/>
-            Наследует <see cref="T:ModelTransformationComponent.Rule"/>
+            ��������� <see cref="T:ModelTransformationComponent.Rule"/>
             </summary>
         </member>
         <member name="T:ModelTransformationComponent.Add_tab">
@@ -864,6 +1062,11 @@
         <member name="T:ModelTransformationComponent.TransformationComponent">
             <summary>
             Компонент трасформации моделей
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.TransformationComponent.#ctor">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.TransformationComponent"/>
             </summary>
         </member>
         <member name="M:ModelTransformationComponent.TransformationComponent.Transform(System.String,System.String,System.String,System.String)">

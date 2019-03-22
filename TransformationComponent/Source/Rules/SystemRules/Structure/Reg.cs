@@ -4,7 +4,9 @@ namespace ModelTransformationComponent{
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Reg : SystemRule{
+     
+    [System.Serializable]
+    public class Reg : SystemRule{
         /// <summary>
         /// Литерао конструкции создания конструкции на основе регулярного выражения
         /// </summary>

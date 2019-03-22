@@ -4,6 +4,8 @@ namespace ModelTransformationComponent{
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
+    
+    [System.Serializable]
     class Translate_rules_end : SystemRule{
         /// <summary>
         /// Литерал конструкции окончания описания дополнительных правил трансформации

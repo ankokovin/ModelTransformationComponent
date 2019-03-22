@@ -184,6 +184,9 @@ namespace ModelTransformationComponent
                                 prevRule = res;
                                 if (prevRule is NamedRule rule)
                                 {
+                                    if (result.ContainsKey(rule.GetName)){
+                                        throw new ConstructAlreadyDefined();
+                                    }
                                     result[rule.GetName] = rule;
                                 }                                
                             }

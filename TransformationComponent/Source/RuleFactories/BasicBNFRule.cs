@@ -1,6 +1,6 @@
 ﻿namespace ModelTransformationComponent
 {
-    class BasicBNFRule : Rule
+    public class BasicBNFRule : Rule
     {
 
     }

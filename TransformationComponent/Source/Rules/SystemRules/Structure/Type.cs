@@ -4,7 +4,9 @@ namespace ModelTransformationComponent{
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Type : SystemRule{
+     
+    [System.Serializable]
+    public class Type : SystemRule{
         /// <summary>
         /// Литерал конструкции создания конструкции типа
         /// </summary>

@@ -2,6 +2,8 @@
 
 namespace ModelTransformationComponent
 {
+
+    [System.Serializable]
     class BNFRule : NamedRule
     {
         public BNFRule(string name) : base(name)

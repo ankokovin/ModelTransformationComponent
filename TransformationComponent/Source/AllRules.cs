@@ -3,7 +3,8 @@ namespace ModelTransformationComponent
 {
     /// <summary>
     /// Все структуры
-    /// </summary>
+    /// </summary> 
+    [System.Serializable]
     public class AllRules{
         /// <summary>
         /// Структуры хранятся следующим образом:
@@ -11,7 +12,7 @@ namespace ModelTransformationComponent
         /// Название структуры : Структура
         /// </summary>
         private Dictionary<string, Dictionary<string, Rule>> rulesPerLanguage;
-
+        
         /// <summary>
         /// Конструктор <see cref="AllRules"/>
         /// </summary>

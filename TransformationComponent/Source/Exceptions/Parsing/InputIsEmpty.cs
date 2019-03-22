@@ -29,6 +29,13 @@ namespace ModelTransformationComponent
         /// <param name="message">Сообщение</param>
         /// <param name="inner">Внутренняя ошибка</param>
         public InputIsEmpty(string message, Exception inner) : base(message, inner) { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         protected InputIsEmpty(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }

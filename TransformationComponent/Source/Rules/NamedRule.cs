@@ -5,6 +5,8 @@ namespace ModelTransformationComponent
     /// <para/>
     /// Наследует <see cref="Rule"/>
     /// </summary>
+    
+    [System.Serializable]
     abstract class NamedRule : Rule{
         /// <summary>
         /// Название конструкции

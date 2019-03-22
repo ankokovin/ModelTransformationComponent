@@ -1,11 +1,13 @@
 namespace ModelTransformationComponent
 {
     /// <summary>
-    /// Системная конструкция
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// <para/>
-    /// Наследует <see cref="Rule"/>
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ <see cref="Rule"/>
     /// </summary>
-    abstract class SystemRule : Rule{
+    
+    [System.Serializable]
+    public abstract class SystemRule : Rule{
         abstract public string GetLiteral{get;}
     }
 }

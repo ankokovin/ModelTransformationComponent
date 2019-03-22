@@ -5,6 +5,8 @@ namespace ModelTransformationComponent
     /// <para/>
     /// Наследует <see cref="NamedRule"/>
     /// </summary>
+    
+    [System.Serializable]
     class RegexRule : NamedRule{
         /// <summary>
         /// Объект регулярного выражения
@@ -14,7 +16,7 @@ namespace ModelTransformationComponent
         /// <summary>
         /// Регулярное выражение
         /// </summary>
-        public string pattern;
+        public string Pattern;
 
         /// <summary>
         /// Конструкция с представлением в виде регулярного выражения
@@ -23,7 +25,7 @@ namespace ModelTransformationComponent
         /// <param name="name">Название конструкции</param>
         public RegexRule(string pattern, string name) : base(name){
             regex = new System.Text.RegularExpressions.Regex(pattern);
-            this.pattern = pattern;
+            this.Pattern = pattern;
         }
     }
 }
