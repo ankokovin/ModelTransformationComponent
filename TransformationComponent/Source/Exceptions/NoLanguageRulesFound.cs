@@ -5,7 +5,8 @@ namespace ModelTransformationComponent
     /// <summary>
     /// Исключение: не было найдено описание трансформаций для языка
     /// </summary>
-    public class NoLanguageRulesFound : Exception{
+    public class NoLanguageRulesFound : TransformComponentException
+    {
 
         /// <summary>
         /// Исключение: не было найдено описание трансформаций для языка

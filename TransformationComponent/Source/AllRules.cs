@@ -57,6 +57,17 @@ namespace ModelTransformationComponent
         /// Получение базовых структур
         /// </summary>
         /// <returns>Словарь базовых структур</returns>
-        public Dictionary<string, Rule> GetBaseRules() => GetRulesForLanguage(BaseName);
+        public Dictionary<string, Rule> GetBaseRules => GetRulesForLanguage(BaseName);
+
+
+        public List<string> GetLanguages
+        {
+            get
+            {
+                var result = new List<string>(rulesPerLanguage.Keys);
+                result.Remove(BaseName);
+                return result;
+            }
+        }
     }
 }

@@ -179,28 +179,30 @@
     ]
   },
   "packageFolders": {
-    "/home/xxxcul/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\TransformationComponent\\TransformationComponent.csproj",
       "projectName": "TransformationComponent",
-      "projectPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj",
-      "packagesPath": "/home/xxxcul/.nuget/packages/",
-      "outputPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponent/obj/",
+      "projectPath": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\TransformationComponent\\TransformationComponent.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\TransformationComponent\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/xxxcul/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

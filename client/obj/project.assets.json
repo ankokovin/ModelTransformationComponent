@@ -702,35 +702,37 @@
     ]
   },
   "packageFolders": {
-    "/home/xxxcul/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/xxxcul/Documents/core/courseWork/client/client.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\client\\client.csproj",
       "projectName": "client",
-      "projectPath": "/home/xxxcul/Documents/core/courseWork/client/client.csproj",
-      "packagesPath": "/home/xxxcul/.nuget/packages/",
-      "outputPath": "/home/xxxcul/Documents/core/courseWork/client/obj/",
+      "projectPath": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\client\\client.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/xxxcul/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj": {
-              "projectPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj"
+            "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\TransformationComponent\\TransformationComponent.csproj": {
+              "projectPath": "C:\\Users\\user\\Documents\\ModelTrasformationComponent\\TransformationComponent\\TransformationComponent.csproj"
             }
           }
         }
