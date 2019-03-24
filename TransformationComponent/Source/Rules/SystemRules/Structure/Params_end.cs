@@ -1,13 +1,14 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция окончания описания параметров
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Params_end : SystemRule{
+    public class Params_end : SystemRule{
         /// <summary>
         /// Литерал конструкции окончания описания параметров
         /// </summary>
-        public override string GetLiteral => "/params_end"; 
+        public override string Literal => "/params_end"; 
     }
 }

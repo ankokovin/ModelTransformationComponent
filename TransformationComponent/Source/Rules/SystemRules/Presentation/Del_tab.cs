@@ -1,15 +1,16 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция уменьшения счётчика табов
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Del_tab : SystemRule
+    public class Del_tab : SystemRule
     {
 
         /// <summary>
         /// Литерал конструкции уменьшения счётчика табов
         /// </summary>
-        public override string GetLiteral=> "del_tab";
+        public override string Literal=> "/del_tab";
     }
 }

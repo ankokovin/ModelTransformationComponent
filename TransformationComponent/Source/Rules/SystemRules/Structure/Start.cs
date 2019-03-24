@@ -1,14 +1,15 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция начала описания трансформаций
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Start : SystemRule
+    public class Start : SystemRule
     {
         /// <summary>
         /// Литерал конструкции начала описания трансформаций
         /// </summary>
-        public override string GetLiteral=> "/start";
+        public override string Literal=> "/start";
     }
 }

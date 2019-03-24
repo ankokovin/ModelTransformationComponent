@@ -7,7 +7,7 @@ namespace ModelTransformationComponent
     /// </summary>
     
     [System.Serializable]
-    class RegexRule : NamedRule{
+    public class RegexRule : NamedRule{
         /// <summary>
         /// Объект регулярного выражения
         /// </summary>

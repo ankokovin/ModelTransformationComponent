@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelTransformationComponent;
+using ModelTransformationComponent.SystemRules;
+
+
 namespace TransformationComponentUnitTest
 {
     [TestClass]
@@ -33,7 +36,12 @@ namespace TransformationComponentUnitTest
 
         }
         #endregion
+
         #region TransformToRules(string)
+
+        #region BaseOnly
+
+        #region Basic
         [TestMethod]
         [TestCategory("TransformToRules")]
         public void ToRulesEmpty(){
@@ -115,7 +123,7 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
             Assert.AreEqual(actual.GetBaseRules.Count,0);
         }
         
@@ -132,7 +140,7 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
             Assert.AreEqual(actual.GetBaseRules.Count,0);
         }
         
@@ -153,10 +161,84 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
             Assert.AreEqual(actual.GetBaseRules.Count,0);
         }
 
+        #endregion
+        #region SystemRule
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesFakeSys()
+        {
+            var fakeName = "aofjpawf";
+            //arrange
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            fakeName+"\n"+
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            try
+            {
+                var actual = component.TransformToRules(rules);
+
+            }//assert
+            catch(TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(RuleParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(BaseRuleParseException));
+                Assert.IsInstanceOfType(tr.InnerException.InnerException, typeof(SyntaxErrorPlaced));
+            }
+            
+        }
+
+        [DataTestMethod]
+        [DataRow(typeof(Add_tab))]
+        [DataRow(typeof(Del_tab))]
+        [DataRow(typeof(Empty))]
+        [DataRow(typeof(Space))]
+
+        [TestCategory("TransformToRules")]
+        public void ToRulesSysPresentation(System.Type type)
+        {
+            //arrange
+            var name = "a";
+            var rule = (SystemRule)System.Activator.CreateInstance(type);
+            var str = rule.Literal;
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= " + str + "\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(1, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFSystemRef{ rule = rule});
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[1] { expBasicBNF });
+
+        }
+
+        #endregion
+        #region Reg
         [TestMethod]
         [TestCategory("TransformToRules")]
         public void ToRulesOneReg(){
@@ -175,7 +257,7 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
 
             var resultRules = actual.GetBaseRules;
             Assert.AreEqual(resultRules.Count,1);
@@ -183,10 +265,7 @@ namespace TransformationComponentUnitTest
             Assert.IsTrue(resultRules.ContainsKey(name));
 
             var resultRegRule = resultRules[name] as RegexRule;
-
-            Assert.IsNotNull(resultRegRule);
-        
-            Assert.AreEqual(resultRegRule.Pattern, pattern);
+            TestUtil.AssertReg(resultRegRule, name, pattern);
         }
 
 
@@ -211,7 +290,7 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
 
             var resultRules = actual.GetBaseRules;
             Assert.AreEqual(resultRules.Count,2);
@@ -220,17 +299,10 @@ namespace TransformationComponentUnitTest
 
             var resultRegRule = resultRules[name] as RegexRule;
 
-            Assert.IsNotNull(resultRegRule);
-        
-            Assert.AreEqual(resultRegRule.Pattern, pattern);
-
-            Assert.IsTrue(resultRules.ContainsKey(name2));
+            TestUtil.AssertReg(resultRegRule, name, pattern);
 
             resultRegRule = resultRules[name2] as RegexRule;
-
-            Assert.IsNotNull(resultRegRule);
-        
-            Assert.AreEqual(resultRegRule.Pattern, pattern2);
+            TestUtil.AssertReg(resultRegRule, name2, pattern2);
         }
 
 
@@ -262,16 +334,18 @@ namespace TransformationComponentUnitTest
                 Assert.IsInstanceOfType(e.InnerException.InnerException.InnerException, typeof(ConstructAlreadyDefined));
             }
         }
-
+        #endregion Reg
+        #region BNF
         [TestMethod]
         [TestCategory("TransformToRules")]
         public void ToRulesBNF(){
             //arrange
             var name = "a";
+            var str = "a";
             var rules = "Some strange comment-like text\n"+
             "with some new lines and //////star\n"+
             "but eventually /start\n"+
-            name + " ::= a\n"+
+            name + " ::= "+str+ "\n"+
             "/end\n"+
             "Some more comments";
             var component = new TransformationComponent();
@@ -280,7 +354,7 @@ namespace TransformationComponentUnitTest
             var actual = component.TransformToRules(rules);
             
             //assert
-            Assert.AreEqual(actual.GetLanguages.Count,0);
+            Assert.AreEqual(actual.Languages.Count,0);
 
             var resultRules = actual.GetBaseRules;
             Assert.AreEqual(1,resultRules.Count);
@@ -289,17 +363,444 @@ namespace TransformationComponentUnitTest
 
             var resultBNFRule = resultRules[name] as BNFRule;
 
-            Assert.IsNotNull(resultBNFRule);
-
-            Assert.AreEqual(1,resultBNFRule.OrSplits.Count);
-
-            var resultSimpleBNFRule = resultBNFRule.OrSplits[0];
-
-            /*
-            TO DO: when i know, wtf is basebnfrule, assert it
-                         */
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFString { Value = str });
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[1] { expBasicBNF });
+            
         }
-        
+
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesTwoBNF()
+        {
+            //arrange
+            var name = "a";
+            var name2 = "b";
+            var str = "a";
+            var str2 = "b";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= "+str+"\n" +
+            name2 + " ::= "+str2+"\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(2, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFString { Value = str });
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[1] { expBasicBNF });
+
+            Assert.IsTrue(resultRules.ContainsKey(name2));
+
+            resultBNFRule = resultRules[name2] as BNFRule;
+
+
+            expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFString { Value = str2 });
+            TestUtil.AssertBNF(resultBNFRule, name2,
+                new BasicBNFRule[1] { expBasicBNF });
+        }
+
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesBNFFakeSys()
+        {
+            //arrange
+            var name = "a";
+            var fakeName = "adkjlxfkbn" ;
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= /" + fakeName + "\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            try
+            {
+                var actual = component.TransformToRules(rules);
+            }//assert
+            catch (TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(RuleParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(BaseRuleParseException));
+                Assert.IsInstanceOfType(tr.InnerException.InnerException, typeof(SyntaxErrorPlaced));
+            }
+            
+        }
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesTwoBNFSameName()
+        {
+            //arrange
+            var name = "a";
+            var name2 = name;
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= a\n" +
+            name2 + " ::= b\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            try
+            {
+                var actual = component.TransformToRules(rules);
+            }
+            catch (System.Exception e)
+            {
+                //assert
+                Assert.IsInstanceOfType(e, typeof(RuleParseException));
+                Assert.IsInstanceOfType(e.InnerException, typeof(BaseRuleParseException));
+                Assert.IsInstanceOfType(e.InnerException.InnerException, typeof(SyntaxErrorPlaced));
+                Assert.IsInstanceOfType(e.InnerException.InnerException.InnerException, typeof(ConstructAlreadyDefined));
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesTwoBNFReference()
+        {
+            //arrange
+            var name = "a";
+            var name2 = "b";
+
+            var str = "a";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= "+str+"\n" +
+            name2 + " ::= <"+name+">\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(2, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFString { Value = str });
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[1] { expBasicBNF });
+
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            resultBNFRule = resultRules[name2] as BNFRule;
+
+
+
+            expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFReference{ Name = name });
+            TestUtil.AssertBNF(resultBNFRule, name2,
+                new BasicBNFRule[1] { expBasicBNF });
+
+        }
+        #endregion BNF
+        #region Type
+        //TO DO!
+        #endregion Type
+        #region TypeEx
+        //TO DO!
+        #endregion TypeEx
+        #region Mix
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesBNFRefReg()
+        {
+            //arrange
+            var name = "a";
+            var name2 = "b";
+            var pattern = "[0-9]+";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            "/reg " + name + " ::= "+pattern+"\n" +
+            name2 + " ::= <"+name+">\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(2, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultRegRule = resultRules[name] as RegexRule;
+
+            TestUtil.AssertReg(resultRegRule, name, pattern);
+            Assert.IsTrue(resultRules.ContainsKey(name2));
+
+            var resultBNFRule = resultRules[name2] as BNFRule;
+
+            
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFReference { Name = name });
+            TestUtil.AssertBNF(resultBNFRule, name2,
+                new BasicBNFRule[1] { expBasicBNF });
+
+        }
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesBNFTwoOrs()
+        {
+            //arrange
+            var name = "a";
+            var str1 = "a";
+            var str2 = "b";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= " + str1 + "|" + str2 + "\n"+
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(1, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFString { Value = str1});
+
+            var expBasicBNF2 = new BasicBNFRule();
+            expBasicBNF2.elements.Add(new BNFString { Value = str2 });
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[2] { expBasicBNF, expBasicBNF2 });
+
+        }
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesBNFSelfRef()
+        {
+            //arrange
+            var name = "a";
+            var str = "a";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            name + " ::= " + "/empty |"+str+"<" + name + ">\n"+
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(1, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+
+
+            var expBasicBNF = new BasicBNFRule();
+            expBasicBNF.elements.Add(new BNFSystemRef { rule= new Empty()});
+            
+            var expBasicBNF2 = new BasicBNFRule();
+            expBasicBNF2.elements.Add(new BNFString { Value = str });
+            expBasicBNF2.elements.Add(new BNFReference { Name = name});
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[2] { expBasicBNF, expBasicBNF2 });
+
+        }
+        #endregion Mix
+        #endregion BaseOnly
+
+        #region WithLanguages
         #endregion
+        #endregion
+
+        #region Transform(string,AllRules,string,string)
+
+        [TestMethod]
+        [TestCategory("TransformWithRules")]
+        public void TransfromNoLanguages()
+        {
+            //arrange
+            string text = "Some text";
+
+            AllRules allRules = new AllRules();
+            allRules.AddBaseRules(new System.Collections.Generic.Dictionary<string, Rule>());
+            string sourceLang = "a";
+
+            string targetLang = "b";
+
+            TransformationComponent transformationComponent = new TransformationComponent();
+
+            //act
+            try
+            {
+                transformationComponent.Transform(text, allRules, sourceLang, targetLang);
+
+            }catch(TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(ModelParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(NoLanguageRulesFound));
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("TransformWithRules")]
+        public void TransfromNoSourceLang()
+        {
+            //arrange
+            string text = "Some text";
+
+            AllRules allRules = new AllRules();
+
+            allRules.AddBaseRules(new System.Collections.Generic.Dictionary<string, Rule>());
+
+            string sourceLang = "a";
+
+            string targetLang = "b";
+
+            allRules.AddLanguageRules(targetLang, new System.Collections.Generic.Dictionary<string, Rule>());
+
+            
+
+            TransformationComponent transformationComponent = new TransformationComponent();
+
+            //act
+            try
+            {
+                transformationComponent.Transform(text, allRules, sourceLang, targetLang);
+
+            }
+            catch (TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(ModelParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(NoLanguageRulesFound));
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("TransformWithRules")]
+        public void TransfromNoTargetLanguage()
+        {
+            //arrange
+            string text = "Some text";
+
+            AllRules allRules = new AllRules();
+
+            allRules.AddBaseRules(new System.Collections.Generic.Dictionary<string, Rule>());
+
+            string sourceLang = "a";
+
+            string targetLang = "b";
+
+            allRules.AddLanguageRules(sourceLang, new System.Collections.Generic.Dictionary<string, Rule>());
+
+
+            TransformationComponent transformationComponent = new TransformationComponent();
+
+            //act
+            try
+            {
+                transformationComponent.Transform(text, allRules, sourceLang, targetLang);
+
+            }
+            catch (TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(ModelParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(NoLanguageRulesFound));
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("TransformWithRules")]
+        public void TransfromNoBase()
+        {
+            //arrange
+            string text = "Some text";
+
+            AllRules allRules = new AllRules();
+            
+            string sourceLang = "a";
+
+            string targetLang = "b";
+
+            allRules.AddLanguageRules(sourceLang, new System.Collections.Generic.Dictionary<string, Rule>());
+            allRules.AddLanguageRules(targetLang, new System.Collections.Generic.Dictionary<string, Rule>());
+
+
+            TransformationComponent transformationComponent = new TransformationComponent();
+
+            //act
+            try
+            {
+                transformationComponent.Transform(text, allRules, sourceLang, targetLang);
+
+            }
+            catch (TransformComponentException tr)
+            {
+                Assert.IsInstanceOfType(tr, typeof(ModelParseException));
+                Assert.IsInstanceOfType(tr.InnerException, typeof(NoBaseRulesFound));
+            }
+        }
+
+
+        #endregion
+        
     }
 }

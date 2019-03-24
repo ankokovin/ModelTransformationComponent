@@ -1,14 +1,15 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция пустой символ
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Empty : SystemRule{
+    public class Empty : SystemRule{
 
         /// <summary>
         /// Литерал конструкции пустой символ
         /// </summary>
-        public override string GetLiteral => "/empty";
+        public override string Literal => "/empty";
     }
 }

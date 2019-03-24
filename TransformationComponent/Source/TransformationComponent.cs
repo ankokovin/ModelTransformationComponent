@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using ModelTransformationComponent.SystemRules;
 
 namespace ModelTransformationComponent
 {
@@ -36,7 +37,7 @@ namespace ModelTransformationComponent
                 [typeof(TypeRuleFactory)] =
                 delegate (string s, Rule rule)
                 {
-                    return rule is Type;
+                    return rule is TypeDef;
                 }
             };
 
@@ -81,28 +82,28 @@ namespace ModelTransformationComponent
 
                 var result = new AllRules();
 
-                var startIdx = rules.IndexOf(new Start().GetLiteral);
+                var startIdx = rules.IndexOf(new Start().Literal);
                 Debug.WriteLine("Index for /start: " + startIdx);
 
                 if (startIdx == -1)
                     throw new NoStartDetected();
 
 
-                var endIdx = rules.IndexOf(new End().GetLiteral);
+                var endIdx = rules.IndexOf(new End().Literal);
                 Debug.WriteLine("Index for /end: " + endIdx);
 
                 if (endIdx == -1)
                     throw new NoEndDetected();
 
 
-                var text = rules.Substring(startIdx, endIdx - startIdx + new End().GetLiteral.Length);
+                var text = rules.Substring(startIdx, endIdx - startIdx + new End().Literal.Length);
 
                 Debug.WriteLine("---------Inside text----------");
                 Debug.WriteLine(text);
                 Debug.WriteLine("-----------------------");
 
 
-                var firstlang = text.IndexOf(new Language_start().GetLiteral);
+                var firstlang = text.IndexOf(new Language_start().Literal);
 
 
                 Debug.WriteLine("First idx for /language_start: " + firstlang);
@@ -112,7 +113,7 @@ namespace ModelTransformationComponent
                     result.AddBaseRules(baseLang);
 
                     var languages = text.Substring(firstlang).Split(
-                        new[] { new Language_end().GetLiteral }, StringSplitOptions.None);
+                        new[] { new Language_end().Literal }, StringSplitOptions.None);
 
                     Debug.WriteLine("Number of languages: " + languages.Length);
                     foreach (var lang in languages)
@@ -184,10 +185,10 @@ namespace ModelTransformationComponent
                                 prevRule = res;
                                 if (prevRule is NamedRule rule)
                                 {
-                                    if (result.ContainsKey(rule.GetName)){
+                                    if (result.ContainsKey(rule.Name)){
                                         throw new ConstructAlreadyDefined();
                                     }
-                                    result[rule.GetName] = rule;
+                                    result[rule.Name] = rule;
                                 }                                
                             }
                             ok = true;
@@ -263,6 +264,11 @@ namespace ModelTransformationComponent
                 Debug.WriteLineIf(rules == null, "rules was null");
                 Debug.WriteLine("sourceLang:" + sourceLang);
                 Debug.WriteLine("targetLang:" + targetLang);
+                try { var t = rules.GetBaseRules; }
+                catch(Exception e)
+                {
+                    throw new NoBaseRulesFound(e);
+                }
                 if (!rules.HasLanguage(sourceLang)) throw new NoLanguageRulesFound(sourceLang);
                 if (!rules.HasLanguage(targetLang)) throw new NoLanguageRulesFound(targetLang);
                 throw new NotImplementedException();

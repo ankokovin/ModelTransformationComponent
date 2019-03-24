@@ -1,13 +1,14 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция задания представления
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Presentation : SystemRule{
+    public class Presentation : SystemRule{
         /// <summary>
         /// Литерал конструкции задания представления
         /// </summary>
-        public override string GetLiteral=> "::=";
+        public override string Literal=> "::=";
     }
 }

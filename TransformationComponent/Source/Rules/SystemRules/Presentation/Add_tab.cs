@@ -1,15 +1,16 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция увеличения счётчика табов
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Add_tab : SystemRule
+    public class Add_tab : SystemRule
     {
 
         /// <summary>
         /// Литерал конструкции увеличения счётчика табов
         /// </summary>
-        public override string GetLiteral => "add_tab";
+        public override string Literal => "/add_tab";
     }
 }

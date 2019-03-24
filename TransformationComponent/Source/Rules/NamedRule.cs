@@ -7,18 +7,18 @@ namespace ModelTransformationComponent
     /// </summary>
     
     [System.Serializable]
-    abstract class NamedRule : Rule{
+    public abstract class NamedRule : Rule{
         /// <summary>
         /// Название конструкции
         /// </summary>
-        public string GetName { get; }
+        public string Name { get; }
 
         /// <summary>
         /// Конструкция с названием
         /// </summary>
         /// <param name="name">Название конструкции</param>
         public NamedRule(string name) : base(){
-            GetName = name;
+            Name = name;
         }
     }
 }

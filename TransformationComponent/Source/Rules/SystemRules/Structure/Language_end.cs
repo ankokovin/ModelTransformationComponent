@@ -1,14 +1,15 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция окончания описания языка
     /// <para/>
     /// Наследует <see cref="SystemRule"/>
     /// </summary>
-    class Language_end : SystemRule
+    public class Language_end : SystemRule
     {
         /// <summary>
         /// Литерал конструкции окончания описания языка
         /// </summary>
-        public override string GetLiteral=> "/language_end";
+        public override string Literal=> "/language_end";
     }
 }

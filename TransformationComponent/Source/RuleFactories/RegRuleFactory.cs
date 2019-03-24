@@ -1,5 +1,5 @@
 using System.Linq;
-
+using ModelTransformationComponent.SystemRules;
 namespace ModelTransformationComponent{
     /// <summary>
     /// Конкретная фабрика структур с представлением в виде регулярных выражений
@@ -23,8 +23,8 @@ namespace ModelTransformationComponent{
             if (sp.Length<3)
                 throw new System.ArgumentException("Unexpected string input");
             string pattern = sp[2];
-            if (sp[1] != new Presentation().GetLiteral)
-                throw new SyntaxError(sp[1], new Presentation().GetLiteral);
+            if (sp[1] != new Presentation().Literal)
+                throw new SyntaxError(sp[1], new Presentation().Literal);
             for(int i=3;i<sp.Length; ++i){
                 pattern += " " + sp[i];
             }

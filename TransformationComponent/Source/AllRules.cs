@@ -69,7 +69,7 @@ namespace ModelTransformationComponent
         /// <summary>
         /// Получение списка введённых языков
         /// </summary>
-        public List<string> GetLanguages
+        public List<string> Languages
         {
             get
             {

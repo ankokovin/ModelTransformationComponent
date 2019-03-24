@@ -1,4 +1,5 @@
 using System.Linq;
+using ModelTransformationComponent.SystemRules;
 
 namespace ModelTransformationComponent
 {
@@ -19,25 +20,30 @@ namespace ModelTransformationComponent
         {
             var wsSplit = text.Split();
 
-            if (wsSplit[1] != new Presentation().GetLiteral)
-                throw new SyntaxError(wsSplit[1], new Presentation().GetLiteral);
+            if (wsSplit[1] != new Presentation().Literal)
+                throw new SyntaxError(wsSplit[1], new Presentation().Literal);
 
-
-            charcnt = wsSplit[0].Length + wsSplit[1].Length + 2;
+            
+            //charcnt = wsSplit[0].Length + wsSplit[1].Length + 2;
             var result = new BNFRule(wsSplit[0]);
+            //return result;
+
+            var declString = wsSplit[2];
+            for (int i = 3; i < wsSplit.Length; ++i)
+                declString +=" "+wsSplit[i];
+
+
+
+            var basicBNFFactory = new BasicBNFFactory();
+            var orStrings = declString.Split('|');
+            foreach (var orStr in orStrings)
+            {
+                var basicBNFRule = (BasicBNFRule)basicBNFFactory.CreateRule(orStr, out int x);
+                result.OrSplits.Add(basicBNFRule);
+            }
+
+            charcnt = text.Length;
             return result;
-
-
-
-            throw new System.NotImplementedException();
-            throw new System.Exception("Unexpected string input");
-        }
-
-        public Rule CreateRule(BNFRule prev, BasicBNFRule rule)
-        {
-            prev.OrSplits.Add(rule);
-
-            return prev;
         }
     }
 }

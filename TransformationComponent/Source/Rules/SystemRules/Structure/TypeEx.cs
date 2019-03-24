@@ -1,4 +1,4 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules{
     /// <summary>
     /// Системная конструкция создания конструкции, реализующий тип
     /// <para/>
@@ -6,10 +6,10 @@ namespace ModelTransformationComponent{
     /// </summary>
     
     [System.Serializable]
-    class TypeEx : SystemRule{
+    public class TypeEx : SystemRule{
         /// <summary>
         /// Литерал конструкции создания конструкции, реализующий тип
         /// </summary>
-        public override string GetLiteral => "/type=";
+        public override string Literal => "/type=";
     }
 }

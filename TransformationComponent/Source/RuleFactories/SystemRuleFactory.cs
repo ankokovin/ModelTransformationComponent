@@ -1,7 +1,8 @@
 using System.Reflection;
 using System.Linq;
 
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent
+{
     /// <summary>
     /// Конкретная фабрика системных конструкций
     /// <para/>
@@ -17,22 +18,17 @@ namespace ModelTransformationComponent{
         /// <returns>Системная конструкция</returns>
         public override Rule CreateRule(string text, out int charcnt)
         {
-            SystemRule rule;
-            System.Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            System.Type[] SystemRuleTypes = (from System.Type type in types
-                                             where type.IsSubclassOf(typeof(SystemRule))
-                                             select type)
-                                             .ToArray();
-            foreach(System.Type t in SystemRuleTypes)
+            SystemTrieSingleton systemTrieSingleton = SystemTrieSingleton.getInstance();
+
+            var result = systemTrieSingleton.Search(text, out charcnt, out string Suggestion);
+            if (result != null)
+                return result;
+            else
             {
-                rule = (SystemRule)System.Activator.CreateInstance(t);
-                if (text.StartsWith(rule.GetLiteral))
-                {
-                    charcnt = rule.GetLiteral.Length;
-                    return rule;
-                }
+                if (Suggestion.Length > 0)
+                    throw new SyntaxError(Suggestion, text);
+                throw new SyntaxError("system rule", text);
             }
-            throw new SyntaxError("system rule", text);
         }
     }
 }

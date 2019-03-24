@@ -1,4 +1,5 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция окончания описания дополнительных правил трансформации
     /// <para/>
@@ -6,10 +7,10 @@ namespace ModelTransformationComponent{
     /// </summary>
     
     [System.Serializable]
-    class Translate_rules_end : SystemRule{
+    public class Translate_rules_end : SystemRule{
         /// <summary>
         /// Литерал конструкции окончания описания дополнительных правил трансформации
         /// </summary>
-        public override string GetLiteral => "/translate_rules_end";
+        public override string Literal => "/translate_rules_end";
     }
 }

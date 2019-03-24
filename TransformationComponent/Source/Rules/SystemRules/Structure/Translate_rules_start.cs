@@ -1,4 +1,5 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция начала описания дополнительных правил трансформации
     /// <para/>
@@ -10,6 +11,6 @@ namespace ModelTransformationComponent{
         /// <summary>
         /// Литерал конструкции начала описания дополнительных правил трансформации
         /// </summary>
-        public override string GetLiteral => "/translate_rules_start";
+        public override string Literal => "/translate_rules_start";
     }
 }

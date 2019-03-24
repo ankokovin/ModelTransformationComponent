@@ -1,4 +1,5 @@
-namespace ModelTransformationComponent{
+namespace ModelTransformationComponent.SystemRules
+{
     /// <summary>
     /// Системная конструкция создания конструкции на основе регулярного выражения
     /// <para/>
@@ -10,6 +11,6 @@ namespace ModelTransformationComponent{
         /// <summary>
         /// Литерао конструкции создания конструкции на основе регулярного выражения
         /// </summary>
-        public override string GetLiteral => "/reg";
+        public override string Literal => "/reg";
     }
 }
