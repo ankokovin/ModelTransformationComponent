@@ -370,6 +370,39 @@ namespace TransformationComponentUnitTest
             
         }
 
+        
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesBNFEmpty(){
+            //arrange
+            var name = "a";
+            var str = "a";
+            var rules = "Some strange comment-like text\n"+
+            "with some new lines and //////star\n"+
+            "but eventually /start\n"+
+            name +"\n"+
+            "/end\n"+
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+            
+            //assert
+            Assert.AreEqual(actual.Languages.Count,0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(1,resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultBNFRule = resultRules[name] as BNFRule;
+
+            TestUtil.AssertBNF(resultBNFRule, name,
+                new BasicBNFRule[0] );
+            
+        }
+
 
         [TestMethod]
         [TestCategory("TransformToRules")]
@@ -532,7 +565,37 @@ namespace TransformationComponentUnitTest
         }
         #endregion BNF
         #region Type
-        //TO DO!
+
+        [TestMethod]
+        [TestCategory("TransformToRules")]
+        public void ToRulesEmptyType(){
+            //arrange
+            var name = "a";
+            var rules = "Some strange comment-like text\n" +
+            "with some new lines and //////star\n" +
+            "but eventually /start\n" +
+            "/type " + name + "\n" +
+            "/end\n" +
+            "Some more comments";
+            var component = new TransformationComponent();
+
+            //act
+            var actual = component.TransformToRules(rules);
+
+            //assert
+            Assert.AreEqual(actual.Languages.Count, 0);
+
+            var resultRules = actual.GetBaseRules;
+            Assert.AreEqual(2, resultRules.Count);
+
+            Assert.IsTrue(resultRules.ContainsKey(name));
+
+            var resultTypeRule = resultRules[name] as TypeRule;
+
+            TestUtil.AssertBNF(resultTypeRule, name,
+                new BasicBNFRule[0]);
+            
+        }
         #endregion Type
         #region TypeEx
         //TO DO!
