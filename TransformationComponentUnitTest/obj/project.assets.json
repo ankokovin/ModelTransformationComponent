@@ -5838,35 +5838,37 @@
     ]
   },
   "packageFolders": {
-    "/home/xxxcul/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/xxxcul/Documents/core/courseWork/TransformationComponentUnitTest/TransformationComponentUnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\ankokovin\\ModelTrasformationComponent1\\TransformationComponentUnitTest\\TransformationComponentUnitTest.csproj",
       "projectName": "TransformationComponentUnitTest",
-      "projectPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponentUnitTest/TransformationComponentUnitTest.csproj",
-      "packagesPath": "/home/xxxcul/.nuget/packages/",
-      "outputPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponentUnitTest/obj/",
+      "projectPath": "C:\\Users\\user\\Source\\Repos\\ankokovin\\ModelTrasformationComponent1\\TransformationComponentUnitTest\\TransformationComponentUnitTest.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Source\\Repos\\ankokovin\\ModelTrasformationComponent1\\TransformationComponentUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/xxxcul/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj": {
-              "projectPath": "/home/xxxcul/Documents/core/courseWork/TransformationComponent/TransformationComponent.csproj"
+            "C:\\Users\\user\\Source\\Repos\\ankokovin\\ModelTrasformationComponent1\\TransformationComponent\\TransformationComponent.csproj": {
+              "projectPath": "C:\\Users\\user\\Source\\Repos\\ankokovin\\ModelTrasformationComponent1\\TransformationComponent\\TransformationComponent.csproj"
             }
           }
         }

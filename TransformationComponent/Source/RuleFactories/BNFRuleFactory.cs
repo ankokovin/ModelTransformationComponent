@@ -18,7 +18,7 @@ namespace ModelTransformationComponent
         /// <returns>BNF конструкция</returns>
         public override Rule CreateRule(string text, out int charcnt)
         {
-            var wsSplit = text.Split();
+            var wsSplit = text.Split().Where(z => z.Length > 0).ToArray(); ;
             var result = new BNFRule(wsSplit[0]);
 
             if (wsSplit.Length == 1){
@@ -27,7 +27,7 @@ namespace ModelTransformationComponent
             }
 
             if (wsSplit[1] != new Presentation().Literal)
-                throw new SyntaxError(wsSplit[1], new Presentation().Literal);
+                throw new SyntaxError(new Presentation().Literal, wsSplit[1]);
 
             
             //charcnt = wsSplit[0].Length + wsSplit[1].Length + 2;

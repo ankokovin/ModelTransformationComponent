@@ -32,7 +32,7 @@ namespace ModelTransformationComponent
                 [typeof(BNFRuleFactory)] =
                 delegate (string s, Rule rule)
                 {
-                    return s.Length > 0 && s[0] != '/' && !(rule is Reg) && !(rule is Type);
+                    return s.Length > 0 && s[0] != '/' && !(rule is Reg) && !(rule is TypeDef);
                 },
                 [typeof(TypeRuleFactory)] =
                 delegate (string s, Rule rule)

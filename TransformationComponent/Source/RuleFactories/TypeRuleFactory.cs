@@ -1,3 +1,4 @@
+using System.Linq;
 using ModelTransformationComponent.SystemRules;
 
 namespace ModelTransformationComponent{
@@ -17,8 +18,8 @@ namespace ModelTransformationComponent{
         public override Rule CreateRule(string text, out int charcnt)
         {
             System.Diagnostics.Debug.WriteLine(text);
-            var wsSplit = text.Split();
-            var result = new BNFRule(wsSplit[0]);
+            var wsSplit = text.Split().Where(z=>z.Length > 0).ToArray();
+            var result = new TypeRule(wsSplit[0]);
 
             
             if (wsSplit.Length == 1){
@@ -27,7 +28,7 @@ namespace ModelTransformationComponent{
             }
 
             if (wsSplit[1] != new Presentation().Literal)
-                throw new SyntaxError(wsSplit[1], new Presentation().Literal);
+                throw new SyntaxError(new Presentation().Literal, wsSplit[1]);
 
             
             //charcnt = wsSplit[0].Length + wsSplit[1].Length + 2;

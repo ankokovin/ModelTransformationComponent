@@ -586,7 +586,7 @@ namespace TransformationComponentUnitTest
             Assert.AreEqual(actual.Languages.Count, 0);
 
             var resultRules = actual.GetBaseRules;
-            Assert.AreEqual(2, resultRules.Count);
+            Assert.AreEqual(1, resultRules.Count);
 
             Assert.IsTrue(resultRules.ContainsKey(name));
 

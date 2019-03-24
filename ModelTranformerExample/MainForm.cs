@@ -148,7 +148,7 @@ namespace ModelTranformerExample
                     Debug.WriteLine("rules parsed succesful");
 
                     AutoCompleteStringCollection names = new AutoCompleteStringCollection();
-                    names.AddRange(allRules.GetLanguages.ToArray());
+                    names.AddRange(allRules.Languages.ToArray());
 
                     SourceLangTextBox.AutoCompleteCustomSource = names;
                     SourceLangTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
