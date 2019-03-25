@@ -44,13 +44,11 @@ namespace ModelTransformationComponent
             foreach (var orStr in orStrings)
             {
                 var basicBNFRule = (BasicBNFRule)basicBNFFactory.CreateRule(orStr, out int x);
-                
-                foreach(var item in basicBNFRule.elements){
-                    if (item is BNFSystemRef sr && sr.rule is Child){
-                        throw new SyntaxError("Синтаксическая ошибка. /child в описании не типа");
-                    }
-                }
 
+
+                if (basicBNFRule.elements.Contains(new BNFSystemRef() { rule = new Child() }))
+                        throw new SyntaxError("Синтаксическая ошибка. /child в описании не типа");
+                
                 result.OrSplits.Add(basicBNFRule);
             }
 

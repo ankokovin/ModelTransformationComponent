@@ -13,5 +13,10 @@ namespace ModelTransformationComponent
         /// Литерал конструкции
         /// </summary>
         abstract public string Literal{get;}
+
+        public override string ToString()
+        {
+            return "SystemRule: "+Literal;
+        }
     }
 }

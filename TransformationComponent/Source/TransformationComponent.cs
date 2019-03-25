@@ -136,12 +136,12 @@ namespace ModelTransformationComponent
             }
         }
 
-        /// <summary>
-        /// Получить базовые структуры 
-        /// </summary>
-        /// <param name="text">Текстовое описание базовых структур</param>
-        /// <returns>Базовые структуры</returns>
-        private Dictionary<string, Rule> GetBaseDescription(string text){
+
+        private Dictionary<string, Rule> ParseRulesDescription(string text, 
+            bool Base = true, 
+            int startline = 0
+            )
+        {
             Debug.WriteLine("getting base description");
             Debug.WriteLine("text:");
             Debug.WriteLine(text);
@@ -150,8 +150,11 @@ namespace ModelTransformationComponent
             int idx = 0;
             int skipChars = 0;
             var lines = text.Split('\n');
+            string typen = string.Empty;
+            bool isTypeEx = false;
             bool paramStart = false;
-            try {
+            try
+            {
                 while (idx < lines.Length)
                 {
                     if (string.IsNullOrWhiteSpace(lines[idx]))
@@ -159,18 +162,28 @@ namespace ModelTransformationComponent
                         ++idx;
                         break;
                     }
-                    
+
                     bool ok = false;
-                    foreach(var pred in RuleTypePredicateList)
+
+                    
+
+                    if (prevRule is TypeEx)
+                    {
+                        HandleTypeExSetUp(in result, idx, ref lines, out typen, out isTypeEx);
+                    }
+
+                    foreach (var pred in RuleTypePredicateList)
                     {
                         if (pred.Value(lines[idx], prevRule))
                         {
                             Debug.WriteLine("Line " + idx + ": creaing factory:" + pred.Key);
+                            Debug.WriteLine("Input line:\n" + lines[idx]);
                             var factory = (AbstractRuleFactory)Activator.CreateInstance(pred.Key);
                             var res = factory.CreateRule(lines[idx], out int charcnt);
+                            Debug.WriteLine("Result:\n" + res);
                             if (charcnt != lines[idx].Length)
                             {
-                                lines[idx] = lines[idx].Substring(charcnt);
+                                lines[idx] = lines[idx].Substring(charcnt+1);
                                 skipChars += charcnt;
                             }
                             else
@@ -178,7 +191,8 @@ namespace ModelTransformationComponent
                                 ++idx;
                                 skipChars = 0;
                             }
-                            if (!paramStart){
+                            if (!paramStart)
+                            {
                                 if (res is Params_start)
                                 {
                                     if (prevRule is BNFRule || prevRule is TypeDef)
@@ -200,67 +214,185 @@ namespace ModelTransformationComponent
                                         result[rule.Name] = rule;
                                     }
                                 }
-                                                                
                                 
-
-                            }else{
+                            }
+                            else
+                            {
                                 if (res is Params_end)
                                 {
                                     paramStart = false;
                                     prevRule = null;
 
                                 }
-                                else if (res is BNFRule r){
-                                    if (r.OrSplits.Count> 1)
-                                    {
-                                        throw new SyntaxError("Синтаксическая ошибка: оператор | во время описания параметра");
-                                    }
-
-                                    if (r.OrSplits.Count > 0 && r.OrSplits[0].elements.Count > 1)
-                                    {
-                                        throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
-                                    }
-
-                                    if (r.OrSplits.Count > 0 && !(r.OrSplits[0].elements[0] is BNFReference))
-                                    {
-                                        throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
-                                    }
-
-                                    string nName = ((NamedRule)prevRule).Name + "." + r.Name;
-                                    if (result.ContainsKey(nName))
-                                    {
-                                        throw new ConstructAlreadyDefined();
-                                    }
-
-                                    result[nName] = r;
+                                else if (res is BNFRule r)
+                                {
+                                    HandleParam(prevRule, ref result, r);
                                 }
                                 else
                                 {
                                     throw new SyntaxError("Синтаксическая ошибка: получили не БНФ конструкцию внутри описания параметров");
                                 }
                             }
+                            if (isTypeEx)
+                            {
+                                HandleTypeEx(ref result, typen, res);
+                                isTypeEx = false;
+                            }
                             ok = true;
                             break;
-                           
+
                         }
                     }
                     if (!ok) throw new SyntaxError();
-                    
-                }    
+
+                }
                 //throw new NotImplementedException();
                 return result;
             }
-            catch(SyntaxErrorPlaced e)
+            catch (SyntaxErrorPlaced e)
             {
                 throw new BaseRuleParseException(e);
             }
             catch (Exception e)
             {
                 throw new BaseRuleParseException(
-                    new SyntaxErrorPlaced(idx+1, skipChars+1,e)
+                    new SyntaxErrorPlaced(startline + idx + 1, skipChars + 1, e)
                     );
             }
 
+        }
+
+        private static void HandleTypeExSetUp(in Dictionary<string, Rule> result, 
+            int idx, 
+            ref string[] lines, 
+            out string typen, 
+            out bool isTypeEx)
+        {
+            Debug.WriteLine("HandleTypeExSetUp called.");
+            typen = lines[idx].Split()[0];
+            Debug.WriteLine("Name of type: " + typen);
+            if (!result.ContainsKey(typen))
+            {
+                throw new SyntaxError(
+                    string.Format(
+                        "Синтаксическая ошибка: " +
+                        "Было встречено определение экземпляра типа {0}, " +
+                        "который ещё не определён",
+                        typen)
+                        );
+            }
+
+
+            if (!(result[typen] is TypeRule))
+            {
+                throw new SyntaxError(
+                    string.Format(
+                        "Синтаксическая ошибка: " +
+                        "{0} не является названием типа",
+                        typen
+                        )
+                        );
+            }
+            Debug.WriteLine("Line was\n"+ lines[idx]);
+            lines[idx] = lines[idx].Substring(typen.Length+1);
+            Debug.WriteLine("Line now\n"+ lines[idx]);
+            isTypeEx = true;
+
+        }
+
+        private static void HandleParam(Rule prevRule, ref Dictionary<string, Rule> result, BNFRule r)
+        {
+            Debug.WriteLine("HandleParam called");
+            if (r.OrSplits.Count > 1)
+            {
+                throw new SyntaxError("Синтаксическая ошибка: оператор | во время описания параметра");
+            }
+
+            if (r.OrSplits.Count > 0 && r.OrSplits[0].elements.Count > 1)
+            {
+                throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
+            }
+
+            if (r.OrSplits.Count > 0 && !(r.OrSplits[0].elements[0] is BNFReference))
+            {
+                throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
+            }
+
+            string nName = ((NamedRule)prevRule).Name + "." + r.Name;
+            if (result.ContainsKey(nName))
+            {
+                throw new ConstructAlreadyDefined();
+            }
+            Debug.WriteLine("Name was:" + r.Name);
+            r.Name = nName;
+            Debug.WriteLine("Name now:"+ r.Name);
+            result[nName] = r;
+        }
+
+        private static void HandleTypeEx(ref Dictionary<string, Rule> result, string typen, Rule res)
+        {
+            Debug.WriteLine("HandleTypeEx called");
+            TypeRule baseType = result[typen] as TypeRule;
+
+            if (!(res is NamedRule nres))
+                throw new TransformComponentException();
+
+            BNFRule bnfR = res as BNFRule;
+
+            if (bnfR == null) throw new TransformComponentException();
+
+            BNFRule bNFRule = new BNFRule(bnfR.Name);
+            foreach (BasicBNFRule basicBNFRule in bnfR)
+            {
+                BasicBNFRule nBasic = new BasicBNFRule();
+                
+                foreach (BNFSimpleElement element in baseType.OrSplits[0])
+                {
+                    bool checkStr = false;
+                    if (element is BNFSystemRef sref && sref.rule is Child)
+                    {
+                        checkStr = true;
+                        bool first = true;
+                        foreach (var e in basicBNFRule)
+                        {
+                            if (first && e is BNFString newS && nBasic.elements[nBasic.elements.Count-1] is BNFString prev)
+                            {
+                                nBasic.elements.RemoveAt(nBasic.elements.Count - 1);
+                                nBasic.elements.Add(new BNFString() { Value = prev.Value + newS.Value });
+                            }else
+                                nBasic.elements.Add(e);
+                            first = false;
+                        }
+
+                    }
+                    else
+                    {
+                        if (checkStr && element is BNFString str && nBasic.elements.Count> 0 && nBasic.elements[nBasic.elements.Count-1] is BNFString str2)
+                        {
+                            checkStr = false;
+                            nBasic.elements.RemoveAt(nBasic.elements.Count - 1);
+                            nBasic.elements.Add(new BNFString() { Value = str.Value + str2.Value });
+                        }
+                        else
+                        nBasic.elements.Add(element);
+                    }
+                }
+                
+
+                bNFRule.OrSplits.Add(nBasic);
+            }
+            baseType.RefList.Add(new BNFReference() { Name = bnfR.Name });
+            result[bNFRule.Name] = bNFRule;
+            Debug.WriteLine("Result:\n"+ bNFRule);
+        }
+
+        /// <summary>
+        /// Получить базовые структуры 
+        /// </summary>
+        /// <param name="text">Текстовое описание базовых структур</param>
+        /// <returns>Базовые структуры</returns>
+        private Dictionary<string, Rule> GetBaseDescription(string text){
+            return ParseRulesDescription(text);            
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace TransformationComponentUnitTest
         }
 
 
-        public static void AssertBNF(BNFRule rule, string expectedName, BasicBNFRule[] expetedOrs)
+        public static void AssertBNF(BNFRule rule, string expectedName, params BasicBNFRule[] expetedOrs)
         {
             Assert.IsNotNull(rule);
             Assert.AreEqual(expectedName, rule.Name);

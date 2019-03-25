@@ -12,5 +12,10 @@
                 return rule.Literal.Equals(s.rule.Literal);
             return false;
         }
+
+        public override string ToString()
+        {
+            return rule.Literal;
+        }
     }
 }

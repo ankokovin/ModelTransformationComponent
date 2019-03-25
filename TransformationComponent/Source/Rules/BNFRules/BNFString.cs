@@ -12,5 +12,10 @@
                 return Value.Equals(s.Value);
             return false;
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }

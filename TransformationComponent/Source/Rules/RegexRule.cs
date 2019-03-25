@@ -27,5 +27,10 @@ namespace ModelTransformationComponent
             regex = new System.Text.RegularExpressions.Regex(pattern);
             this.Pattern = pattern;
         }
+
+        public override string ToString()
+        {
+            return "RegRule "+Name+" = "+Pattern;
+        }
     }
 }

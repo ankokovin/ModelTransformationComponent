@@ -11,7 +11,7 @@ namespace ModelTransformationComponent
         /// <summary>
         /// Название конструкции
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Конструкция с названием

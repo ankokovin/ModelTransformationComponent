@@ -27,3 +27,4 @@ C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\Transformation
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.AssemblyInfo.cs
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.dll
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponent\obj\Debug\netstandard2.0\TransformationComponent.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponent\bin\Debug\netstandard2.0\TransformationComponent.xml

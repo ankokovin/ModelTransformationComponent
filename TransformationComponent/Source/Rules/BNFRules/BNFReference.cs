@@ -12,5 +12,10 @@
                 return this.Name.Equals(r.Name);
             return false;
         }
+
+        public override string ToString()
+        {
+            return "<"+Name+">";
+        }
     }
 }

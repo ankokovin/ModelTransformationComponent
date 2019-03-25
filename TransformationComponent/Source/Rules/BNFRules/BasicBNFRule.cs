@@ -1,14 +1,17 @@
-﻿namespace ModelTransformationComponent
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace ModelTransformationComponent
 {
 
     [System.Serializable]
-    public class BasicBNFRule : Rule
+    public class BasicBNFRule : Rule, IEnumerable<BNFSimpleElement>
     {
-        public System.Collections.Generic.List<BNFSimpleElement> elements;
+        public List<BNFSimpleElement> elements;
 
         public BasicBNFRule()
         {
-            elements = new System.Collections.Generic.List<BNFSimpleElement>();
+            elements = new List<BNFSimpleElement>();
         }
 
         public override bool Equals(object obj)
@@ -24,6 +27,26 @@
                 return true;
             }
             return false;
+        }
+
+        public IEnumerator<BNFSimpleElement> GetEnumerator()
+        {
+            return ((IEnumerable<BNFSimpleElement>)elements).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<BNFSimpleElement>)elements).GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            var result = string.Empty;
+
+            foreach (var i in elements)
+                result += i + " ";
+
+            return result;
         }
     }
 }
