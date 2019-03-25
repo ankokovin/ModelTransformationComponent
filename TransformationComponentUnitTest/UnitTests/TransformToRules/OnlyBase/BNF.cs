@@ -11,6 +11,7 @@ namespace TransformationComponentUnitTest
             public partial class OnlyBase
             {
 
+
                 [TestClass]
                 public class BNF
                 {

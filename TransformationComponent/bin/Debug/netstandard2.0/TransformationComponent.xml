@@ -508,9 +508,19 @@
             <param name="info"></param>
             <param name="context"></param>
         </member>
+        <member name="T:ModelTransformationComponent.TranslateRuleRequired">
+            <summary>
+            Требуется переопределение конструкции для целевого языка
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.TranslateRuleRequired.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:ModelTransformationComponent.BaseRuleParseException">
             <summary>
-            Ошибка парсинга основных правил трансформаций в <see cref="M:ModelTransformationComponent.TransformationComponent.GetBaseDescription(System.String)"/>
+            Ошибка парсинга основных правил трансформаций в <see cref="!:TransformationComponent.GetBaseDescription(string)"/>
             <para/>
             Наследует <see cref="T:ModelTransformationComponent.TransformComponentException"/>
             </summary>
@@ -548,7 +558,7 @@
         </member>
         <member name="T:ModelTransformationComponent.LangRuleParseException">
             <summary>
-            Ошибка парсинга правил трансформаций конкретного языка в <see cref="M:ModelTransformationComponent.TransformationComponent.GetLangDescription(System.String,System.Collections.Generic.Dictionary{System.String,ModelTransformationComponent.Rule},System.String@)"/>
+            Ошибка парсинга правил трансформаций конкретного языка в <see cref="!:TransformationComponent.GetLangDescription(string, Dictionary&lt;string, Rule&gt;, out string)"/>
             <para/>
             Наследует <see cref="T:ModelTransformationComponent.TransformComponentException"/>
             </summary>
@@ -1211,14 +1221,14 @@
             Вызывается при отсутствии входного текста
             </exception>
         </member>
-        <member name="M:ModelTransformationComponent.TransformationComponent.GetBaseDescription(System.String)">
+        <member name="M:ModelTransformationComponent.TransformationComponent.GetBaseDescription(System.String,System.Int32@)">
             <summary>
             Получить базовые структуры 
             </summary>
             <param name="text">Текстовое описание базовых структур</param>
             <returns>Базовые структуры</returns>
         </member>
-        <member name="M:ModelTransformationComponent.TransformationComponent.GetLangDescription(System.String,System.Collections.Generic.Dictionary{System.String,ModelTransformationComponent.Rule},System.String@)">
+        <member name="M:ModelTransformationComponent.TransformationComponent.GetLangDescription(System.String,System.Collections.Generic.Dictionary{System.String,ModelTransformationComponent.Rule},System.String,System.Int32,System.Int32@)">
             <summary>
             Получить структуры языка 
             </summary>
