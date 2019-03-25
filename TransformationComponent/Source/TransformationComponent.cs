@@ -150,6 +150,7 @@ namespace ModelTransformationComponent
             int idx = 0;
             int skipChars = 0;
             var lines = text.Split('\n');
+            bool paramStart = false;
             try {
                 while (idx < lines.Length)
                 {
@@ -158,11 +159,13 @@ namespace ModelTransformationComponent
                         ++idx;
                         break;
                     }
+                    
                     bool ok = false;
                     foreach(var pred in RuleTypePredicateList)
                     {
                         if (pred.Value(lines[idx], prevRule))
                         {
+                            Debug.WriteLine("Line " + idx + ": creaing factory:" + pred.Key);
                             var factory = (AbstractRuleFactory)Activator.CreateInstance(pred.Key);
                             var res = factory.CreateRule(lines[idx], out int charcnt);
                             if (charcnt != lines[idx].Length)
@@ -175,31 +178,75 @@ namespace ModelTransformationComponent
                                 ++idx;
                                 skipChars = 0;
                             }
-
-                            if (/*???prevRule needs this res*/false)
-                            {
-
-                            }
-                            else
-                            {
-                                prevRule = res;
-                                if (prevRule is NamedRule rule)
+                            if (!paramStart){
+                                if (res is Params_start)
                                 {
-                                    if (result.ContainsKey(rule.Name)){
+                                    if (prevRule is BNFRule || prevRule is TypeDef)
+                                    {
+                                        paramStart = true;
+                                    }
+                                    else
+                                        throw new SyntaxError("Синтаксическая ошибка: получили /params_start после не БНФ или типовой структуры");
+                                }
+                                else
+                                {
+                                    prevRule = res;
+                                    if (prevRule is NamedRule rule)
+                                    {
+                                        if (result.ContainsKey(rule.Name))
+                                        {
+                                            throw new ConstructAlreadyDefined();
+                                        }
+                                        result[rule.Name] = rule;
+                                    }
+                                }
+                                                                
+                                
+
+                            }else{
+                                if (res is Params_end)
+                                {
+                                    paramStart = false;
+                                    prevRule = null;
+
+                                }
+                                else if (res is BNFRule r){
+                                    if (r.OrSplits.Count> 1)
+                                    {
+                                        throw new SyntaxError("Синтаксическая ошибка: оператор | во время описания параметра");
+                                    }
+
+                                    if (r.OrSplits.Count > 0 && r.OrSplits[0].elements.Count > 1)
+                                    {
+                                        throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
+                                    }
+
+                                    if (r.OrSplits.Count > 0 && !(r.OrSplits[0].elements[0] is BNFReference))
+                                    {
+                                        throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
+                                    }
+
+                                    string nName = ((NamedRule)prevRule).Name + "." + r.Name;
+                                    if (result.ContainsKey(nName))
+                                    {
                                         throw new ConstructAlreadyDefined();
                                     }
-                                    result[rule.Name] = rule;
-                                }                                
+
+                                    result[nName] = r;
+                                }
+                                else
+                                {
+                                    throw new SyntaxError("Синтаксическая ошибка: получили не БНФ конструкцию внутри описания параметров");
+                                }
                             }
                             ok = true;
                             break;
+                           
                         }
                     }
                     if (!ok) throw new SyntaxError();
-                }
-
-
-
+                    
+                }    
                 //throw new NotImplementedException();
                 return result;
             }
