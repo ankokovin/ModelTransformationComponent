@@ -120,7 +120,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
                         basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
@@ -177,7 +177,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
                         basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
@@ -243,7 +243,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
                         basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
@@ -376,7 +376,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -432,7 +432,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -497,7 +497,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "a.b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });

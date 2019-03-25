@@ -164,7 +164,6 @@ namespace ModelTransformationComponent
                     }
 
                     bool ok = false;
-
                     
 
                     if (prevRule is TypeEx)
@@ -233,7 +232,7 @@ namespace ModelTransformationComponent
                                     throw new SyntaxError("Синтаксическая ошибка: получили не БНФ конструкцию внутри описания параметров");
                                 }
                             }
-                            if (isTypeEx)
+                            if (isTypeEx && !(res is TypeDef))
                             {
                                 HandleTypeEx(ref result, typen, res);
                                 isTypeEx = false;
@@ -324,9 +323,24 @@ namespace ModelTransformationComponent
                 throw new ConstructAlreadyDefined();
             }
             Debug.WriteLine("Name was:" + r.Name);
+            var bnfRule = (BNFRule)prevRule;
+
+            foreach(BasicBNFRule basicr in bnfRule)
+            {
+                foreach (BNFSimpleElement item in basicr)
+                {
+                    if (item is BNFReference refr &&  refr.Name == r.Name)
+                        refr.Name = nName;
+                }
+            }
+            
+
             r.Name = nName;
             Debug.WriteLine("Name now:"+ r.Name);
             result[nName] = r;
+
+
+
         }
 
         private static void HandleTypeEx(ref Dictionary<string, Rule> result, string typen, Rule res)
@@ -340,8 +354,11 @@ namespace ModelTransformationComponent
             BNFRule bnfR = res as BNFRule;
 
             if (bnfR == null) throw new TransformComponentException();
-
-            BNFRule bNFRule = new BNFRule(bnfR.Name);
+            BNFRule bNFRule;
+            if (res is TypeRule)
+                bNFRule = new TypeRule(bnfR.Name);
+            else
+                bNFRule = new BNFRule(bnfR.Name);
             foreach (BasicBNFRule basicBNFRule in bnfR)
             {
                 BasicBNFRule nBasic = new BasicBNFRule();

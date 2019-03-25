@@ -8,8 +8,11 @@
 
         public override bool Equals(object obj)
         {
+            System.Diagnostics.Debug.WriteLine("Equals in BNFReference");
+            System.Diagnostics.Debug.WriteLine("First:" + ToString());
+            System.Diagnostics.Debug.WriteLine("Second:" + obj.ToString());
             if (obj is BNFReference r)
-                return this.Name.Equals(r.Name);
+                return Name.Equals(r.Name);
             return false;
         }
 

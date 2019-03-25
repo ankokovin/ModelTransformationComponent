@@ -22,6 +22,9 @@ namespace ModelTransformationComponent
 
         public override bool Equals(object obj)
         {
+            System.Diagnostics.Debug.WriteLine("Equals in BasicBNFRule");
+            System.Diagnostics.Debug.WriteLine("First:" + ToString());
+            System.Diagnostics.Debug.WriteLine("Second:" + obj.ToString());
             if (obj is BasicBNFRule b)
             {
                 if (elements.Count != b.elements.Count) return false;

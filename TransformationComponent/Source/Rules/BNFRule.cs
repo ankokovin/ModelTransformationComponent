@@ -14,7 +14,7 @@ namespace ModelTransformationComponent
             OrSplits = new List<BasicBNFRule>();
         }
 
-        private readonly List<BasicBNFRule> OrSplits;
+        protected readonly List<BasicBNFRule> OrSplits;
 
         public int Count => OrSplits.Count;
 

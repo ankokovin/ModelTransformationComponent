@@ -1,3 +1,4 @@
+using System.Linq;
 using ModelTransformationComponent.SystemRules;
 
 namespace ModelTransformationComponent
@@ -16,6 +17,15 @@ namespace ModelTransformationComponent
         public override string ToString()
         {
             return "Type " + base.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            System.Diagnostics.Debug.WriteLine("Equals in TypeRule");
+            System.Diagnostics.Debug.WriteLine("First:" + ToString());
+            System.Diagnostics.Debug.WriteLine("Second:" + obj.ToString());
+            var r = obj as TypeRule;
+            return r != null && this.SequenceEqual(r);
         }
     }
 }
