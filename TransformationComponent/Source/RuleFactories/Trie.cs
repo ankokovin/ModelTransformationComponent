@@ -3,53 +3,105 @@ using System.Collections.Generic;
 
 namespace ModelTransformationComponent
 {
+    /// <summary>
+    /// Бор
+    /// </summary>
+    /// <typeparam name="T">Хранимый тип</typeparam>
     public class Trie<T>
     {
+        /// <summary>
+        /// Вершина бора <see cref="Trie{T}"/>
+        /// </summary>
         class Node
         {
-            public char Value { get; set; }
-
+            /// <summary>
+            /// Символ, по которому зашти из предка
+            /// </summary>
+            public char Value;
+            /// <summary>
+            /// Хранимое значение
+            /// </summary>
             public T Result { get; set; }
-            public List<Node> Children { get; set; }
+
+            /// <summary>
+            /// Потомки
+            /// </summary>
+            public Dictionary<char, Node> Children { get; set; }
+
+            /// <summary>
+            /// Предок
+            /// </summary>
             public Node Parent { get; set; }
+
+            /// <summary>
+            /// Глубина обхода - длина строки, соответствующей данной вершине
+            /// </summary>
             public int Depth { get; set; }
 
-            public Node(char value, int depth, Node parent)
+            /// <summary>
+            /// Конструктор <see cref="Node"/>
+            /// </summary>
+            /// <param name="depth">Глубина</param>
+            /// <param name="parent">Предок</param>
+            /// <param name="value">Символ</param>
+            public Node(int depth, Node parent, char value)
             {
-                Value = value;
-                Children = new List<Node>();
+                Children = new Dictionary<char, Node>();
                 Depth = depth;
                 Parent = parent;
+                Value = value;
             }
 
+            /// <summary>
+            /// Является ли вершина листом
+            /// </summary>
+            /// <returns><see cref="System.Boolean"/></returns>
             public bool IsLeaf()
             {
                 return Children.Count == 0;
             }
 
+            /// <summary>
+            /// Поиск потомка с данным символом
+            /// </summary>
+            /// <param name="c">Символ</param>
+            /// <returns>Потомок (null если отсутствует)</returns>
             public Node FindChildNode(char c)
             {
-                foreach (var child in Children)
-                    if (child.Value == c)
-                        return child;
-
+                if (Children.ContainsKey(c))
+                {
+                    return Children[c];
+                }
                 return null;
             }
 
+            /// <summary>
+            /// Удаление потомка
+            /// </summary>
+            /// <param name="c">Символ</param>
             public void DeleteChildNode(char c)
             {
-                for (var i = 0; i < Children.Count; i++)
-                    if (Children[i].Value == c)
-                        Children.RemoveAt(i);
+                Children.Remove(c);
             }
         }
+        /// <summary>
+        /// Корень бора
+        /// </summary>
         private readonly Node _root;
 
+        /// <summary>
+        /// Конструктор <see cref="Trie{T}"/>
+        /// </summary>
         public Trie()
         {
-            _root = new Node('^', 0, null);
+            _root = new Node(0, null, '^');
         }
         
+        /// <summary>
+        /// Функция поиска наибольшего префикса строки
+        /// </summary>
+        /// <param name="s">Строка</param>
+        /// <returns>Вершина, соответствующая наибольшему префиксу</returns>
         private Node Prefix(string s)
         {
             var currentNode = _root;
@@ -66,24 +118,39 @@ namespace ModelTransformationComponent
             return result;
         }
 
+        private int maxDepth = 0;
+
+        /// <summary>
+        /// Добавление в бор
+        /// </summary>
+        /// <param name="Item">Хранимый элемент</param>
+        /// <param name="Name">Строка элемента</param>
         public void Insert(T Item, string Name)
         {
+            maxDepth = maxDepth < Name.Length ? Name.Length : maxDepth;
             var commonPrefix = Prefix(Name);
             var current = commonPrefix;
 
             for (var i = current.Depth; i < Name.Length; i++)
             {
-                var newNode = new Node(Name[i], current.Depth + 1, current);
-                current.Children.Add(newNode);
+                var newNode = new Node(current.Depth + 1, current, Name[i]);
+                current.Children.Add(Name[i], newNode);
                 current = newNode;
             }
-            var endNode = new Node('$', current.Depth + 1, current)
+            var endNode = new Node(current.Depth + 1, current, '$')
             {
                 Result = Item
             };
-            current.Children.Add(endNode);
+            current.Children.Add('$', endNode);
         }
 
+        /// <summary>
+        /// Поиск элемента, строка которого является наибольшим префиксом данной строки
+        /// </summary>
+        /// <param name="s">Входная строка</param>
+        /// <param name="depth">Полученная длина</param>
+        /// <param name="Suggestion">Предположение</param>
+        /// <returns>Найденный элемент (default если не найден)</returns>
         public T Search(string s, out int depth, out string Suggestion)
         {
             Suggestion = string.Empty;
@@ -94,24 +161,26 @@ namespace ModelTransformationComponent
                 return endChild.Result;
             else
             {
-                if (prefix.Children.Count == 0)
+                if (prefix.Children.Count == 1)
                 {
-                    var temp = prefix.Parent;
+                    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder(depth + 1, maxDepth);
+                    var temp = prefix;
+                    while (temp.Value != '$')
+                    {
+                        stringBuilder.Append(temp.Value);
+                        temp = temp.Children.First().Value;
+                        if (temp.Children.Count > 1)
+                            return default(T);
+                    }
+                    temp = prefix.Parent;
                     while (temp.Depth > 0)
                     {
-                        Suggestion += temp.Value;
+                        stringBuilder.Insert(0, temp.Value);
                         temp = temp.Parent;
                     }
-                    char[] charArray = Suggestion.ToCharArray();
-                    System.Array.Reverse(charArray);
-                    Suggestion = new string(charArray);
-
                     temp = prefix;
-                    while (prefix.Value != '$')
-                    {
-                        Suggestion += temp.Value;
-                        temp = temp.Children.First();
-                    }
+                    
+                    Suggestion = stringBuilder.ToString();
                 }
                 return default(T);
             }

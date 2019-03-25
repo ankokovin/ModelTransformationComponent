@@ -1,0 +1,14 @@
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\client.deps.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\client.runtimeconfig.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\client.runtimeconfig.dev.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\client.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\client.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\TransformationComponent.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\bin\Release\netcoreapp2.2\TransformationComponent.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.csprojAssemblyReference.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.AssemblyInfoInputs.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.AssemblyInfo.cs
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.csproj.CopyComplete
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\client\obj\Release\netcoreapp2.2\client.pdb

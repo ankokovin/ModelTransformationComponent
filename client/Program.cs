@@ -32,59 +32,66 @@ namespace client
         /// </param>
         static void Main(string[] args)
         {
-            try{
-            int ar = 0;
-            
-            var transf = new ModelTransformationComponent.TransformationComponent();
-            switch(args[0]){
-                case "-h":
-                case "--h":
-                    Help();
-                    return;
+            try
+            {
+                int ar = 0;
 
-                case "-r":
-                    var r_rules_txt = File.ReadAllText(args[1]);
-                    var r_rules = transf.TransformToRules(r_rules_txt);
-                    var formatter = new BinaryFormatter();
-                    using (FileStream fs = new FileStream(args[2], FileMode.OpenOrCreate))
-                    {
-                        formatter.Serialize(fs, r_rules);
-                        Console.WriteLine("Done");
-                    }
-                    return;
+                var transf = new ModelTransformationComponent.TransformationComponent();
 
-                case "-fr":
-                    formatter = new BinaryFormatter();
-                    AllRules fr_rules;
-                    using (FileStream fs = new FileStream(args[2], FileMode.OpenOrCreate))
-                    {
-                        fr_rules = (AllRules)formatter.Deserialize(fs);
-                    }
-                    var fr_text = File.ReadAllText(args[1]);
-                    File.WriteAllText(args[5],transf.Transform(fr_text,fr_rules, args[3], args[4]));       
-                    return;
 
-                case "-f":
-                    ar++;
-                    break;
-            
+                switch (args[0])
+                {
+                    case "-h":
+                    case "--h":
+                        Help();
+                        return;
+
+                    case "-r":
+                        var r_rules_txt = File.ReadAllText(args[1]);
+                        var r_rules = transf.TransformToRules(r_rules_txt);
+                        var formatter = new BinaryFormatter();
+                        using (FileStream fs = new FileStream(args[2], FileMode.OpenOrCreate))
+                        {
+                            formatter.Serialize(fs, r_rules);
+                            Console.WriteLine("Done");
+                        }
+                        return;
+
+                    case "-fr":
+                        formatter = new BinaryFormatter();
+                        AllRules fr_rules;
+                        using (FileStream fs = new FileStream(args[2], FileMode.OpenOrCreate))
+                        {
+                            fr_rules = (AllRules)formatter.Deserialize(fs);
+                        }
+                        var fr_text = File.ReadAllText(args[1]);
+                        File.WriteAllText(args[5], transf.Transform(fr_text, fr_rules, args[3], args[4]));
+                        return;
+
+                    case "-f":
+                        ar++;
+                        break;
+
+                }
+                var text = File.ReadAllText(args[ar]);
+                var rules = File.ReadAllText(args[ar + 1]);
+                var result = transf.Transform(text, rules, args[ar + 2], args[ar + 3]);
+                if (args.Length == ar + 5)
+                    File.WriteAllText(args[ar + 4], result);
+                else
+                    Console.WriteLine(result);
             }
-            var text = File.ReadAllText(args[ar]);
-            var rules = File.ReadAllText(args[ar+1]);
-            var result = transf.Transform(text,rules, args[ar+2], args[ar+3]);
-            if (args.Length == ar+5)
-                File.WriteAllText(args[ar+4],result);
-            else
-                Console.WriteLine(result);
-            }
-            catch(TransformComponentException tr){
+            catch (TransformComponentException tr)
+            {
                 System.Exception ex = tr;
-                do{
+                do
+                {
                     Console.WriteLine(ex.Message);
                     ex = ex.InnerException;
-                }while(ex!=null);
+                } while (ex != null);
             }
-            catch(System.Exception){
+            catch (System.Exception)
+            {
                 Console.WriteLine("Ошибка в аргументах вызова");
                 Help();
             }

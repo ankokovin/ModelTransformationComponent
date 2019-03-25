@@ -1,0 +1,17 @@
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponentUnitTest.deps.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponentUnitTest.runtimeconfig.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponentUnitTest.runtimeconfig.dev.json
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponentUnitTest.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponentUnitTest.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponent.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\bin\Release\netcoreapp2.2\TransformationComponent.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.csprojAssemblyReference.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.AssemblyInfoInputs.cache
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.AssemblyInfo.cs
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.csproj.CopyComplete
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.dll
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Release\netcoreapp2.2\TransformationComponentUnitTest.pdb

@@ -792,6 +792,102 @@
             <param name="charcnt">Количество символов, использованных для создания</param>
             <returns>Системная конструкция</returns>
         </member>
+        <member name="T:ModelTransformationComponent.Trie`1">
+            <summary>
+            Бор
+            </summary>
+            <typeparam name="T">Хранимый тип</typeparam>
+        </member>
+        <member name="T:ModelTransformationComponent.Trie`1.Node">
+            <summary>
+            Вершина бора <see cref="T:ModelTransformationComponent.Trie`1"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.Trie`1.Node.Value">
+            <summary>
+            Символ, по которому зашти из предка
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.Trie`1.Node.Result">
+            <summary>
+            Хранимое значение
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.Trie`1.Node.Children">
+            <summary>
+            Потомки
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.Trie`1.Node.Parent">
+            <summary>
+            Предок
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.Trie`1.Node.Depth">
+            <summary>
+            Глубина обхода - длина строки, соответствующей данной вершине
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Node.#ctor(System.Int32,ModelTransformationComponent.Trie{`0}.Node,System.Char)">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.Trie`1.Node"/>
+            </summary>
+            <param name="depth">Глубина</param>
+            <param name="parent">Предок</param>
+            <param name="value">Символ</param>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Node.IsLeaf">
+            <summary>
+            Является ли вершина листом
+            </summary>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Node.FindChildNode(System.Char)">
+            <summary>
+            Поиск потомка с данным символом
+            </summary>
+            <param name="c">Символ</param>
+            <returns>Потомок (null если отсутствует)</returns>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Node.DeleteChildNode(System.Char)">
+            <summary>
+            Удаление потомка
+            </summary>
+            <param name="c">Символ</param>
+        </member>
+        <member name="F:ModelTransformationComponent.Trie`1._root">
+            <summary>
+            Корень бора
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.#ctor">
+            <summary>
+            Конструктор <see cref="T:ModelTransformationComponent.Trie`1"/>
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Prefix(System.String)">
+            <summary>
+            Функция поиска наибольшего префикса строки
+            </summary>
+            <param name="s">Строка</param>
+            <returns>Вершина, соответствующая наибольшему префиксу</returns>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Insert(`0,System.String)">
+            <summary>
+            Добавление в бор
+            </summary>
+            <param name="Item">Хранимый элемент</param>
+            <param name="Name">Строка элемента</param>
+        </member>
+        <member name="M:ModelTransformationComponent.Trie`1.Search(System.String,System.Int32@,System.String@)">
+            <summary>
+            Поиск элемента, строка которого является наибольшим префиксом данной строки
+            </summary>
+            <param name="s">Входная строка</param>
+            <param name="depth">Полученная длина</param>
+            <param name="Suggestion">Предположение</param>
+            <returns>Найденный элемент (default если не найден)</returns>
+        </member>
         <member name="T:ModelTransformationComponent.TypeRuleFactory">
             <summary>
             Конкретная фабрика type конструкций
