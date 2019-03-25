@@ -56,7 +56,7 @@
                         var sysRuleRef = new BNFSystemRef();
                         var sysRule = sysRuleFact.CreateRule(tempStr, out int c);
                         sysRuleRef.rule = (SystemRule)sysRule;
-                        basicBNFRule.elements.Add(sysRuleRef);
+                        basicBNFRule.Add(sysRuleRef);
                         tempStr = string.Empty;
                     }
                     ++idx;
@@ -74,7 +74,7 @@
                             Value = tempStr
                         };
                         tempStr = string.Empty;
-                        basicBNFRule.elements.Add(strRule);
+                        basicBNFRule.Add(strRule);
                     }
                     tempStr += text[idx];
                     ++idx;
@@ -93,7 +93,7 @@
                             Value = tempStr
                         };
                         tempStr = string.Empty;
-                        basicBNFRule.elements.Add(strRule);
+                        basicBNFRule.Add(strRule);
                     }
                     ++idx;
                     continue;
@@ -112,7 +112,7 @@
                     {
                         Name = tempStr
                     };
-                    basicBNFRule.elements.Add(refRule);
+                    basicBNFRule.Add(refRule);
                     tempStr = string.Empty;
                     refr = false;
                     ++idx;
@@ -153,7 +153,7 @@
                         rule = sysRule
                     };
                 }
-                basicBNFRule.elements.Add(lastRule);
+                basicBNFRule.Add(lastRule);
 
             }
             charcnt = text.Length;

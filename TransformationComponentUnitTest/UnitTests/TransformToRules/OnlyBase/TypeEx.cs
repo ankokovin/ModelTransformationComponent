@@ -43,8 +43,10 @@ namespace TransformationComponentUnitTest
 
                         Assert.IsNotNull(bnfrule);
 
-                        var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFString() { Value = typep + exbnf });
+                        var basicBNFRule = new BasicBNFRule
+                        {
+                            new BNFString() { Value = typep + exbnf }
+                        };
 
                         TestUtil.AssertBNF(bnfrule, exname, basicBNFRule );
 

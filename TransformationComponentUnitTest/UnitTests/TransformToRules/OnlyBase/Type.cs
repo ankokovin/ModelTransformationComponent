@@ -75,9 +75,11 @@ namespace TransformationComponentUnitTest
 
                         var resultTypeRule = resultRules[name] as TypeRule;
 
-                        var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFString() { Value = "a" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        var basicBNFRule = new BasicBNFRule
+                        {
+                            new BNFString() { Value = "a" },
+                            new BNFSystemRef() { rule = new Child() }
+                        };
 
                         TestUtil.AssertBNF(resultTypeRule, name,basicBNFRule);
                     }
@@ -110,9 +112,11 @@ namespace TransformationComponentUnitTest
 
                         var resultTypeRule = resultRules[name] as TypeRule;
 
-                        var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        var basicBNFRule = new BasicBNFRule
+                        {
+                            new BNFReference() { Name = "b" },
+                            new BNFSystemRef() { rule = new Child() }
+                        };
 
 
                         TestUtil.AssertBNF(resultTypeRule, name,basicBNFRule);
@@ -147,10 +151,12 @@ namespace TransformationComponentUnitTest
 
                         var resultTypeRule = resultRules[name] as TypeRule;
 
-                        var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
-                        basicBNFRule.elements.Add(new BNFString() { Value = "a" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        var basicBNFRule = new BasicBNFRule
+                        {
+                            new BNFReference() { Name = "b" },
+                            new BNFString() { Value = "a" },
+                            new BNFSystemRef() { rule = new Child() }
+                        };
 
 
                         TestUtil.AssertBNF(resultTypeRule, name, basicBNFRule );

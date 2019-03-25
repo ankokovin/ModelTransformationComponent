@@ -78,8 +78,8 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFString() { Value = "a" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        basicBNFRule.Add(new BNFString() { Value = "a" });
+                        basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -120,8 +120,8 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -177,8 +177,8 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -187,7 +187,7 @@ namespace TransformationComponentUnitTest
                         var resultBNFRule = resultRules[full_par_n] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n1 });
+                        basicBNFRule.Add(new BNFReference() { Name = n1 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n,
                           new BasicBNFRule[] { basicBNFRule });
@@ -243,8 +243,8 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as TypeRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
-                        basicBNFRule.elements.Add(new BNFSystemRef() { rule = new Child() });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFSystemRef() { rule = new Child() });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -253,7 +253,7 @@ namespace TransformationComponentUnitTest
                         var resultBNFRule = resultRules[full_par_n] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n1 });
+                        basicBNFRule.Add(new BNFReference() { Name = n1 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n,
                           new BasicBNFRule[] { basicBNFRule });
@@ -263,7 +263,7 @@ namespace TransformationComponentUnitTest
                         resultBNFRule = resultRules[full_par_n_2] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n2 });
+                        basicBNFRule.Add(new BNFReference() { Name = n2 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n_2,
                           new BasicBNFRule[] { basicBNFRule });
@@ -335,7 +335,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFString() { Value = "a" });
+                        basicBNFRule.Add(new BNFString() { Value = "a" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -376,7 +376,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -432,7 +432,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -441,7 +441,7 @@ namespace TransformationComponentUnitTest
                         var resultBNFRule = resultRules[full_par_n] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n1 });
+                        basicBNFRule.Add(new BNFReference() { Name = n1 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n,
                           new BasicBNFRule[] { basicBNFRule });
@@ -497,7 +497,7 @@ namespace TransformationComponentUnitTest
                         var resultTypeRule = resultRules[name] as BNFRule;
 
                         var basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = "b" });
+                        basicBNFRule.Add(new BNFReference() { Name = "b" });
 
                         TestUtil.AssertBNF(resultTypeRule, name,
                             new BasicBNFRule[] { basicBNFRule });
@@ -506,7 +506,7 @@ namespace TransformationComponentUnitTest
                         var resultBNFRule = resultRules[full_par_n] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n1 });
+                        basicBNFRule.Add(new BNFReference() { Name = n1 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n,
                           new BasicBNFRule[] { basicBNFRule });
@@ -516,7 +516,7 @@ namespace TransformationComponentUnitTest
                         resultBNFRule = resultRules[full_par_n_2] as BNFRule;
 
                         basicBNFRule = new BasicBNFRule();
-                        basicBNFRule.elements.Add(new BNFReference() { Name = n2 });
+                        basicBNFRule.Add(new BNFReference() { Name = n2 });
 
                         TestUtil.AssertBNF(resultBNFRule, full_par_n_2,
                           new BasicBNFRule[] { basicBNFRule });

@@ -44,11 +44,11 @@ namespace ModelTransformationComponent{
             var basicBNFFactory = new BasicBNFFactory();
             var basicBNFRule = (BasicBNFRule)basicBNFFactory.CreateRule(declString, out int x);
 
-            if (!basicBNFRule.elements.Contains(new BNFSystemRef() { rule = new Child() }))
+            if (!basicBNFRule.Contains(new BNFSystemRef() { rule = new Child() }))
                 throw new SyntaxError("Синтаксическая ошибка. Описание типа без символа /child");
             
 
-            result.OrSplits.Add(basicBNFRule);
+            result.Add(basicBNFRule);
             
 
             charcnt = text.Length;

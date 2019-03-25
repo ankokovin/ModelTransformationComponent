@@ -303,17 +303,17 @@ namespace ModelTransformationComponent
         private static void HandleParam(Rule prevRule, ref Dictionary<string, Rule> result, BNFRule r)
         {
             Debug.WriteLine("HandleParam called");
-            if (r.OrSplits.Count > 1)
+            if (r.Count > 1)
             {
                 throw new SyntaxError("Синтаксическая ошибка: оператор | во время описания параметра");
             }
 
-            if (r.OrSplits.Count > 0 && r.OrSplits[0].elements.Count > 1)
+            if (r.Count > 0 && r[0].Count > 1)
             {
                 throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
             }
 
-            if (r.OrSplits.Count > 0 && !(r.OrSplits[0].elements[0] is BNFReference))
+            if (r.Count > 0 && !(r[0][0] is BNFReference))
             {
                 throw new SyntaxError("Синтаксическая ошибка: описание параметра может иметь только 1 элемент - ссылку");
             }
@@ -346,7 +346,7 @@ namespace ModelTransformationComponent
             {
                 BasicBNFRule nBasic = new BasicBNFRule();
                 
-                foreach (BNFSimpleElement element in baseType.OrSplits[0])
+                foreach (BNFSimpleElement element in baseType[0])
                 {
                     bool checkStr = false;
                     if (element is BNFSystemRef sref && sref.rule is Child)
@@ -355,31 +355,31 @@ namespace ModelTransformationComponent
                         bool first = true;
                         foreach (var e in basicBNFRule)
                         {
-                            if (first && e is BNFString newS && nBasic.elements[nBasic.elements.Count-1] is BNFString prev)
+                            if (first && e is BNFString newS && nBasic[nBasic.Count-1] is BNFString prev)
                             {
-                                nBasic.elements.RemoveAt(nBasic.elements.Count - 1);
-                                nBasic.elements.Add(new BNFString() { Value = prev.Value + newS.Value });
+                                nBasic.RemoveAt(nBasic.Count - 1);
+                                nBasic.Add(new BNFString() { Value = prev.Value + newS.Value });
                             }else
-                                nBasic.elements.Add(e);
+                                nBasic.Add(e);
                             first = false;
                         }
 
                     }
                     else
                     {
-                        if (checkStr && element is BNFString str && nBasic.elements.Count> 0 && nBasic.elements[nBasic.elements.Count-1] is BNFString str2)
+                        if (checkStr && element is BNFString str && nBasic.Count> 0 && nBasic[nBasic.Count-1] is BNFString str2)
                         {
                             checkStr = false;
-                            nBasic.elements.RemoveAt(nBasic.elements.Count - 1);
-                            nBasic.elements.Add(new BNFString() { Value = str.Value + str2.Value });
+                            nBasic.RemoveAt(nBasic.Count - 1);
+                            nBasic.Add(new BNFString() { Value = str.Value + str2.Value });
                         }
                         else
-                        nBasic.elements.Add(element);
+                        nBasic.Add(element);
                     }
                 }
                 
 
-                bNFRule.OrSplits.Add(nBasic);
+                bNFRule.Add(nBasic);
             }
             baseType.RefList.Add(new BNFReference() { Name = bnfR.Name });
             result[bNFRule.Name] = bNFRule;

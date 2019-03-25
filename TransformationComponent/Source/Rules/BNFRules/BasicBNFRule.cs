@@ -5,9 +5,15 @@ namespace ModelTransformationComponent
 {
 
     [System.Serializable]
-    public class BasicBNFRule : Rule, IEnumerable<BNFSimpleElement>
+    public class BasicBNFRule : Rule, IList<BNFSimpleElement>
     {
-        public List<BNFSimpleElement> elements;
+        private readonly List<BNFSimpleElement> elements;
+
+        public int Count => ((ICollection<BNFSimpleElement>)elements).Count;
+
+        public bool IsReadOnly => ((ICollection<BNFSimpleElement>)elements).IsReadOnly;
+
+        public BNFSimpleElement this[int index] { get => elements[index]; set => elements[index] = value; }
 
         public BasicBNFRule()
         {
@@ -47,6 +53,46 @@ namespace ModelTransformationComponent
                 result += i + " ";
 
             return result;
+        }
+
+        public void Add(BNFSimpleElement item)
+        {
+            ((ICollection<BNFSimpleElement>)elements).Add(item);
+        }
+
+        public void Clear()
+        {
+            ((ICollection<BNFSimpleElement>)elements).Clear();
+        }
+
+        public bool Contains(BNFSimpleElement item)
+        {
+            return ((ICollection<BNFSimpleElement>)elements).Contains(item);
+        }
+
+        public void CopyTo(BNFSimpleElement[] array, int arrayIndex)
+        {
+            ((ICollection<BNFSimpleElement>)elements).CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(BNFSimpleElement item)
+        {
+            return ((ICollection<BNFSimpleElement>)elements).Remove(item);
+        }
+
+        public int IndexOf(BNFSimpleElement item)
+        {
+            return elements.IndexOf(item);
+        }
+
+        public void Insert(int index, BNFSimpleElement item)
+        {
+            elements.Insert(index, item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            elements.RemoveAt(index);
         }
     }
 }

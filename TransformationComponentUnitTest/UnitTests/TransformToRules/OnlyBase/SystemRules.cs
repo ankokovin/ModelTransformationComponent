@@ -77,8 +77,10 @@ namespace TransformationComponentUnitTest
 
                         var resultBNFRule = resultRules[name] as BNFRule;
 
-                        var expBasicBNF = new BasicBNFRule();
-                        expBasicBNF.elements.Add(new BNFSystemRef { rule = rule });
+                        var expBasicBNF = new BasicBNFRule
+                        {
+                            new BNFSystemRef { rule = rule }
+                        };
                         TestUtil.AssertBNF(resultBNFRule, name,
                             new BasicBNFRule[1] { expBasicBNF });
 

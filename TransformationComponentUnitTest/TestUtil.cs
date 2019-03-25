@@ -17,11 +17,11 @@ namespace TransformationComponentUnitTest
         {
             Assert.IsNotNull(rule);
             Assert.AreEqual(expectedName, rule.Name);
-            Assert.AreEqual(expetedOrs.Length, rule.OrSplits.Count);
+            Assert.AreEqual(expetedOrs.Length, rule.Count);
 
             for (int i = 0; i < expetedOrs.Length; i++)
             {
-                Assert.AreEqual(expetedOrs[i], rule.OrSplits[i]);
+                Assert.AreEqual(expetedOrs[i], rule[i]);
             }
 
         }
