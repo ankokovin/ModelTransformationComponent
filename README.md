@@ -13,15 +13,15 @@
 
 ### Аргументы
 
-  client [-h|--h|-r|-fr|-f] <args>
+  client [-h|--h|-r|-fr|-f] \<args>
   
   -h|--h : info
   
-  -r : parse rules, <args> ::= <rules txt source><rules serialize target>
+  -r : parse rules, \<args> ::= \<rules txt source>\<rules serialize target>
   
-  -fr: parse model with already serialized rules, <args> ::= <model txt><rules serialized source><source language><target language><output txt>
+  -fr: parse model with already serialized rules, \<args> ::= \<model txt>\<rules serialized source><source language>\<target language>\<output txt>
   
-  -f | none : parse both rules and model, <args> ::= <model txt><rules txt><source language><target language><output txt>
+  -f | none : parse both rules and model, \<args> ::= \<model txt>\<rules txt>\<source language>\<target language>\<output txt>
 
 
 ## Model Transformer Example
