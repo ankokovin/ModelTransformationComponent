@@ -44,7 +44,7 @@ namespace ModelTransformationComponent{
             var basicBNFFactory = new BasicBNFFactory();
             var basicBNFRule = (BasicBNFRule)basicBNFFactory.CreateRule(declString, out int x);
 
-            if (!basicBNFRule.Contains(new BNFSystemRef() { rule = new Child() }))
+            if (!basicBNFRule.Contains(new BNFSystemRef( new Child())))
                 throw new SyntaxError("Синтаксическая ошибка. Описание типа без символа /child");
             
 

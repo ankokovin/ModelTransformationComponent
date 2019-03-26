@@ -20,5 +20,10 @@
         {
             return Value;
         }
+
+        public BNFString(string val)
+        {
+            Value = val;
+        }
     }
 }

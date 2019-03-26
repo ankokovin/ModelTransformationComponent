@@ -36,7 +36,7 @@ namespace TransformationComponentUnitTest
 
                         TestUtil.AssertReg(result.GetBaseRules[name] as RegexRule,name, pattern);
                         TestUtil.AssertBNF(result.GetBaseRules["T+" + name] as BNFRule, "T+" + name, 
-                            new BasicBNFRule { new BNFString { Value = "a" } });
+                            new BasicBNFRule { new BNFString("a") });
                         
                     }
 
@@ -63,10 +63,10 @@ namespace TransformationComponentUnitTest
                         result.GetBaseRules.ContainsKey("T+" + name);
 
                         TestUtil.AssertBNF(result.GetBaseRules[name] as BNFRule, name, 
-                            new BasicBNFRule { new BNFString() { Value = "a" } },
-                            new BasicBNFRule { new BNFReference { Name = "r" } });
+                            new BasicBNFRule { new BNFString("a") },
+                            new BasicBNFRule { new BNFReference ("r") });
                         TestUtil.AssertBNF(result.GetBaseRules["T+" + name] as BNFRule, "T+" + name, 
-                            new BasicBNFRule { new BNFString { Value = "a" } });
+                            new BasicBNFRule { new BNFString ("a") });
 
                     }
                 }

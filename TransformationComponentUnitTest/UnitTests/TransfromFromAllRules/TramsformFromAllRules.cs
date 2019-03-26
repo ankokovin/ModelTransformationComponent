@@ -7,11 +7,11 @@ namespace TransformationComponentUnitTest
     public partial class TransformUnitTest
     {
         [TestClass]
-        public partial class TramsfromFromAllRules
+        public partial class TramsformFromAllRules
         {
             [TestMethod]
             [TestCategory("TransformWithRules")]
-            public void TransfromNoLanguages()
+            public void TransformNoLanguages()
             {
                 //arrange
                 string text = "Some text";
@@ -39,7 +39,7 @@ namespace TransformationComponentUnitTest
 
             [TestMethod]
             [TestCategory("TransformWithRules")]
-            public void TransfromNoSourceLang()
+            public void TransformNoSourceLang()
             {
                 //arrange
                 string text = "Some text";
@@ -73,7 +73,7 @@ namespace TransformationComponentUnitTest
 
             [TestMethod]
             [TestCategory("TransformWithRules")]
-            public void TransfromNoTargetLanguage()
+            public void TransformNoTargetLanguage()
             {
                 //arrange
                 string text = "Some text";
@@ -106,7 +106,7 @@ namespace TransformationComponentUnitTest
 
             [TestMethod]
             [TestCategory("TransformWithRules")]
-            public void TransfromNoBase()
+            public void TransformNoBase()
             {
                 //arrange
                 string text = "Some text";
@@ -135,7 +135,41 @@ namespace TransformationComponentUnitTest
                     Assert.IsInstanceOfType(tr.InnerException, typeof(NoBaseRulesFound));
                 }
             }
-            
+
+
+
+            [TestMethod]
+            public void SimpleTransform()
+            {
+                //arrange
+                var text = "a";
+                var sourceLang = "a";
+                var targetLang = "b";
+                AllRules allRules = new AllRules();
+                allRules.AddBaseRules(
+                    new System.Collections.Generic.Dictionary<string, Rule>
+                    {
+                        ["a"] = new BNFRule("a")
+                    }
+                    );
+                allRules.AddLanguageRules(sourceLang, new System.Collections.Generic.Dictionary<string, Rule>
+                {
+                    ["a"] = new BNFRule("a"){new BasicBNFRule { new BNFString("a") }}
+                });
+                allRules.AddLanguageRules(targetLang, new System.Collections.Generic.Dictionary<string, Rule>
+                {
+                    ["a"] = new BNFRule("a") { new BasicBNFRule { new BNFString("b") } }
+                });
+                var transformationComponent = new TransformationComponent();
+                var expected = "b";
+
+
+                //act
+                var actual = transformationComponent.Transform(text, allRules, sourceLang, targetLang);
+
+                //assert
+                Assert.AreEqual(expected, actual);
+            }
         }
     }
 }

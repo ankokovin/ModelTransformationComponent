@@ -531,7 +531,7 @@ namespace ModelTransformationComponent
                             if (first && e is BNFString newS && nBasic[nBasic.Count-1] is BNFString prev)
                             {
                                 nBasic.RemoveAt(nBasic.Count - 1);
-                                nBasic.Add(new BNFString() { Value = prev.Value + newS.Value });
+                                nBasic.Add(new BNFString( prev.Value + newS.Value ));
                             }else
                                 nBasic.Add(e);
                             first = false;
@@ -544,7 +544,7 @@ namespace ModelTransformationComponent
                         {
                             checkStr = false;
                             nBasic.RemoveAt(nBasic.Count - 1);
-                            nBasic.Add(new BNFString() { Value = str.Value + str2.Value });
+                            nBasic.Add(new BNFString(str.Value + str2.Value));
                         }
                         else
                         nBasic.Add(element);
@@ -554,7 +554,7 @@ namespace ModelTransformationComponent
 
                 bNFRule.Add(nBasic);
             }
-            baseType.RefList.Add(new BNFReference() { Name = bnfR.Name });
+            baseType.RefList.Add(new BNFReference(bnfR.Name ));
             result[bNFRule.Name] = bNFRule;
             Debug.WriteLine("Result:\n"+ bNFRule);
         }
@@ -628,7 +628,10 @@ namespace ModelTransformationComponent
                 }
                 if (!rules.HasLanguage(sourceLang)) throw new NoLanguageRulesFound(sourceLang);
                 if (!rules.HasLanguage(targetLang)) throw new NoLanguageRulesFound(targetLang);
+
+
                 throw new NotImplementedException();
+                
             }catch(Exception e)
             {
                 throw new ModelParseException("Ошибка при парсинге текстовой модели", e);

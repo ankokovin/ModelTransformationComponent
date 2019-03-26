@@ -6,6 +6,10 @@
     {
         public string Name;
 
+        public BNFReference(string name)
+        {
+            Name = name;
+        }
         public override bool Equals(object obj)
         {
             System.Diagnostics.Debug.WriteLine("Equals in BNFReference");

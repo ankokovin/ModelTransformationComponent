@@ -182,8 +182,9 @@ namespace ModelTransformationComponent
                     
                     Suggestion = stringBuilder.ToString();
                 }
-                return default(T);
+                return default;
             }
         }
     }
+    
 }

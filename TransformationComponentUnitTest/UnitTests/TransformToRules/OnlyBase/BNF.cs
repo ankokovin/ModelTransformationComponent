@@ -44,7 +44,7 @@ namespace TransformationComponentUnitTest
                         var resultBNFRule = resultRules[name] as BNFRule;
 
                         var expBasicBNF = new BasicBNFRule();
-                        expBasicBNF.Add(new BNFString { Value = str });
+                        expBasicBNF.Add(new BNFString (str));
                         TestUtil.AssertBNF(resultBNFRule, name,expBasicBNF);
 
                     }
@@ -116,7 +116,7 @@ namespace TransformationComponentUnitTest
 
                         var expBasicBNF = new BasicBNFRule
                         {
-                            new BNFString { Value = str }
+                            new BNFString (str )
                         };
                         TestUtil.AssertBNF(resultBNFRule, name,
                             new BasicBNFRule[1] { expBasicBNF });
@@ -128,7 +128,7 @@ namespace TransformationComponentUnitTest
 
                         expBasicBNF = new BasicBNFRule
                         {
-                            new BNFString { Value = str2 }
+                            new BNFString ( str2 )
                         };
                         TestUtil.AssertBNF(resultBNFRule, name2,expBasicBNF);
                     }
@@ -228,7 +228,7 @@ namespace TransformationComponentUnitTest
 
                         var expBasicBNF = new BasicBNFRule
                         {
-                            new BNFString { Value = str }
+                            new BNFString ( str )
                         };
                         TestUtil.AssertBNF(resultBNFRule, name,expBasicBNF);
 
@@ -241,7 +241,7 @@ namespace TransformationComponentUnitTest
 
                         expBasicBNF = new BasicBNFRule
                         {
-                            new BNFReference { Name = name }
+                            new BNFReference (name)
                         };
                         TestUtil.AssertBNF(resultBNFRule, name2,expBasicBNF);
 

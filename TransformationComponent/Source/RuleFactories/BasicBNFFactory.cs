@@ -53,9 +53,9 @@
                     else
                     {
                         sys = false;
-                        var sysRuleRef = new BNFSystemRef();
                         var sysRule = sysRuleFact.CreateRule(tempStr, out int c);
-                        sysRuleRef.rule = (SystemRule)sysRule;
+                        var sysRuleRef = new BNFSystemRef((SystemRule)sysRule);
+
                         basicBNFRule.Add(sysRuleRef);
                         tempStr = string.Empty;
                     }
@@ -69,10 +69,7 @@
                     sys = true;
                     if (!string.IsNullOrEmpty(tempStr))
                     {
-                        var strRule = new BNFString
-                        {
-                            Value = tempStr
-                        };
+                        var strRule = new BNFString(tempStr);
                         tempStr = string.Empty;
                         basicBNFRule.Add(strRule);
                     }
@@ -88,10 +85,7 @@
                     refr = true;
                     if (!string.IsNullOrEmpty(tempStr))
                     {
-                        var strRule = new BNFString
-                        {
-                            Value = tempStr
-                        };
+                        var strRule = new BNFString(tempStr);
                         tempStr = string.Empty;
                         basicBNFRule.Add(strRule);
                     }
@@ -108,10 +102,7 @@
                     {
                         throw new SyntaxErrorPlaced();
                     }
-                    var refRule = new BNFReference
-                    {
-                        Name = tempStr
-                    };
+                    var refRule = new BNFReference(tempStr);
                     basicBNFRule.Add(refRule);
                     tempStr = string.Empty;
                     refr = false;
@@ -139,19 +130,13 @@
 
                 if (!sys)
                 {
-                    lastRule = new BNFString
-                    {
-                        Value = tempStr
-                    };
+                    lastRule = new BNFString( tempStr);
                    
                 }
                 else
                 {
                     var sysRule = (SystemRule)sysRuleFact.CreateRule(tempStr, out int c);
-                    lastRule = new BNFSystemRef
-                    {
-                        rule = sysRule
-                    };
+                    lastRule = new BNFSystemRef(sysRule);
                 }
                 basicBNFRule.Add(lastRule);
 

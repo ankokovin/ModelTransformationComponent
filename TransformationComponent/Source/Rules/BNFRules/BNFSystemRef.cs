@@ -20,5 +20,11 @@
         {
             return rule.Literal;
         }
+
+
+        public BNFSystemRef(SystemRule systemRule)
+        {
+            rule = systemRule;
+        }
     }
 }

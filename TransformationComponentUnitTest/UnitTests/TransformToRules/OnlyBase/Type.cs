@@ -77,8 +77,8 @@ namespace TransformationComponentUnitTest
 
                         var basicBNFRule = new BasicBNFRule
                         {
-                            new BNFString() { Value = "a" },
-                            new BNFSystemRef() { rule = new Child() }
+                            new BNFString( "a" ),
+                            new BNFSystemRef(new Child())
                         };
 
                         TestUtil.AssertBNF(resultTypeRule, name,basicBNFRule);
@@ -114,8 +114,8 @@ namespace TransformationComponentUnitTest
 
                         var basicBNFRule = new BasicBNFRule
                         {
-                            new BNFReference() { Name = "b" },
-                            new BNFSystemRef() { rule = new Child() }
+                            new BNFReference("b"),
+                            new BNFSystemRef(new Child() )
                         };
 
 
@@ -153,9 +153,9 @@ namespace TransformationComponentUnitTest
 
                         var basicBNFRule = new BasicBNFRule
                         {
-                            new BNFReference() { Name = "b" },
-                            new BNFString() { Value = "a" },
-                            new BNFSystemRef() { rule = new Child() }
+                            new BNFReference("b" ),
+                            new BNFString("a" ),
+                            new BNFSystemRef(new Child())
                         };
 
 
