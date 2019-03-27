@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace ModelTransformationComponent
 {
-
     [System.Serializable]
     public class BNFRule : NamedRule, IList<BasicBNFRule>
     {
@@ -19,6 +18,8 @@ namespace ModelTransformationComponent
         public int Count => OrSplits.Count;
 
         public bool IsReadOnly => ((ICollection<BasicBNFRule>)OrSplits).IsReadOnly;
+
+
 
         public BasicBNFRule this[int index] { get => OrSplits[index]; set => OrSplits[index] = value; }
 
@@ -35,9 +36,33 @@ namespace ModelTransformationComponent
         public override string ToString()
         {
             var result = "BNFRule " + Name + "\n";
+            bool first = true;
             foreach (var i in OrSplits)
-                result += i.ToString();
+                if (first)
+                {
+                    first = false;
+                    result += i.ToString();
+                }
+                else
+                    result += " | " + i.ToString();
             return result;
+        }
+
+
+        public bool SelfReferenced
+        {
+            get
+            {
+                foreach (var item in this)
+                {
+                    foreach (var item2 in item)
+                    {
+                        if (item2 is BNFReference refr && refr.Name == Name)
+                            return true;
+                    }
+                }
+                return false;
+            }
         }
 
         public override bool Equals(object obj)

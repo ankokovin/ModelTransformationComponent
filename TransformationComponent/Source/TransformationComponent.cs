@@ -59,7 +59,9 @@ namespace ModelTransformationComponent
         /// Вызывается при отсутствии определения языка
         /// </exception>
         public string Transform(string text, string rules, string sourceLang, string targetLang){
-            return Transform(text,TransformToRules(rules),sourceLang, targetLang);
+            AllRules allRules = TransformToRules(rules, true);
+            
+            return Transform(text,allRules,sourceLang, targetLang);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace ModelTransformationComponent
         /// <exception cref="InputIsEmpty">
         /// Вызывается при отсутствии входного текста
         /// </exception>
-        public AllRules TransformToRules(string rules){
+        public AllRules TransformToRules(string rules, bool Minimize = false){
             try
             {
                 if (rules.Length == 0)
@@ -123,13 +125,14 @@ namespace ModelTransformationComponent
                     {
                         string langName = string.Empty;
 
-                        
-                        if (lang.Split('\n')[0].Split().Length != 2)
-                            throw new SyntaxError();
-                        langName = lang.Split('\n')[0].Split()[1];
+                        var s = lang.Split('\n')[0].Split().Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+                        if (s.Length != 2)
+                            throw new SyntaxErrorPlaced(line,0,null);
+                        langName = s[1];
 
 
-                        var res = GetLangDescription(lang.Substring(lang.IndexOf('\n')+1), baseLang, langName, line, out line);
+                        var res = GetLangDescription(lang.Substring(lang.IndexOf('\n')+1), baseLang, langName, line, out int linec);
+                        line += linec;
                         result.AddLanguageRules(langName, res);
                         Debug.WriteLine("Got language: " + langName);
                     }
@@ -140,6 +143,51 @@ namespace ModelTransformationComponent
                     var baseLang = GetBaseDescription(text, out int line_end);
                     result.AddBaseRules(baseLang);
                 }
+
+
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    Debug.WriteLine("TranformToRules result:");
+                    Debug.WriteLine("-------------------Base------------------");
+                    foreach (var item in result.GetBaseRules)
+                    {
+                        Debug.WriteLine(item.Value);
+                    }
+                    foreach (var item in result.Languages)
+                    {
+                        Debug.WriteLine("---------------------------");
+                        Debug.WriteLine("------------------"+item+"---------------------------");
+                        foreach (var item1 in result.GetRulesForLanguage(item))
+                        {
+                            Debug.WriteLine(item1);
+                        }
+                    }
+                }
+
+                if (Minimize)
+                {
+                    
+                    result = BackTrackTypes(result);
+
+                    if (System.Diagnostics.Debugger.IsAttached)
+                    {
+                        Debug.WriteLine("TranformToRules result:");
+                        Debug.WriteLine("-------------------Base------------------");
+                        foreach (var item in result.GetBaseRules)
+                        {
+                            Debug.WriteLine(item.Value);
+                        }
+                        foreach (var item in result.Languages)
+                        {
+                            Debug.WriteLine("---------------------------");
+                            Debug.WriteLine("------------------" + item + "---------------------------");
+                            foreach (var item1 in result.GetRulesForLanguage(item))
+                            {
+                                Debug.WriteLine(item1);
+                            }
+                        }
+                    }
+                }
                 return result;
             }catch(Exception e)
             {
@@ -147,6 +195,53 @@ namespace ModelTransformationComponent
             }
         }
 
+        private AllRules BackTrackTypes(in AllRules allRules)
+        {
+            AllRules res = new AllRules();
+            var baseR = allRules.GetBaseRules;
+            Dictionary<string, Rule> temp = new Dictionary<string, Rule>();
+            foreach (var item in baseR)
+            {
+                if (item.Value is TypeRule t)
+                {
+                    BNFRule bNF = new BNFRule(item.Key);
+                    foreach (var refr in t.RefList)
+                    {
+                        bNF.Add(new BasicBNFRule { refr });
+                    }
+                    temp[item.Key] = bNF;
+                }
+                else
+                {
+                    temp[item.Key] = item.Value;
+                }
+            }
+            res.AddBaseRules(temp);
+            foreach (var lang in allRules.Languages)
+            {
+                temp = new Dictionary<string, Rule>();
+                var langR = allRules.GetRulesForLanguage(lang);
+                foreach (var item in langR)
+                {
+                    if (item.Value is TypeRule t)
+                    {
+                        BNFRule bNF = new BNFRule(item.Key);
+                        foreach (var refr in t.RefList)
+                        {
+                            bNF.Add(new BasicBNFRule { refr });
+                        }
+                        temp[item.Key] = bNF;
+                    }
+                    else
+                    {
+                        temp[item.Key] = item.Value;
+                    }
+                }
+                res.AddLanguageRules(lang, temp);
+            }
+
+            return res;
+        }
 
         private Dictionary<string, Rule> ParseRulesDescription(string text, 
             out int line_end,
@@ -175,7 +270,7 @@ namespace ModelTransformationComponent
                     if (string.IsNullOrWhiteSpace(lines[idx]))
                     {
                         ++idx;
-                        break;
+                        continue;
                     }
 
                     bool ok = false;
@@ -196,6 +291,13 @@ namespace ModelTransformationComponent
                             var res = factory.CreateRule(lines[idx], out int charcnt);
                             Debug.WriteLine("Result:\n" + res);
                             
+                            if (res is Comment)
+                            {
+                                ++idx;
+                                ok = true;
+                                break;
+                            }
+
                             if (charcnt != lines[idx].Length)
                             {
                                 lines[idx] = lines[idx].Substring(charcnt+1);
@@ -280,7 +382,7 @@ namespace ModelTransformationComponent
                         if (string.IsNullOrWhiteSpace(lines[idx]))
                         {
                             ++idx;
-                            break;
+                            continue;
 
                         }
 
@@ -296,6 +398,12 @@ namespace ModelTransformationComponent
                                 var res = ((AbstractRuleFactory)System.Activator.CreateInstance(pred.Key)).CreateRule(lines[idx], out int charcnt);
 
                                 Debug.WriteLine("Result:\n" + res);
+
+                                if (res is Comment)
+                                {
+                                    ++idx;
+                                    break;
+                                }
 
                                 if (charcnt != lines[idx].Length)
                                 {
@@ -355,53 +463,6 @@ namespace ModelTransformationComponent
                         if (r is BNFRule bnf && bnf.Count == 0 && !result.ContainsKey(bnf.Name))
                             throw new EOSException("Неожиданный конец описания языка. Ожидался символ " + bnf.Name);
 
-                        if (r is RegexRule re)
-                        {
-                            var banned = new HashSet<char>
-                                {
-                                    '?', '(', '{', '+', '*', '.', '|', '['
-                                };
-                            for (int i = 0; i < re.Pattern.Length; i++)
-                            {
-                                if (banned.Contains(re.Pattern[i]) && (i == 0 || re.Pattern[i] != '/'))
-                                {
-                                    if (!result.ContainsKey("T+" + re.Name))
-                                        throw new TranslateRuleRequired();
-                                }
-                            }
-                        }
-                    }
-
-
-                    foreach (Rule r in result.Values)
-                    {
-
-                        if (r is RegexRule re)
-                        {
-                            var banned = new HashSet<char>
-                                {
-                                    '?', '(', '{', '+', '*', '.', '|', '['
-                                };
-                            for (int i = 0; i < re.Pattern.Length; i++)
-                            {
-                                if (banned.Contains(re.Pattern[i]) && (i == 0 || re.Pattern[i] != '/'))
-                                {
-                                    if (!result.ContainsKey("T+" + re.Name))
-                                        throw new TranslateRuleRequired();
-                                }
-                            }
-                        }
-                        if (r is BNFRule bn)
-                        {
-                            foreach (var item in bn)
-                            {
-                                foreach (var item1 in item)
-                                {
-                                    if (item1 is BNFReference refr && refr.Name == bn.Name)
-                                        throw new TranslateRuleRequired();
-                                }
-                            }
-                        }
                     }
                 }
                     
@@ -621,18 +682,15 @@ namespace ModelTransformationComponent
                 Debug.WriteLineIf(rules == null, "rules was null");
                 Debug.WriteLine("sourceLang:" + sourceLang);
                 Debug.WriteLine("targetLang:" + targetLang);
-                try { var t = rules.GetBaseRules; }
-                catch(Exception e)
-                {
-                    throw new NoBaseRulesFound(e);
-                }
+                var a = rules.GetBaseRules;
                 if (!rules.HasLanguage(sourceLang)) throw new NoLanguageRulesFound(sourceLang);
                 if (!rules.HasLanguage(targetLang)) throw new NoLanguageRulesFound(targetLang);
 
-
-                throw new NotImplementedException();
+                DependencyGraph dependencyGraph = new DependencyGraph(in rules, sourceLang, targetLang);
+                return dependencyGraph.TransformText(text);
                 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new ModelParseException("Ошибка при парсинге текстовой модели", e);
             }

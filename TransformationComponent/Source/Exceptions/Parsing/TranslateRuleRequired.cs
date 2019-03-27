@@ -12,8 +12,13 @@ namespace ModelTransformationComponent
         /// <summary>
         /// 
         /// </summary>
-        public TranslateRuleRequired() : base("Требуется переопределение конструкции для целевого языка")
+        public TranslateRuleRequired() : base()
         {
+        }
+
+        public TranslateRuleRequired(string name) : base("Требуется переопределение конструкции "+name+" для целевого языка")
+        {
+
         }
     }
 }

@@ -628,7 +628,7 @@
         </member>
         <member name="T:ModelTransformationComponent.RuleParseException">
             <summary>
-            Ошибка парсинга правил трансформаций в <see cref="M:ModelTransformationComponent.TransformationComponent.TransformToRules(System.String)"/>
+            Ошибка парсинга правил трансформаций в <see cref="!:TransformationComponent.TransformToRules(string)"/>
             <para/>
             Наследует <see cref="T:ModelTransformationComponent.TransformComponentException"/>
             </summary>
@@ -720,7 +720,7 @@
             <param name="targetLang">Название целевого языка</param>
             <returns>Результат трансформации - новое текстовое представление</returns>
         </member>
-        <member name="M:ModelTransformationComponent.ITransformationComponent.TransformToRules(System.String)">
+        <member name="M:ModelTransformationComponent.ITransformationComponent.TransformToRules(System.String,System.Boolean)">
             <summary>
             
             </summary>
@@ -1020,6 +1020,18 @@
             Литерал конструкции пустой символ
             </summary>
         </member>
+        <member name="T:ModelTransformationComponent.SystemRules.New_line">
+            <summary>
+            Системная конструкиция новая строка
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.SystemRule"/>
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.SystemRules.New_line.Literal">
+            <summary>
+            Литерал конструкции новая строка
+            </summary>
+        </member>
         <member name="T:ModelTransformationComponent.SystemRules.Space">
             <summary>
             Системная конструкиция пробел
@@ -1211,7 +1223,7 @@
             Вызывается при отсутствии определения языка
             </exception>
         </member>
-        <member name="M:ModelTransformationComponent.TransformationComponent.TransformToRules(System.String)">
+        <member name="M:ModelTransformationComponent.TransformationComponent.TransformToRules(System.String,System.Boolean)">
             <summary>
             Получение всех структур языков
             </summary>

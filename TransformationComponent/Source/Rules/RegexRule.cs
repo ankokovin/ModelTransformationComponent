@@ -7,16 +7,36 @@ namespace ModelTransformationComponent
     /// </summary>
     
     [System.Serializable]
-    public class RegexRule : NamedRule{
+    public class RegexRule : NamedRule, IBannableRule{
         /// <summary>
         /// Объект регулярного выражения
         /// </summary>
-        private System.Text.RegularExpressions.Regex regex;
+        public System.Text.RegularExpressions.Regex regex;
         
         /// <summary>
         /// Регулярное выражение
         /// </summary>
         public string Pattern;
+
+        private static System.Collections.Generic.HashSet<char> bannedChars 
+            = new System.Collections.Generic.HashSet<char>
+                                {
+                                    '?', '(', '{', '+', '*', '.', '|', '['
+                                };
+
+        public bool Banned {
+            get
+            {
+                for (int i = 0; i < Pattern.Length; i++)
+                {
+                    if (bannedChars.Contains(Pattern[i]) && (i == 0 || Pattern[i] != '/'))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
 
         /// <summary>
         /// Конструкция с представлением в виде регулярного выражения
@@ -24,7 +44,7 @@ namespace ModelTransformationComponent
         /// <param name="pattern">Регулярное выражение</param>
         /// <param name="name">Название конструкции</param>
         public RegexRule(string pattern, string name) : base(name){
-            regex = new System.Text.RegularExpressions.Regex(pattern);
+            regex = new System.Text.RegularExpressions.Regex("^" + pattern);
             this.Pattern = pattern;
         }
 

@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CSharpPascalRules" xml:space="preserve">
+    <value>/start
+//Предыдущий символ показывает, что началость описание трансформаций
+//Сначала описывается совместная структура языков
+//Поддержка регулярных выражений
+//Структура "ноль или больше пробельных символов"
+/reg ws_zero ::= \s*
+
+//Структура "один или больше пробельных символов"
+/reg ws_one ::=  \s+
+
+
+//Для пробела и пустоты есть системные символы
+//Структура "начало блока"
+start_block ::= /empty
+
+//Структура "конец блока"
+end_block ::= /empty
+
+//Некоторые конструкции могут быть просто определены, но без конкретного представления. Они должны быть определены в описаниях исходного целевого языков
+//Структура "разделитель операторов"
+Command_end
+
+//Возможность определения «типов»
+//В типах всегда определяется элемент /Child
+//В результате, когда описывается экземпляр типа, его описание вставляется в место /Child
+//Тип "оператор"
+/type Command ::= /child &lt;ws_zero&gt;&lt;Command_end&gt;
+
+//Структура "идентификатор"
+/reg ident ::= \w+
+
+//Структрура "присваивание"
+set_val ::= =
+
+//Структура "целое число"
+/reg int_val ::= -?\d+
+
+//Структура "целочисленное присваивание"
+set_int_val
+//Структуры могут иметь свои параметры
+/params_start
+//Целевая переменная - идентификатор
+set_int_ident ::= &lt;ident&gt;
+//Символ присваивания
+set_int_set_val ::= &lt;set_val&gt;
+//Целое число
+set_int_Int_val ::= &lt;int_val&gt;
+/params_end
+
+//Тип "инициализация переменной"
+/type init_val ::= &lt;name&gt;/child
+/params_start
+//Название переменной
+name ::= &lt;ident&gt;
+/params_end
+
+/type= init_val init_int
+
+//Структура "разделитель списка инициализируемых значений"
+init_val_sep
+
+vars ::= /empty|&lt;init_int&gt;|&lt;init_int&gt;&lt;init_val_sep&gt;&lt;vars&gt;
+
+
+//Структура "Программа"
+Program 
+/params_start
+//Название программы
+program_name ::= &lt;ident&gt;
+//Инициализация переменных
+//Поддерживается оператор или из БНФ
+program_vars ::= &lt;vars&gt;
+//Тело программы
+program_body ::= &lt;program_body&gt;
+/params_end
+
+commands_list ::=  /empty |&lt;Command&gt; | &lt;Command&gt;&lt;commands_list&gt;
+
+//Структура "Тело программы"
+program_body ::= &lt;Commands&gt;
+/params_start
+//Тело программы состоит из списка комманд.
+//В &lt;Command&gt; подставляется любой экземпляр типа &lt;Command&gt;
+Commands ::= &lt;commands_list&gt;
+/params_end
+
+//Цикл с целочисленным счётчиком
+/type= Command for_loop 
+/params_start
+//Начальное значение
+Int_Val_From ::= &lt;set_int_val&gt;
+//Получение ссылки на параметр.
+//Переменная счётчик
+For_Index ::= &lt;set_int_val.set_int_ident&gt;
+//Конечное значение переменной счётчика
+Int_Val_To ::= &lt;int_val&gt;
+//Тело цикла
+Commands ::= &lt;commands_list&gt;
+/params_end
+
+call_sep ::=  ,
+args ::= /empty|&lt;ident&gt;|&lt;ident&gt;&lt;call_sep&gt;&lt;args&gt;  
+
+//Экземпляр типа Команда
+//Тип "Вызов функции"
+/type= Command /type func_call ::= /child ( &lt;args&gt; )
+
+//Структура "Вызов функции вывода"
+/type= func_call print
+
+/translate_rules_start
+//Некоторые символы нужно определить по другому для целевого языка: те, которые указаны регулярными выражениями.
+
+ws_zero ::= /empty
+ws_one ::= /space
+
+//Системные символы, которые увеличивают или уменьшают счётчик табов, расставляемых с новой строки
+//Для обычных ЯП – увеличивает читаемость выходящего кода
+//Для Питона - необходимость
+//Поскольку трансформируем на Питон, выносится в правила для целевого языка
+start_block ::= /add_tab
+end_block ::= /del_tab
+
+/translate_rules_end
+
+
+//Определим Паскаль
+/language_start Pascal
+
+
+//Внутри определения языка запрещено использование регулярных выражений
+//Разделитель операторов
+Command_end ::= &lt;ws_zero&gt;;&lt;ws_zero&gt;
+
+//Присваивание значения
+set_val ::= :=
+
+//Присвоить целое значение
+set_int_val ::= &lt;set_int_val.set_int_ident&gt;&lt;ws_zero&gt;&lt;set_int_val.set_int_set_val&gt;&lt;ws_zero&gt;&lt;set_int_val.set_int_Int_val&gt;
+
+//Инициализировать целое число
+init_int ::= &lt;ident&gt;:Integer;
+
+init_val_sep ::= /new_line
+
+
+//Программа
+Program ::= program&lt;ws_one&gt;&lt;Program.program_name&gt;;&lt;ws_zero&gt;var&lt;ws_one&gt;&lt;Program.program_vars&gt;&lt;ws_zero&gt;begin&lt;start_block&gt;&lt;ws_zero&gt;&lt;Program.program_body&gt;&lt;end_block&gt;end.
+
+for_loop ::= for&lt;ws_one&gt;&lt;for_loop.Int_Val_From&gt;&lt;ws_one&gt;to&lt;ws_one&gt;&lt;for_loop.Int_Val_To&gt;&lt;ws_one&gt;do&lt;ws_one&gt;begin&lt;ws_one&gt;&lt;start_block&gt;&lt;for_loop.Commands&gt;end&lt;Command_end&gt;&lt;end_block&gt;
+//Возможно определение конструкции для определённого параметра
+print ::= writeln(&lt;args&gt;)&lt;Command_end&gt;
+/language_end
+
+//Определим C#
+/language_start CSharp
+
+Command_end ::= ;/new_line &lt;ws_zero&gt;
+
+set_int_val ::= int&lt;ws_one&gt;&lt;set_int_val.set_int_ident&gt;&lt;ws_zero&gt;&lt;set_int_val.set_int_set_val&gt;&lt;ws_zero&gt;&lt;set_int_val.set_int_Int_val&gt;
+
+//Возможно определение новых конструкций внутри определения языка
+start_block ::= { /add_tab /new_line 
+end_block ::= /del_tab /new_line }
+
+init_val_sep ::= /new_line
+init_int ::= int &lt;ws_one&gt;&lt;ident&gt;;
+
+Program ::= namespace&lt;ws_one&gt;&lt;Program.program_name&gt;&lt;ws_zero&gt;&lt;start_block&gt;&lt;ws_zero&gt;class&lt;ws_one&gt;&lt;Program.program_name&gt;&lt;ws_zero&gt;&lt;start_block&gt;&lt;ws_zero&gt;int&lt;ws_one&gt;main&lt;ws_zero&gt;(&lt;ws_zero&gt;)&lt;ws_zero&gt;&lt;start_block&gt;&lt;ws_zero&gt;&lt;Program.program_vars&gt;&lt;ws_zero&gt;&lt;Program.program_body&gt;&lt;ws_zero&gt;&lt;end_block&gt;&lt;ws_zero&gt;&lt;end_block&gt;&lt;ws_zero&gt;&lt;end_block&gt;&lt;ws_zero&gt;
+
+for_loop ::= for&lt;ws_zero&gt;(&lt;ws_zero&gt;&lt;for_loop.Int_Val_From&gt;&lt;ws_zero&gt;;&lt;ws_zero&gt;&lt;for_loop.For_Index&gt;&lt;ws_zero&gt;~&lt;=&lt;ws_zero&gt;&lt;for_loop.Int_Val_To&gt;&lt;ws_zero&gt;;&lt;ws_zero&gt;&lt;for_loop.For_Index&gt;&lt;ws_zero&gt;++&lt;ws_zero&gt;)&lt;ws_zero&gt;&lt;start_block&gt;&lt;ws_zero&gt;&lt;for_loop.Commands&gt;&lt;ws_zero&gt;&lt;end_block&gt;&lt;Command_end&gt;
+print ::= System.Console.WriteLine(&lt;args&gt;)&lt;Command_end&gt;
+/language_end
+/end
+
+
+
+Пример на Pascal
+program test;
+var i:Integer;
+begin
+for i:=1 to 10 do begin
+writeln(i);
+end;
+end.
+
+Трансформируется в код на C#
+namespace test{
+	class test{
+		int main(){
+			int i;
+			for(i:=1;i&lt;=10;++i){
+				System.Console.WriteLine(i);
+			};
+		}
+	}
+}</value>
+  </data>
+  <data name="CSharpSource" xml:space="preserve">
+    <value>namespace test{
+	class test{
+		int main(){
+			int i;
+			for(i:=1;i&lt;=10;++i){
+				System.Console.WriteLine(i);
+			};
+		}
+	}
+}</value>
+  </data>
+  <data name="PascalSource" xml:space="preserve">
+    <value>program test;
+var i:Integer;
+begin
+for i:=1 to 10 do begin
+writeln(i);
+end;
+end.</value>
+  </data>
+</root>

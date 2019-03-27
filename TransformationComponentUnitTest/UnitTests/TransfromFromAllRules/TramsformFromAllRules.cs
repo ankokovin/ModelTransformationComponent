@@ -149,16 +149,16 @@ namespace TransformationComponentUnitTest
                 allRules.AddBaseRules(
                     new System.Collections.Generic.Dictionary<string, Rule>
                     {
-                        ["a"] = new BNFRule("a")
+                        ["Program"] = new BNFRule("Program")
                     }
                     );
                 allRules.AddLanguageRules(sourceLang, new System.Collections.Generic.Dictionary<string, Rule>
                 {
-                    ["a"] = new BNFRule("a"){new BasicBNFRule { new BNFString("a") }}
+                    ["Program"] = new BNFRule("Program") {new BasicBNFRule { new BNFString("a") }}
                 });
                 allRules.AddLanguageRules(targetLang, new System.Collections.Generic.Dictionary<string, Rule>
                 {
-                    ["a"] = new BNFRule("a") { new BasicBNFRule { new BNFString("b") } }
+                    ["Program"] = new BNFRule("Program") { new BasicBNFRule { new BNFString("b") } }
                 });
                 var transformationComponent = new TransformationComponent();
                 var expected = "b";
@@ -169,6 +169,19 @@ namespace TransformationComponentUnitTest
 
                 //assert
                 Assert.AreEqual(expected, actual);
+            }
+
+
+            [TestMethod]
+            public void TransformPascalToCSharp()
+            {
+                Assert.Fail();
+            }
+
+            [TestMethod]
+            public void TransformCSharpToPascal()
+            {
+                Assert.Fail();
             }
         }
     }

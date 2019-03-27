@@ -7,9 +7,8 @@ namespace ModelTransformationComponent
     /// <summary>
     /// Текущее положение парсера
     /// </summary>
-    class ParserState
+    public class ParserState
     {
-        public Stack<Tuple<Rule, int>> RuleStack;
         private int tabCount;
         public int TabCount
         {

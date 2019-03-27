@@ -20,7 +20,7 @@ namespace ModelTransformationComponent
         /// </summary>
         /// <param name="rules"></param>
         /// <returns></returns>
-        AllRules TransformToRules(string rules);
+        AllRules TransformToRules(string rules, bool Minimize);
 
         /// <summary>
         /// 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ModelTransformationComponent
@@ -7,7 +8,7 @@ namespace ModelTransformationComponent
     /// <summary>
     /// Текущее положение генерации текстового представления модели
     /// </summary>
-    class GeneratorState
+    public class GeneratorState
     {
         private string text;
         private int tabCount;
@@ -29,7 +30,7 @@ namespace ModelTransformationComponent
                     if (tabCount < value)
                         text += new string('\t', value - tabCount);
                     else
-                        text = text.Substring(0, text.Length - (value - tabCount));
+                        text = text.Substring(0, text.Length - (tabCount - value));
 
                 tabCount = value;
             }
@@ -41,22 +42,20 @@ namespace ModelTransformationComponent
         public string Text
         {
             get => text;
-            set
+        }
+
+        public void AppendText(string input)
+        {
+
+            var sp = input.Split('\n');
+            if ((sp.Length >= 1) && input.Length == 1 && input[0]=='\n')
             {
-                var str = value;
-                int idx = 0;
-                while(idx < str.Length)
-                {
-                    var nidx = str.IndexOf('\n');
-                    if (nidx == -1)
-                    {
-                        text += str;
-                    }
-                    else
-                    {
-                        text += str.Substring(0, nidx);
-                    }
-                }
+                text += '\n' + new string('\t', tabCount);
+            }
+            text += sp[0];
+            foreach (var item in sp.Skip(1))
+            {
+                text += '\n' + new string('\t', tabCount) + item;
             }
         }
     }

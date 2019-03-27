@@ -34,3 +34,5 @@ C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\Transformation
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Debug\netcoreapp2.2\TransformationComponentUnitTest.csproj.CopyComplete
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Debug\netcoreapp2.2\TransformationComponentUnitTest.dll
 C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Debug\netcoreapp2.2\TransformationComponentUnitTest.pdb
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Debug\netcoreapp2.2\TransformationComponentUnitTest.Resource1.resources
+C:\Users\user\Source\Repos\ankokovin\ModelTrasformationComponent1\TransformationComponentUnitTest\obj\Debug\netcoreapp2.2\TransformationComponentUnitTest.csproj.GenerateResource.cache

@@ -1,0 +1,199 @@
+﻿/start
+//Предыдущий символ показывает, что началость описание трансформаций
+//Сначала описывается совместная структура языков
+//Поддержка регулярных выражений
+//Структура "ноль или больше пробельных символов"
+/reg ws_zero ::= \s*
+
+//Структура "один или больше пробельных символов"
+/reg ws_one ::=  \s+
+
+
+//Для пробела и пустоты есть системные символы
+//Структура "начало блока"
+start_block ::= /empty
+
+//Структура "конец блока"
+end_block ::= /empty
+
+//Некоторые конструкции могут быть просто определены, но без конкретного представления. Они должны быть определены в описаниях исходного целевого языков
+//Структура "разделитель операторов"
+Command_end
+
+//Возможность определения «типов»
+//В типах всегда определяется элемент /Child
+//В результате, когда описывается экземпляр типа, его описание вставляется в место /Child
+//Тип "оператор"
+/type Command ::= /child <ws_zero><Command_end>
+
+//Структура "идентификатор"
+/reg ident ::= \w+
+
+//Структрура "присваивание"
+set_val ::= =
+
+//Структура "целое число"
+/reg int_val ::= -?\d+
+
+//Структура "целочисленное присваивание"
+set_int_val
+//Структуры могут иметь свои параметры
+/params_start
+//Целевая переменная - идентификатор
+set_int_ident ::= <ident>
+//Символ присваивания
+set_int_set_val ::= <set_val>
+//Целое число
+set_int_Int_val ::= <int_val>
+/params_end
+
+//Тип "инициализация переменной"
+/type init_val ::= <name>/child
+/params_start
+//Название переменной
+name ::= <ident>
+/params_end
+
+/type= init_val init_int
+
+//Структура "разделитель списка инициализируемых значений"
+init_val_sep
+
+vars ::= /empty|<init_int>|<init_int><init_val_sep><vars>
+
+
+//Структура "Программа"
+Program 
+/params_start
+//Название программы
+program_name ::= <ident>
+//Инициализация переменных
+//Поддерживается оператор или из БНФ
+program_vars ::= <vars>
+//Тело программы
+program_body ::= <program_body>
+/params_end
+
+commands_list ::=  /empty |<Command> | <Command><commands_list>
+
+//Структура "Тело программы"
+program_body ::= <Commands>
+/params_start
+//Тело программы состоит из списка комманд.
+//В <Command> подставляется любой экземпляр типа <Command>
+Commands ::= <commands_list>
+/params_end
+
+//Цикл с целочисленным счётчиком
+/type= Command for_loop 
+/params_start
+//Начальное значение
+Int_Val_From ::= <set_int_val>
+//Получение ссылки на параметр.
+//Переменная счётчик
+For_Index ::= <set_int_val.set_int_ident>
+//Конечное значение переменной счётчика
+Int_Val_To ::= <int_val>
+//Тело цикла
+Commands ::= <commands_list>
+/params_end
+
+call_sep ::=  ,
+args ::= /empty|<ident>|<ident><call_sep><args>  
+
+//Экземпляр типа Команда
+//Тип "Вызов функции"
+/type= Command /type func_call ::= /child ( <args> )
+
+//Структура "Вызов функции вывода"
+/type= func_call print
+
+/translate_rules_start
+//Некоторые символы нужно определить по другому для целевого языка: те, которые указаны регулярными выражениями.
+
+ws_zero ::= /empty
+ws_one ::= /space
+
+//Системные символы, которые увеличивают или уменьшают счётчик табов, расставляемых с новой строки
+//Для обычных ЯП – увеличивает читаемость выходящего кода
+//Для Питона - необходимость
+//Поскольку трансформируем на Питон, выносится в правила для целевого языка
+start_block ::= /add_tab
+end_block ::= /del_tab
+
+/translate_rules_end
+
+
+//Определим Паскаль
+/language_start Pascal
+
+
+//Внутри определения языка запрещено использование регулярных выражений
+//Разделитель операторов
+Command_end ::= <ws_zero>;<ws_zero>
+
+//Присваивание значения
+set_val ::= :=
+
+//Присвоить целое значение
+set_int_val ::= <set_int_val.set_int_ident><ws_zero><set_int_val.set_int_set_val><ws_zero><set_int_val.set_int_Int_val>
+
+//Инициализировать целое число
+init_int ::= <ident>:Integer;
+
+init_val_sep ::= /new_line
+
+
+//Программа
+Program ::= program<ws_one><Program.program_name>;<ws_zero>var<ws_one><Program.program_vars><ws_zero>begin<start_block><ws_zero><Program.program_body><end_block>end.
+
+for_loop ::= for<ws_one><for_loop.Int_Val_From><ws_one>to<ws_one><for_loop.Int_Val_To><ws_one>do<ws_one>begin<ws_one><start_block><for_loop.Commands>end<Command_end><end_block>
+//Возможно определение конструкции для определённого параметра
+print ::= writeln(<args>)<Command_end>
+/language_end
+
+//Определим C#
+/language_start CSharp
+
+Command_end ::= ;/new_line <ws_zero>
+
+set_int_val ::= int<ws_one><set_int_val.set_int_ident><ws_zero><set_int_val.set_int_set_val><ws_zero><set_int_val.set_int_Int_val>
+
+//Возможно определение новых конструкций внутри определения языка
+start_block ::= { /add_tab /new_line 
+end_block ::= /del_tab /new_line }
+
+init_val_sep ::= /new_line
+init_int ::= int <ws_one><ident>;
+
+Program ::= namespace<ws_one><Program.program_name><ws_zero><start_block><ws_zero>class<ws_one><Program.program_name><ws_zero><start_block><ws_zero>int<ws_one>main<ws_zero>(<ws_zero>)<ws_zero><start_block><ws_zero><Program.program_vars><ws_zero><Program.program_body><ws_zero><end_block><ws_zero><end_block><ws_zero><end_block><ws_zero>
+
+for_loop ::= for<ws_zero>(<ws_zero><for_loop.Int_Val_From><ws_zero>;<ws_zero><for_loop.For_Index><ws_zero>~<=<ws_zero><for_loop.Int_Val_To><ws_zero>;<ws_zero><for_loop.For_Index><ws_zero>++<ws_zero>)<ws_zero><start_block><ws_zero><for_loop.Commands><ws_zero><end_block><Command_end>
+print ::= System.Console.WriteLine(<args>)<Command_end>
+
+
+/language_end
+/end
+
+
+
+Пример на Pascal
+program test;
+var i:Integer;
+begin
+for i:=1 to 10 do begin
+writeln(i);
+end;
+end.
+
+Трансформируется в код на C#
+namespace test{
+	class test{
+		int main(){
+			int i;
+			for(i:=1;i<=10;++i){
+				System.Console.WriteLine(i);
+			};
+		}
+	}
+}

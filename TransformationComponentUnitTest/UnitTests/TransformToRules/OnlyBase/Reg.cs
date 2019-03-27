@@ -42,7 +42,35 @@ namespace TransformationComponentUnitTest
                         var resultRegRule = resultRules[name] as RegexRule;
                         TestUtil.AssertReg(resultRegRule, name, pattern);
                     }
+                    [TestMethod]
+                    [TestCategory("TransformToRules")]
+                    public void ToRulesOneRegNL()
+                    {
+                        //arrange
+                        var pattern = "\\r\\n";
+                        var name = "a";
+                        var rules = "Some strange comment-like text\n" +
+                        "with some new lines and //////star\n" +
+                        "but eventually /start\n" +
+                        "/reg " + name + " ::= " + pattern + "\n" +
+                        "/end\n" +
+                        "Some more comments";
+                        var component = new TransformationComponent();
 
+                        //act
+                        var actual = component.TransformToRules(rules);
+
+                        //assert
+                        Assert.AreEqual(actual.Languages.Count, 0);
+
+                        var resultRules = actual.GetBaseRules;
+                        Assert.AreEqual(resultRules.Count, 1);
+
+                        Assert.IsTrue(resultRules.ContainsKey(name));
+
+                        var resultRegRule = resultRules[name] as RegexRule;
+                        TestUtil.AssertReg(resultRegRule, name, pattern);
+                    }
 
                     [TestMethod]
                     [TestCategory("TransformToRules")]

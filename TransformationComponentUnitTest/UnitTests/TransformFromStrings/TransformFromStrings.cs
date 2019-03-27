@@ -15,12 +15,12 @@ namespace TransformationComponentUnitTest
             {
                 //arrange
                 var rules = "/start\n" +
-                            "main\n" +
+                            "Program\n" +
                             "/language_start a\n" +
-                            "main ::= a\n" +
+                            "Program ::= a\n" +
                             "/language_end\n" +
                             "/language_start b\n" +
-                            "main ::= b\n" +
+                            "Program ::= b\n" +
                             "/language_end\n" +
                             "/end";
                 var text = "a";
@@ -34,6 +34,21 @@ namespace TransformationComponentUnitTest
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual);
 
+            }
+
+
+            [TestMethod]
+            public void PascalToCSharp()
+            {
+                //arrange
+                var rules = TransformationComponentUnitTest.Resource1.CSharpPascalRules;
+                var source = TransformationComponentUnitTest.Resource1.PascalSource;
+                var component = new TransformationComponent();
+
+                //act
+                var actual = component.Transform(source, rules, "Pascal", "CSharp");
+
+                System.Diagnostics.Debug.WriteLine(actual);
             }
         }
     }

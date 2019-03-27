@@ -108,7 +108,7 @@ namespace ModelTranformerExample
                     Debug.WriteLine("allRules was null");
                     hash = RulesInputRichTextBox.Text.GetHashCode();
                     Debug.WriteLine("got hash: " + hash.ToString());
-                    allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text);
+                    allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text, true);
                     Debug.WriteLine("parsed rules succesfully");
                 }
                 var text = transformationComponent.Transform(InputTestRichTextBox.Text,
@@ -144,7 +144,7 @@ namespace ModelTranformerExample
                     Debug.WriteLineIf(hash != RulesInputRichTextBox.Text.GetHashCode(), "hash was:" + hash + " got:" + gothash);
                     hash = gothash;
                     Debug.WriteLine("new hash:" + hash);
-                    allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text);
+                    allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text, true);
                     Debug.WriteLine("rules parsed succesful");
 
                     AutoCompleteStringCollection names = new AutoCompleteStringCollection();
@@ -173,7 +173,7 @@ namespace ModelTranformerExample
                         Debug.WriteLine("got yes");
                         hash = RulesInputRichTextBox.Text.GetHashCode();
                         Debug.WriteLine("new hash:" + hash);
-                        allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text);
+                        allRules = transformationComponent.TransformToRules(RulesInputRichTextBox.Text, true);
                         Debug.WriteLine("rules parsed succesful");
                     }
                     else
