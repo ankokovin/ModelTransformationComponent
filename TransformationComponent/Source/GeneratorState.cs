@@ -44,6 +44,10 @@ namespace ModelTransformationComponent
             get => text;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
         public void AppendText(string input)
         {
 

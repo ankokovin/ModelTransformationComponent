@@ -14,6 +14,10 @@ namespace ModelTransformationComponent
         /// </summary>
         abstract public string Literal{get;}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "SystemRule: "+Literal;

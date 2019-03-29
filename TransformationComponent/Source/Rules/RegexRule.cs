@@ -24,6 +24,10 @@ namespace ModelTransformationComponent
                                     '?', '(', '{', '+', '*', '.', '|', '['
                                 };
 
+        /// <summary>
+        /// Проверка, является ли данный паттерн запрещённым для правил вывода
+        /// </summary>
+        /// <value></value>
         public bool Banned {
             get
             {
@@ -48,6 +52,11 @@ namespace ModelTransformationComponent
             this.Pattern = pattern;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "RegRule "+Name+" = "+Pattern;

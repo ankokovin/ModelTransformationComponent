@@ -68,6 +68,7 @@ namespace ModelTransformationComponent
         /// Получение всех структур языков
         /// </summary>
         /// <param name="rules">Текстовое представление структур</param>
+        /// <param name="Minimize"></param>
         /// <returns>Все структуры языков</returns>
         /// <exception cref="InputIsEmpty">
         /// Вызывается при отсутствии входного текста
@@ -624,6 +625,7 @@ namespace ModelTransformationComponent
         /// Получить базовые структуры 
         /// </summary>
         /// <param name="text">Текстовое описание базовых структур</param>
+        /// <param name="line_end">Номер последней строки</param>
         /// <returns>Базовые структуры</returns>
         private Dictionary<string, Rule> GetBaseDescription(string text, out int line_end){
             try
@@ -642,6 +644,8 @@ namespace ModelTransformationComponent
         /// <param name="text">Текстовое описание структур языка</param>
         /// <param name="baseDescription">Базовые структуры</param>
         /// <param name="LangName">Название языка</param>
+        /// <param name="line"></param>
+        /// <param name="line_end"></param>
         /// <returns>Структуры данного языка</returns>
         private Dictionary<string, Rule> GetLangDescription(string text, Dictionary<string,Rule> baseDescription, string LangName, int line, out int line_end){
             Debug.WriteLine("getting language description");

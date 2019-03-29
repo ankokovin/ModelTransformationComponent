@@ -12,11 +12,18 @@ namespace ModelTransformationComponent.SystemRules
         /// </summary>
         public override string Literal => "/space";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="generatorState"></param>
         public void ChangeState(ref GeneratorState generatorState)
         {
             generatorState.AppendText(" ");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parserState"></param>
         public void ChangeState(ref ParserState parserState)
         {
             throw new System.NotImplementedException();

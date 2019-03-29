@@ -13,11 +13,19 @@ namespace ModelTransformationComponent.SystemRules
         /// </summary>
         public override string Literal=> "/del_tab";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="generatorState"></param>
         public void ChangeState(ref GeneratorState generatorState)
         {
             --generatorState.TabCount;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parserState"></param>
         public void ChangeState(ref ParserState parserState)
         {
             --parserState.TabCount;

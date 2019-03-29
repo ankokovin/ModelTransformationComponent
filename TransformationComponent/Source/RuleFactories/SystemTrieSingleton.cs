@@ -3,7 +3,9 @@ using System.Linq;
 
 namespace ModelTransformationComponent
 {
-    
+    /// <summary>
+    /// Префиксное дерево системных правил генерации
+    /// </summary>
     public class SystemTrieSingleton
     {
         private static SystemTrieSingleton instance;
@@ -25,11 +27,23 @@ namespace ModelTransformationComponent
             }
         }
 
+        /// <summary>
+        /// Поиск правила
+        /// </summary>
+        /// <param name="text">Название правила</param>
+        /// <param name="charcnt">Количество найденых символов</param>
+        /// <param name="Suggestion">Возможное название</param>
+        /// <returns></returns>
         public SystemRule Search(string text, out int charcnt, out string Suggestion)
         {
             return trie.Search(text, out charcnt, out Suggestion);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static SystemTrieSingleton getInstance()
         {
             if (instance == null)

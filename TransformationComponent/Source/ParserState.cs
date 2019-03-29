@@ -10,6 +10,11 @@ namespace ModelTransformationComponent
     public class ParserState
     {
         private int tabCount;
+
+        /// <summary>
+        /// Количество символов табуляции
+        /// </summary>
+        /// <value></value>
         public int TabCount
         {
             get => tabCount;

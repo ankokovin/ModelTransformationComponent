@@ -13,11 +13,19 @@
         /// </summary>
         public override string Literal => "/new_line";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="generatorState"></param>
         public void ChangeState(ref GeneratorState generatorState)
         {
             generatorState.AppendText("\r\n");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parserState"></param>
         public void ChangeState(ref ParserState parserState)
         {
             throw new System.NotImplementedException();

@@ -8,27 +8,55 @@ namespace ModelTransformationComponent
 {
     public partial class DependencyGraph
     {
+        /// <summary>
+        /// Регулярное выражение для определения важных значений из вершин правил <see cref="RegexRule"/>
+        /// </summary>
         private static System.Text.RegularExpressions.Regex Important = new System.Text.RegularExpressions.Regex(@"[\w\d]");
+        
+        /// <summary>
+        /// Вершина правила верхнего уровня
+        /// </summary>
         Node rootNode;
+
+        /// <summary>
+        /// Правила входа
+        /// </summary>
         Dictionary<string, Node> sourceNodes;
+        
+        /// <summary>
+        /// Правила выхода
+        /// </summary>
         Dictionary<string, Node> targetNodes;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allRules">Объект с правилами</param>
+        /// <param name="sourceLang">Исходный язык</param>
+        /// <param name="targetLang">Выходной язык</param>
+        /// <param name="root">Название корневой вершины</param>
         public DependencyGraph(in AllRules allRules, string sourceLang, string targetLang, string root="Program")
         {
             sourceNodes = new Dictionary<string, Node>();
             targetNodes = new Dictionary<string, Node>();
 
-
+            //Получим правила исходного языка
             var slang = allRules.GetRulesForLanguage(sourceLang);
+            //"чистые" правила исходного языка
             Dictionary<string, Rule> cslang = new Dictionary<string, Rule>();
 
+            
             foreach (var item in slang)
             {
+                //Все правила, кроме правил, когда язык целевой
                 if (!item.Key.StartsWith("T+"))
                     cslang.Add(item.Key, item.Value);
             }
 
+            //Получим общие правила правила 
             var sblang = allRules.GetBaseRules;
+            //и очистим их от правил для выхода
             Dictionary<string, Rule> csblang = new Dictionary<string, Rule>();
 
             foreach (var item in sblang)
@@ -37,35 +65,39 @@ namespace ModelTransformationComponent
                     csblang.Add(item.Key, item.Value);
             }
 
-
+            //Построим вершины графа исходных правил
             BuildTree(csblang, ref sourceNodes, true);
 
             if (Debugger.IsAttached)
             {
-                Debug.WriteLine("Tree w/o base");
+                Debug.WriteLine("Source tree base");
                 foreach (var item in sourceNodes)
                 {
                     Debug.WriteLine(item);
                 }
             }
 
+            // Перестроим вершины графа с помощью правил исходного языка
             BuildTree(cslang, ref sourceNodes, false);
 
 
             if (Debugger.IsAttached)
             {
-                Debug.WriteLine("Tree w base");
+                Debug.WriteLine("Source tree Full");
                 foreach (var item in sourceNodes)
                 {
                     Debug.WriteLine(item);
                 }
             }
 
+            // Построим рёбра графа
             foreach (var item in sourceNodes)
             {
                 if (item.Value.rule is BNFRule b)
                     HandleBNFLink(ref sourceNodes, b);
             }
+
+
             if (Debugger.IsAttached)
             {
                 Debug.WriteLine("Tree w links");
@@ -80,7 +112,7 @@ namespace ModelTransformationComponent
 
 
 
-
+            //то же самое для целевого языка
             var tlang = allRules.GetRulesForLanguage(targetLang);
 
             Dictionary<string, Rule> ctlang = new Dictionary<string, Rule>();
@@ -127,7 +159,7 @@ namespace ModelTransformationComponent
 
             if (Debugger.IsAttached)
             {
-                Debug.WriteLine("Tree w/o base");
+                Debug.WriteLine("Tree  base");
                 foreach (var item in targetNodes)
                 {
                     Debug.WriteLine(item);
@@ -137,7 +169,7 @@ namespace ModelTransformationComponent
 
             if (Debugger.IsAttached)
             {
-                Debug.WriteLine("Tree w base");
+                Debug.WriteLine("Tree full");
                 foreach (var item in targetNodes)
                 {
                     Debug.WriteLine(item);
@@ -160,6 +192,12 @@ namespace ModelTransformationComponent
             }
         }
 
+
+        /// <summary>
+        /// Построение леса разбора
+        /// </summary>
+        /// <param name="text">Текст входящий</param>
+        /// <returns>Список вершин - корней деревьев разбора</returns>
         public List<BNode> buildTree(in string text)
         {
             List<BNode> result = new List<BNode>();
@@ -181,6 +219,8 @@ namespace ModelTransformationComponent
             }
             return result;
         }
+
+
         private BNode tryRule(in string text, int startIdx, Node node, out int charCount)
         {
             Debug.WriteLine("tryRule startIdx:{0}, node" + node, startIdx);
@@ -260,7 +300,7 @@ namespace ModelTransformationComponent
                 if (temp == null)
                     return null;
                 result.Children.Add(temp);
-                temp.Parrent = result;
+                temp.Parent = result;
             }
             charCount = offset;
             return result;
@@ -339,8 +379,14 @@ namespace ModelTransformationComponent
             return null;
         }
 
+        /// <summary>
+        /// Функция трансформации леса разбора в текст
+        /// </summary>
+        /// <param name="tree">Список корней деревьев разбора</param>
+        /// <returns>Результат трансформации</returns>
         public string toText(List<BNode> tree)
         {
+            //TO DO: 1)async to parallel 2)do not use 1 gen state for everything
             GeneratorState generatorState = new GeneratorState();
             foreach (var item in tree)
             {
@@ -349,6 +395,7 @@ namespace ModelTransformationComponent
             return generatorState.Text;
         }
 
+        //TO DO refactor to different class
         private GeneratorState toText(BNode node, GeneratorState generatorState)
         {
             if (node.RuleName == "str") throw new TransformComponentException();
@@ -449,7 +496,11 @@ namespace ModelTransformationComponent
             throw new TransformComponentException("WHO DID THIS???" + element.GetType()+":"+ element.ToString());
         }
 
-
+        /// <summary>
+        /// Трансформация текста исходного языка в текст целевого 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>Результат трансформации</returns>
         public string TransformText(string text)
         {
             var tree = buildTree(text);
