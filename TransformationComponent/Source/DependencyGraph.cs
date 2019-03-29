@@ -168,10 +168,16 @@ namespace ModelTransformationComponent
             while (idx < text.Length)
             {
                 var temp = tryRule(in text, idx, rootNode, out int charCount);
-                if (temp == null)
-                    throw new TransformComponentException();
-                result.Add(temp);
-                idx += charCount;
+                if (temp != null)
+                {
+                    result.Add(temp);
+
+                    idx += charCount+1;
+                }
+                else
+                {
+                    break;
+                }
             }
             return result;
         }

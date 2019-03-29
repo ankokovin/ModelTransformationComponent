@@ -175,13 +175,13 @@ namespace TransformationComponentUnitTest
             [TestMethod]
             public void TransformPascalToCSharp()
             {
-                Assert.Fail();
+                Assert.Fail("expected fail");
             }
 
             [TestMethod]
             public void TransformCSharpToPascal()
             {
-                Assert.Fail();
+                Assert.Fail("expected fail");
             }
         }
     }

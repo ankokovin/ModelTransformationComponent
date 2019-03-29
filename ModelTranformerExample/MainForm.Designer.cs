@@ -37,9 +37,6 @@
             this.InputTextLabel = new System.Windows.Forms.Label();
             this.InputRulesLabel = new System.Windows.Forms.Label();
             this.OutputLabel = new System.Windows.Forms.Label();
-            this.OpenTextButton = new System.Windows.Forms.Button();
-            this.InputRulesButton = new System.Windows.Forms.Button();
-            this.OutputButton = new System.Windows.Forms.Button();
             this.TextOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.RulesOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.OutputSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -50,10 +47,10 @@
             this.AllInputTextPanel = new System.Windows.Forms.Panel();
             this.AllInputRulesPanel = new System.Windows.Forms.Panel();
             this.TranslationPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TransformStartButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.TargetLangLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.InputTextPanel.SuspendLayout();
             this.InputRulesPanel.SuspendLayout();
             this.OutputPanel.SuspendLayout();
@@ -69,14 +66,14 @@
             this.InputTextPanel.Controls.Add(this.InputTestRichTextBox);
             this.InputTextPanel.Location = new System.Drawing.Point(-4, 63);
             this.InputTextPanel.Name = "InputTextPanel";
-            this.InputTextPanel.Size = new System.Drawing.Size(322, 506);
+            this.InputTextPanel.Size = new System.Drawing.Size(300, 506);
             this.InputTextPanel.TabIndex = 0;
             // 
             // InputTestRichTextBox
             // 
             this.InputTestRichTextBox.Location = new System.Drawing.Point(4, 0);
             this.InputTestRichTextBox.Name = "InputTestRichTextBox";
-            this.InputTestRichTextBox.Size = new System.Drawing.Size(315, 503);
+            this.InputTestRichTextBox.Size = new System.Drawing.Size(293, 503);
             this.InputTestRichTextBox.TabIndex = 0;
             this.InputTestRichTextBox.Text = "";
             this.InputTestRichTextBox.TextChanged += new System.EventHandler(this.InputTestRichTextBox_TextChanged);
@@ -141,36 +138,6 @@
             this.OutputLabel.TabIndex = 5;
             this.OutputLabel.Text = "Вывод";
             // 
-            // OpenTextButton
-            // 
-            this.OpenTextButton.Location = new System.Drawing.Point(107, 7);
-            this.OpenTextButton.Name = "OpenTextButton";
-            this.OpenTextButton.Size = new System.Drawing.Size(111, 23);
-            this.OpenTextButton.TabIndex = 7;
-            this.OpenTextButton.Text = "Открыть файл";
-            this.OpenTextButton.UseVisualStyleBackColor = true;
-            this.OpenTextButton.Click += new System.EventHandler(this.OpenTextButton_Click);
-            // 
-            // InputRulesButton
-            // 
-            this.InputRulesButton.Location = new System.Drawing.Point(142, 7);
-            this.InputRulesButton.Name = "InputRulesButton";
-            this.InputRulesButton.Size = new System.Drawing.Size(98, 23);
-            this.InputRulesButton.TabIndex = 8;
-            this.InputRulesButton.Text = "Открыть файл";
-            this.InputRulesButton.UseVisualStyleBackColor = true;
-            this.InputRulesButton.Click += new System.EventHandler(this.InputRulesButton_Click);
-            // 
-            // OutputButton
-            // 
-            this.OutputButton.Location = new System.Drawing.Point(101, 10);
-            this.OutputButton.Name = "OutputButton";
-            this.OutputButton.Size = new System.Drawing.Size(103, 23);
-            this.OutputButton.TabIndex = 9;
-            this.OutputButton.Text = "Сохранить в";
-            this.OutputButton.UseVisualStyleBackColor = true;
-            this.OutputButton.Click += new System.EventHandler(this.OutputButton_Click);
-            // 
             // TextOpenFileDialog
             // 
             this.TextOpenFileDialog.FileName = "openFileDialog1";
@@ -214,14 +181,13 @@
             // 
             // AllInputTextPanel
             // 
-            this.AllInputTextPanel.Controls.Add(this.OpenTextButton);
             this.AllInputTextPanel.Controls.Add(this.SourceLangLabel);
             this.AllInputTextPanel.Controls.Add(this.InputTextPanel);
             this.AllInputTextPanel.Controls.Add(this.InputTextLabel);
             this.AllInputTextPanel.Controls.Add(this.SourceLangTextBox);
             this.AllInputTextPanel.Location = new System.Drawing.Point(3, 3);
             this.AllInputTextPanel.Name = "AllInputTextPanel";
-            this.AllInputTextPanel.Size = new System.Drawing.Size(321, 572);
+            this.AllInputTextPanel.Size = new System.Drawing.Size(278, 572);
             this.AllInputTextPanel.TabIndex = 14;
             // 
             // AllInputRulesPanel
@@ -229,49 +195,18 @@
             this.AllInputRulesPanel.Controls.Add(this.InputRulesLabel);
             this.AllInputRulesPanel.Controls.Add(this.InputRulesPanel);
             this.AllInputRulesPanel.Controls.Add(this.ParseRulesButton);
-            this.AllInputRulesPanel.Controls.Add(this.InputRulesButton);
-            this.AllInputRulesPanel.Location = new System.Drawing.Point(330, 3);
+            this.AllInputRulesPanel.Location = new System.Drawing.Point(287, 3);
             this.AllInputRulesPanel.Name = "AllInputRulesPanel";
-            this.AllInputRulesPanel.Size = new System.Drawing.Size(334, 572);
+            this.AllInputRulesPanel.Size = new System.Drawing.Size(329, 572);
             this.AllInputRulesPanel.TabIndex = 15;
             // 
             // TranslationPanel
             // 
             this.TranslationPanel.Controls.Add(this.TransformStartButton);
-            this.TranslationPanel.Location = new System.Drawing.Point(670, 3);
+            this.TranslationPanel.Location = new System.Drawing.Point(622, 3);
             this.TranslationPanel.Name = "TranslationPanel";
-            this.TranslationPanel.Size = new System.Drawing.Size(72, 572);
+            this.TranslationPanel.Size = new System.Drawing.Size(70, 572);
             this.TranslationPanel.TabIndex = 16;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.TargetLangLabel);
-            this.panel1.Controls.Add(this.OutputLabel);
-            this.panel1.Controls.Add(this.OutputPanel);
-            this.panel1.Controls.Add(this.OutputButton);
-            this.panel1.Controls.Add(this.TargetLangTextBox);
-            this.panel1.Location = new System.Drawing.Point(748, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(275, 572);
-            this.panel1.TabIndex = 17;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.06303F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.93697F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
-            this.tableLayoutPanel1.Controls.Add(this.AllInputTextPanel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.AllInputRulesPanel, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.TranslationPanel, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1026, 578);
-            this.tableLayoutPanel1.TabIndex = 18;
             // 
             // TransformStartButton
             // 
@@ -283,6 +218,17 @@
             this.TransformStartButton.UseVisualStyleBackColor = true;
             this.TransformStartButton.Click += new System.EventHandler(this.TransformStartButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.TargetLangLabel);
+            this.panel1.Controls.Add(this.OutputLabel);
+            this.panel1.Controls.Add(this.OutputPanel);
+            this.panel1.Controls.Add(this.TargetLangTextBox);
+            this.panel1.Location = new System.Drawing.Point(698, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(275, 572);
+            this.panel1.TabIndex = 17;
+            // 
             // TargetLangLabel
             // 
             this.TargetLangLabel.AutoSize = true;
@@ -292,11 +238,29 @@
             this.TargetLangLabel.TabIndex = 14;
             this.TargetLangLabel.Text = "Целевой язык";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.87706F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.12294F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 330F));
+            this.tableLayoutPanel1.Controls.Add(this.AllInputTextPanel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AllInputRulesPanel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.TranslationPanel, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1026, 578);
+            this.tableLayoutPanel1.TabIndex = 18;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 602);
+            this.ClientSize = new System.Drawing.Size(955, 602);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
             this.ShowIcon = false;
@@ -327,9 +291,6 @@
         private System.Windows.Forms.RichTextBox InputTestRichTextBox;
         private System.Windows.Forms.RichTextBox RulesInputRichTextBox;
         private System.Windows.Forms.RichTextBox OutputRichTextBox;
-        private System.Windows.Forms.Button OpenTextButton;
-        private System.Windows.Forms.Button InputRulesButton;
-        private System.Windows.Forms.Button OutputButton;
         private System.Windows.Forms.OpenFileDialog TextOpenFileDialog;
         private System.Windows.Forms.OpenFileDialog RulesOpenFileDialog;
         private System.Windows.Forms.SaveFileDialog OutputSaveFileDialog;

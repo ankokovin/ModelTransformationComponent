@@ -107,7 +107,7 @@ namespace TransformationComponentUnitTest
                         return;
                     }
                     //Assert
-                    Assert.Fail();
+                    Assert.Fail("expected fail");
 
                 }
 
@@ -165,7 +165,7 @@ namespace TransformationComponentUnitTest
                         Assert.IsInstanceOfType(ex.InnerException.InnerException.InnerException, typeof(EOSException));
                     }
                     //Assert
-                    Assert.Fail();
+                    Assert.Fail("expected fail");
 
                 }
 
