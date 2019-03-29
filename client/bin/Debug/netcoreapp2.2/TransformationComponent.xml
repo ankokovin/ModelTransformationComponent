@@ -64,6 +64,138 @@
             Получение списка введённых языков
             </summary>
         </member>
+        <member name="T:ModelTransformationComponent.DependencyGraph">
+            <summary>
+            Граф зависимостей правил
+            </summary>
+        </member>
+        <member name="T:ModelTransformationComponent.DependencyGraph.BNode">
+            <summary>
+            Вершина дерева парсинга
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.BNode.Parent">
+            <summary>
+            Родитель вершины
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.BNode.Children">
+            <summary>
+            Дети вершины
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.BNode.Value">
+            <summary>
+            Параметр вершиины
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.BNode.RuleName">
+            <summary>
+            Название правила
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.BNode.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name">Название</param>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.BNode.isRef">
+            <summary>
+            Является ли ссылкой
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DependencyGraph.Important">
+            <summary>
+            Регулярное выражение для определения важных значений из вершин правил <see cref="T:ModelTransformationComponent.RegexRule"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DependencyGraph.rootNode">
+            <summary>
+            Вершина правила верхнего уровня
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DependencyGraph.sourceNodes">
+            <summary>
+            Правила входа
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DependencyGraph.targetNodes">
+            <summary>
+            Правила выхода
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.#ctor(ModelTransformationComponent.AllRules@,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="allRules">Объект с правилами</param>
+            <param name="sourceLang">Исходный язык</param>
+            <param name="targetLang">Выходной язык</param>
+            <param name="root">Название корневой вершины</param>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.buildTree(System.String@)">
+            <summary>
+            Построение леса разбора
+            </summary>
+            <param name="text">Текст входящий</param>
+            <returns>Список вершин - корней деревьев разбора</returns>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.toText(System.Collections.Generic.List{ModelTransformationComponent.DependencyGraph.BNode})">
+            <summary>
+            Функция трансформации леса разбора в текст
+            </summary>
+            <param name="tree">Список корней деревьев разбора</param>
+            <returns>Результат трансформации</returns>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.TransformText(System.String)">
+            <summary>
+            Трансформация текста исходного языка в текст целевого 
+            </summary>
+            <param name="text"></param>
+            <returns>Результат трансформации</returns>
+        </member>
+        <member name="T:ModelTransformationComponent.DependencyGraph.Node">
+            <summary>
+            Вершина правила в графе зависимостей <see cref="T:ModelTransformationComponent.DependencyGraph"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.DependencyGraph.Node.rule">
+            <summary>
+            Правило
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.Node.#ctor(ModelTransformationComponent.Rule,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="rule"></param>
+            <param name="isBase"></param>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.Node.Parent">
+            <summary>
+            Правила, которые используют данные
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.Node.Children">
+            <summary>
+            Правила, которые используются данными
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ModelTransformationComponent.DependencyGraph.Node.fromBase">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ModelTransformationComponent.DependencyGraph.Node.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ModelTransformationComponent.NoBaseRulesFound">
             <summary>
             Исключение: не было найдено описание трансформаций для языка
@@ -518,6 +650,12 @@
             
             </summary>
         </member>
+        <member name="M:ModelTransformationComponent.TranslateRuleRequired.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+        </member>
         <member name="T:ModelTransformationComponent.BaseRuleParseException">
             <summary>
             Ошибка парсинга основных правил трансформаций в <see cref="!:TransformationComponent.GetBaseDescription(string)"/>
@@ -705,6 +843,29 @@
             Текущий текст
             </summary>
         </member>
+        <member name="M:ModelTransformationComponent.GeneratorState.AppendText(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.IChangeState">
+            <summary>
+            Интерфейс для правил, которые могут изменять текущее положение генератора и парсера
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.IChangeState.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            Изменить положение генератора
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.IChangeState.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            Изменить положение парсера
+            </summary>
+            <param name="parserState"></param>
+        </member>
         <member name="T:ModelTransformationComponent.ITransformationComponent">
             <summary>
             Интрефейс компонента трансформации моделей
@@ -725,6 +886,7 @@
             
             </summary>
             <param name="rules"></param>
+            <param name="Minimize"/>
             <returns></returns>
         </member>
         <member name="M:ModelTransformationComponent.ITransformationComponent.Transform(System.String,ModelTransformationComponent.AllRules,System.String,System.String)">
@@ -741,6 +903,12 @@
             <summary>
             Текущее положение парсера
             </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.ParserState.TabCount">
+            <summary>
+            Количество символов табуляции
+            </summary>
+            <value></value>
         </member>
         <member name="T:ModelTransformationComponent.AbstractRuleFactory">
             <summary>
@@ -801,6 +969,26 @@
             <param name="text">Текстовое описание конструкции</param>
             <param name="charcnt">Количество символов, использованных для создания</param>
             <returns>Системная конструкция</returns>
+        </member>
+        <member name="T:ModelTransformationComponent.SystemTrieSingleton">
+            <summary>
+            Префиксное дерево системных правил генерации
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemTrieSingleton.Search(System.String,System.Int32@,System.String@)">
+            <summary>
+            Поиск правила
+            </summary>
+            <param name="text">Название правила</param>
+            <param name="charcnt">Количество найденых символов</param>
+            <param name="Suggestion">Возможное название</param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemTrieSingleton.getInstance">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ModelTransformationComponent.Trie`1">
             <summary>
@@ -913,6 +1101,323 @@
             <param name="charcnt">Количество символов, использованных для создания</param>
             <returns>type конструкция</returns>
         </member>
+        <member name="T:ModelTransformationComponent.BNFRule">
+            <summary>
+            БНФ правило
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ModelTransformationComponent.BNFRule.OrSplits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.BNFRule.Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.BNFRule.IsReadOnly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ModelTransformationComponent.BNFRule.Item(System.Int32)">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ModelTransformationComponent.BNFRule.SelfReferenced">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Add(ModelTransformationComponent.BasicBNFRule)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Clear">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Contains(ModelTransformationComponent.BasicBNFRule)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.CopyTo(ModelTransformationComponent.BasicBNFRule[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Remove(ModelTransformationComponent.BasicBNFRule)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.IndexOf(ModelTransformationComponent.BasicBNFRule)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.Insert(System.Int32,ModelTransformationComponent.BasicBNFRule)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFRule.RemoveAt(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.BasicBNFRule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.BasicBNFRule.Count">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ModelTransformationComponent.BasicBNFRule.IsReadOnly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ModelTransformationComponent.BasicBNFRule.Item(System.Int32)">
+            <summary>
+            
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Add(ModelTransformationComponent.BNFSimpleElement)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Clear">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Contains(ModelTransformationComponent.BNFSimpleElement)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.CopyTo(ModelTransformationComponent.BNFSimpleElement[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Remove(ModelTransformationComponent.BNFSimpleElement)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.IndexOf(ModelTransformationComponent.BNFSimpleElement)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.Insert(System.Int32,ModelTransformationComponent.BNFSimpleElement)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BasicBNFRule.RemoveAt(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.BNFReference">
+            <summary>
+            Ссылка на правило
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.BNFSimpleElement"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.BNFReference.Name">
+            <summary>
+            Название правила, на которое ссылаются
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFReference.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFReference.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFReference.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ModelTransformationComponent.BNFSimpleElement">
+            <summary>
+            Простой элемент <see cref="T:ModelTransformationComponent.BasicBNFRule"/>
+            </summary>
+        </member>
+        <member name="T:ModelTransformationComponent.BNFString">
+            <summary>
+            Строка в БНФ
+            <para/>
+            Наследует <see cref="T:ModelTransformationComponent.BNFSimpleElement"/>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.BNFString.Value">
+            <summary>
+            Строковое значение
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFString.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFString.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFString.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.BNFSystemRef">
+            <summary>
+            Ссылка на системное правило
+            <para>Наследует <see cref="T:ModelTransformationComponent.BNFSimpleElement"/></para>
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.BNFSystemRef.rule">
+            <summary>
+            Системное правило, на которое ссылается данный оюъект
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFSystemRef.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFSystemRef.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.BNFSystemRef.#ctor(ModelTransformationComponent.SystemRule)">
+            <summary>
+            
+            </summary>
+            <param name="systemRule"></param>
+        </member>
+        <member name="T:ModelTransformationComponent.IBannableRule">
+            <summary>
+            Интерфейс правил, которые могут быть запрещены для использования в выходных правил
+            </summary>
+        </member>
+        <member name="P:ModelTransformationComponent.IBannableRule.Banned">
+            <summary>
+            Запрещено ли использование данного правила
+            </summary>
+        </member>
         <member name="T:ModelTransformationComponent.NamedRule">
             <summary>
             Конструкция с названием
@@ -948,12 +1453,24 @@
             Регулярное выражение
             </summary>
         </member>
+        <member name="P:ModelTransformationComponent.RegexRule.Banned">
+            <summary>
+            Проверка, является ли данный паттерн запрещённым для правил вывода
+            </summary>
+            <value></value>
+        </member>
         <member name="M:ModelTransformationComponent.RegexRule.#ctor(System.String,System.String)">
             <summary>
             Конструкция с представлением в виде регулярного выражения
             </summary>
             <param name="pattern">Регулярное выражение</param>
             <param name="name">Название конструкции</param>
+        </member>
+        <member name="M:ModelTransformationComponent.RegexRule.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ModelTransformationComponent.Rule">
             <summary>
@@ -972,6 +1489,12 @@
             Литерал конструкции
             </summary>
         </member>
+        <member name="M:ModelTransformationComponent.SystemRule.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ModelTransformationComponent.SystemRules.Add_tab">
             <summary>
             Системная конструкция увеличения счётчика табов
@@ -983,6 +1506,18 @@
             <summary>
             Литерал конструкции увеличения счётчика табов
             </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Add_tab.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Add_tab.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            
+            </summary>
+            <param name="parserState"></param>
         </member>
         <member name="T:ModelTransformationComponent.SystemRules.Child">
             <summary>
@@ -1008,6 +1543,18 @@
             Литерал конструкции уменьшения счётчика табов
             </summary>
         </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Del_tab.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Del_tab.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            
+            </summary>
+            <param name="parserState"></param>
+        </member>
         <member name="T:ModelTransformationComponent.SystemRules.Empty">
             <summary>
             Системная конструкция пустой символ
@@ -1019,6 +1566,18 @@
             <summary>
             Литерал конструкции пустой символ
             </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Empty.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Empty.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            
+            </summary>
+            <param name="parserState"></param>
         </member>
         <member name="T:ModelTransformationComponent.SystemRules.New_line">
             <summary>
@@ -1032,6 +1591,18 @@
             Литерал конструкции новая строка
             </summary>
         </member>
+        <member name="M:ModelTransformationComponent.SystemRules.New_line.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.New_line.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            
+            </summary>
+            <param name="parserState"></param>
+        </member>
         <member name="T:ModelTransformationComponent.SystemRules.Space">
             <summary>
             Системная конструкиция пробел
@@ -1043,6 +1614,18 @@
             <summary>
             Литерал конструкции пробел
             </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Space.ChangeState(ModelTransformationComponent.GeneratorState@)">
+            <summary>
+            
+            </summary>
+            <param name="generatorState"></param>
+        </member>
+        <member name="M:ModelTransformationComponent.SystemRules.Space.ChangeState(ModelTransformationComponent.ParserState@)">
+            <summary>
+            
+            </summary>
+            <param name="parserState"></param>
         </member>
         <member name="T:ModelTransformationComponent.SystemRules.Comment">
             <summary>
@@ -1200,6 +1783,35 @@
             Литерал конструкции создания конструкции, реализующий тип
             </summary>
         </member>
+        <member name="T:ModelTransformationComponent.TypeRule">
+            <summary>
+            Правило типа
+            </summary>
+        </member>
+        <member name="F:ModelTransformationComponent.TypeRule.RefList">
+            <summary>
+            Список ссылок на экземпляры
+            </summary>
+        </member>
+        <member name="M:ModelTransformationComponent.TypeRule.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name">Название правила</param>
+        </member>
+        <member name="M:ModelTransformationComponent.TypeRule.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ModelTransformationComponent.TypeRule.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="T:ModelTransformationComponent.TransformationComponent">
             <summary>
             Компонент трасформации моделей
@@ -1228,6 +1840,7 @@
             Получение всех структур языков
             </summary>
             <param name="rules">Текстовое представление структур</param>
+            <param name="Minimize"></param>
             <returns>Все структуры языков</returns>
             <exception cref="T:ModelTransformationComponent.InputIsEmpty">
             Вызывается при отсутствии входного текста
@@ -1238,6 +1851,7 @@
             Получить базовые структуры 
             </summary>
             <param name="text">Текстовое описание базовых структур</param>
+            <param name="line_end">Номер последней строки</param>
             <returns>Базовые структуры</returns>
         </member>
         <member name="M:ModelTransformationComponent.TransformationComponent.GetLangDescription(System.String,System.Collections.Generic.Dictionary{System.String,ModelTransformationComponent.Rule},System.String,System.Int32,System.Int32@)">
@@ -1247,6 +1861,8 @@
             <param name="text">Текстовое описание структур языка</param>
             <param name="baseDescription">Базовые структуры</param>
             <param name="LangName">Название языка</param>
+            <param name="line"></param>
+            <param name="line_end"></param>
             <returns>Структуры данного языка</returns>
         </member>
         <member name="M:ModelTransformationComponent.TransformationComponent.Transform(System.String,ModelTransformationComponent.AllRules,System.String,System.String)">

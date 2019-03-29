@@ -251,7 +251,7 @@ namespace ModelTransformationComponent
             Dictionary<string, Rule> baseDescription = null
             )
         {
-            Debug.WriteLine("getting base description");
+            Debug.WriteLine("getting description");
             Debug.WriteLine("text:");
             Debug.WriteLine(text);
             Rule prevRule = null;
@@ -444,7 +444,8 @@ namespace ModelTransformationComponent
                     if (idx == lines.Length - 1)
                     {
                         if (RuleTypePredicateList[typeof(SystemRuleFactory)](lines[idx], prevRule)
-                            && (new SystemRuleFactory()).CreateRule(lines[idx], out int charcnt) is End
+                            && ((new SystemRuleFactory()).CreateRule(lines[idx], out int charcnt) is End
+                            ||(new SystemRuleFactory()).CreateRule(lines[idx], out charcnt) is Language_end)
                             && (charcnt == lines[idx].Length || string.IsNullOrWhiteSpace(lines[idx].Substring(charcnt+1))))
                             {
 
